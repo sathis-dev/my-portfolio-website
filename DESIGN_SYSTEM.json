@@ -1,0 +1,348 @@
+{
+  "portfolioDesignSystem": {
+    "metadata": {
+      "version": "1.0.0",
+      "name": "Sathis Portfolio Design System",
+      "lastUpdated": "2024"
+    },
+    
+    "colorPalette": {
+      "background": {
+        "primary": "#0A0A0F",
+        "secondary": "#13131A",
+        "tertiary": "#1A1A24",
+        "canvas": "transparent"
+      },
+      
+      "glass": {
+        "header": {
+          "default": "rgba(10, 10, 15, 0.4)",
+          "scrolled": "rgba(10, 10, 15, 0.6)",
+          "backdrop": "blur(20px) saturate(120%)"
+        },
+        "card": {
+          "default": "rgba(255, 255, 255, 0.03)",
+          "hover": "rgba(255, 255, 255, 0.05)"
+        }
+      },
+      
+      "gradients": {
+        "background": {
+          "hero": "radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%)",
+          "accent": "linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #1E90FF 100%)",
+          "vignette": "radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%)"
+        },
+        
+        "text": {
+          "primary": "linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6366F1 100%)",
+          "highlight": "linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%)"
+        },
+        
+        "buttons": {
+          "primary": "linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%)",
+          "primaryHover": "linear-gradient(135deg, #9D6EFF 0%, #7C8FFF 100%)"
+        }
+      },
+      
+      "text": {
+        "primary": "#FFFFFF",
+        "secondary": "rgba(255, 255, 255, 0.9)",
+        "tertiary": "rgba(255, 255, 255, 0.7)",
+        "muted": "rgba(255, 255, 255, 0.6)",
+        "disabled": "rgba(255, 255, 255, 0.4)"
+      },
+      
+      "accent": {
+        "purple": "#8B5CF6",
+        "violet": "#7C3AED",
+        "indigo": "#6366F1",
+        "green": "#10B981",
+        "blue": "#3B82F6",
+        "pink": "#EC4899"
+      },
+      
+      "borders": {
+        "default": "rgba(255, 255, 255, 0.1)",
+        "hover": "rgba(255, 255, 255, 0.2)",
+        "focus": "rgba(139, 92, 246, 0.5)",
+        "accent": "rgba(139, 92, 246, 0.2)"
+      }
+    },
+    
+    "header": {
+      "container": {
+        "position": "fixed",
+        "top": "0",
+        "left": "0",
+        "right": "0",
+        "zIndex": 1000,
+        "padding": "1rem 1.5rem"
+      },
+      
+      "nav": {
+        "maxWidth": "1400px",
+        "margin": "0 auto",
+        "borderRadius": "16px",
+        "padding": "0.75rem 1.5rem",
+        "background": "rgba(10, 10, 15, 0.3)",
+        "backdropFilter": "blur(16px) saturate(100%)",
+        "border": "1px solid rgba(255, 255, 255, 0.06)",
+        "boxShadow": [
+          "0 4px 24px rgba(0, 0, 0, 0.1)",
+          "inset 0 1px 0 rgba(255, 255, 255, 0.02)"
+        ],
+        "note": "70% transparent - DarkVeil clearly visible through"
+      },
+      
+      "scrolledState": {
+        "background": "rgba(10, 10, 15, 0.5)",
+        "backdropFilter": "blur(20px) saturate(110%)",
+        "border": "1px solid rgba(255, 255, 255, 0.08)",
+        "boxShadow": [
+          "0 8px 32px rgba(0, 0, 0, 0.15)",
+          "inset 0 1px 0 rgba(255, 255, 255, 0.03)"
+        ],
+        "note": "50% transparent - DarkVeil still visible"
+      },
+      
+      "logo": {
+        "size": "40px",
+        "borderRadius": "10px",
+        "background": "rgba(139, 92, 246, 0.1)",
+        "border": "1px solid rgba(139, 92, 246, 0.2)",
+        "hover": {
+          "background": "rgba(139, 92, 246, 0.15)",
+          "border": "1px solid rgba(139, 92, 246, 0.3)",
+          "transform": "scale(1.05)"
+        }
+      },
+      
+      "navLinks": {
+        "default": {
+          "color": "rgba(255, 255, 255, 0.7)",
+          "fontSize": "0.875rem",
+          "fontWeight": 500,
+          "padding": "0.5rem 1rem",
+          "borderRadius": "10px",
+          "background": "transparent",
+          "border": "1px solid transparent",
+          "transition": "all 0.3s ease"
+        },
+        
+        "hover": {
+          "color": "#FFFFFF",
+          "background": "rgba(255, 255, 255, 0.05)",
+          "border": "1px solid rgba(255, 255, 255, 0.1)"
+        },
+        
+        "active": {
+          "color": "#FFFFFF",
+          "fontWeight": 600,
+          "background": "rgba(139, 92, 246, 0.12)",
+          "border": "1px solid rgba(139, 92, 246, 0.25)"
+        }
+      },
+      
+      "availabilityBadge": {
+        "background": "rgba(16, 185, 129, 0.08)",
+        "border": "1px solid rgba(16, 185, 129, 0.25)",
+        "color": "#10B981",
+        "padding": "0.5rem 1rem",
+        "borderRadius": "10px",
+        "fontSize": "0.8125rem",
+        "fontWeight": 500,
+        "dot": {
+          "size": "6px",
+          "color": "#10B981",
+          "animation": "pulse 2s infinite"
+        }
+      },
+      
+      "cvButton": {
+        "background": "linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%)",
+        "color": "#FFFFFF",
+        "padding": "0.5rem 1.25rem",
+        "borderRadius": "10px",
+        "fontSize": "0.875rem",
+        "fontWeight": 600,
+        "boxShadow": "0 4px 12px rgba(139, 92, 246, 0.3)",
+        "hover": {
+          "boxShadow": "0 6px 16px rgba(139, 92, 246, 0.4)",
+          "transform": "translateY(-1px)"
+        }
+      }
+    },
+    
+    "hero": {
+      "background": {
+        "base": "transparent",
+        "overlay": [
+          {
+            "type": "radial-gradient",
+            "value": "radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%)",
+            "position": "center",
+            "size": "800px 800px"
+          },
+          {
+            "type": "vignette",
+            "value": "radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%)"
+          }
+        ]
+      },
+      
+      "availabilityBadge": {
+        "background": "rgba(16, 185, 129, 0.08)",
+        "border": "1px solid rgba(16, 185, 129, 0.2)",
+        "backdropFilter": "blur(10px)",
+        "boxShadow": "0 4px 16px rgba(16, 185, 129, 0.1)",
+        "padding": "0.625rem 1.25rem",
+        "borderRadius": "100px",
+        "color": "#10B981",
+        "fontSize": "0.8125rem"
+      },
+      
+      "heading": {
+        "name": {
+          "fontSize": "clamp(3rem, 8vw, 6rem)",
+          "fontWeight": 800,
+          "color": "#FFFFFF",
+          "lineHeight": 1.1,
+          "letterSpacing": "-0.02em"
+        },
+        
+        "lastName": {
+          "gradient": "linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6366F1 100%)",
+          "WebkitBackgroundClip": "text",
+          "WebkitTextFillColor": "transparent"
+        }
+      },
+      
+      "subtitle": {
+        "fontSize": "clamp(1.125rem, 2vw, 1.5rem)",
+        "fontWeight": 600,
+        "color": "rgba(255, 255, 255, 0.9)",
+        "lineHeight": 1.4
+      },
+      
+      "description": {
+        "fontSize": "1.125rem",
+        "color": "rgba(255, 255, 255, 0.6)",
+        "lineHeight": 1.7,
+        "maxWidth": "600px"
+      },
+      
+      "buttons": {
+        "primary": {
+          "background": "linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%)",
+          "color": "#FFFFFF",
+          "padding": "1rem 2rem",
+          "borderRadius": "16px",
+          "fontSize": "1rem",
+          "fontWeight": 600,
+          "boxShadow": [
+            "0 8px 24px rgba(139, 92, 246, 0.4)",
+            "inset 0 1px 0 rgba(255, 255, 255, 0.2)"
+          ],
+          "hover": {
+            "boxShadow": [
+              "0 12px 32px rgba(139, 92, 246, 0.5)",
+              "inset 0 1px 0 rgba(255, 255, 255, 0.3)"
+            ],
+            "transform": "translateY(-2px)"
+          }
+        },
+        
+        "secondary": {
+          "background": "rgba(255, 255, 255, 0.05)",
+          "border": "1px solid rgba(255, 255, 255, 0.1)",
+          "backdropFilter": "blur(10px)",
+          "color": "#FFFFFF",
+          "padding": "1rem 2rem",
+          "borderRadius": "16px",
+          "fontSize": "1rem",
+          "fontWeight": 600,
+          "hover": {
+            "background": "rgba(255, 255, 255, 0.1)",
+            "border": "1px solid rgba(255, 255, 255, 0.2)",
+            "transform": "translateY(-2px)"
+          }
+        }
+      },
+      
+      "stats": {
+        "number": {
+          "fontSize": "clamp(2.5rem, 5vw, 3rem)",
+          "fontWeight": 800,
+          "gradient": "linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%)",
+          "WebkitBackgroundClip": "text",
+          "WebkitTextFillColor": "transparent"
+        },
+        
+        "label": {
+          "fontSize": "0.875rem",
+          "color": "rgba(255, 255, 255, 0.5)",
+          "fontWeight": 500,
+          "textTransform": "uppercase",
+          "letterSpacing": "0.05em"
+        }
+      }
+    },
+    
+    "effects": {
+      "shadows": {
+        "sm": "0 2px 8px rgba(0, 0, 0, 0.1)",
+        "md": "0 4px 16px rgba(0, 0, 0, 0.2)",
+        "lg": "0 8px 24px rgba(0, 0, 0, 0.3)",
+        "xl": "0 12px 32px rgba(0, 0, 0, 0.4)",
+        "colored": {
+          "purple": "0 8px 24px rgba(139, 92, 246, 0.4)",
+          "green": "0 4px 16px rgba(16, 185, 129, 0.3)"
+        },
+        "inset": {
+          "light": "inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+          "medium": "inset 0 1px 0 rgba(255, 255, 255, 0.05)"
+        }
+      },
+      
+      "blur": {
+        "sm": "blur(10px)",
+        "md": "blur(20px)",
+        "lg": "blur(40px)"
+      },
+      
+      "borderRadius": {
+        "sm": "8px",
+        "md": "10px",
+        "lg": "12px",
+        "xl": "16px",
+        "2xl": "20px",
+        "full": "9999px"
+      }
+    },
+    
+    "doNotRules": {
+      "header": [
+        "DO NOT use solid backgrounds - always use rgba with low opacity",
+        "DO NOT forget backdrop-filter blur for glass effect",
+        "DO NOT use borders thicker than 1px",
+        "DO NOT forget inset shadow for depth",
+        "DO NOT make header background darker than rgba(10, 10, 15, 0.6)"
+      ],
+      
+      "gradients": [
+        "DO NOT apply text gradients to body text",
+        "DO NOT use gradients on small UI elements (< 32px)",
+        "DO NOT stack multiple gradients without transparency",
+        "DO NOT use bright gradients on backgrounds"
+      ],
+      
+      "colors": [
+        "DO NOT use pure white (#FFF) - always rgba(255, 255, 255, 0.x)",
+        "DO NOT use pure black (#000) - use #0A0A0F",
+        "DO NOT exceed 0.7 opacity for secondary text",
+        "DO NOT use colors without transparency in glass elements"
+      ]
+    }
+  }
+}
+

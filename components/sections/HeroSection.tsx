@@ -1,0 +1,505 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { Sparkles, ArrowRight, Download, Command, Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { PillNavEffect } from '@/components/ui/pill-nav-effect'
+import { DecryptedText } from '@/components/ui/decrypted-text'
+import { LogoLoop } from '@/components/ui/logo-loop'
+import StatsSection from './StatsSection'
+import WhatIDoSection from './WhatIDoSection'
+import SelectedWorkSection from './SelectedWorkSection'
+import SmartScrollIndicator from '@/components/ui/SmartScrollIndicator'
+
+const navItems = [
+  { label: 'HOME', href: '/' },
+  { label: 'PROJECTS', href: '/projects' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'SKILLS', href: '/skills' },
+  { label: 'EXPERIENCE', href: '/experience' },
+  { label: 'CONTACT', href: '/contact' },
+]
+
+export default function HeroSection() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [hoveredNavIndex, setHoveredNavIndex] = useState<number | null>(null)
+  const [showHeader, setShowHeader] = useState(true)
+  const pathname = usePathname()
+  const navRef = useRef<HTMLDivElement>(null)
+  const lastScrollY = useRef(0)
+  
+  // Calculate active nav index for pill effect
+  const activeNavIndex = navItems.findIndex(item => item.href === pathname)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // Update scrolled state (for header styling)
+      setIsScrolled(currentScrollY > 20)
+      
+      // Determine scroll direction and header visibility
+      if (currentScrollY < 20) {
+        // At top of page - always show header
+        setShowHeader(true)
+      } else if (currentScrollY < lastScrollY.current) {
+        // Scrolling UP - show header
+        setShowHeader(true)
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        // Scrolling DOWN (and past 100px) - hide header
+        setShowHeader(false)
+      }
+      
+      lastScrollY.current = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects')
+    projectsSection?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  return (
+    <section className="relative min-h-[100svh] flex flex-col overflow-hidden pb-4 sm:pb-6 md:pb-8 lg:pb-10">
+      {/* DarkVeil Background is now in the layout - seamless continuation */}
+
+      {/* Integrated Header - Part of Hero - Smart Hide/Show */}
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ 
+          opacity: showHeader ? 1 : 0,
+          y: showHeader ? 0 : -100,
+        }}
+        transition={{ 
+          duration: 0.4, 
+          ease: [0.4, 0, 0.2, 1],
+        }}
+        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4"
+        style={{
+          pointerEvents: showHeader ? 'auto' : 'none',
+        }}
+      >
+        <nav
+          className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-500"
+          style={{
+            background: isScrolled 
+              ? 'rgba(39, 10, 33, 0.85)' 
+              : 'rgba(39, 10, 33, 0.6)',
+            backdropFilter: 'blur(20px) saturate(110%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(110%)',
+            border: `1px solid ${isScrolled 
+              ? 'rgba(199, 21, 133, 0.3)' 
+              : 'rgba(199, 21, 133, 0.2)'}`,
+            boxShadow: isScrolled
+              ? '0 8px 32px rgba(74, 20, 140, 0.35), inset 0 1px 0 rgba(199, 21, 133, 0.1)'
+              : '0 4px 20px rgba(74, 20, 140, 0.25), inset 0 1px 0 rgba(199, 21, 133, 0.05)',
+          }}
+        >
+          {/* Grid Layout */}
+          <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4 lg:gap-8">
+            {/* Logo */}
+            <div className="flex items-center">
+              <Link 
+                href="/"
+                data-cursor="link"
+                data-cursor-text="Home"
+                className="group"
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center transition-all duration-300"
+                >
+                  <img
+                    src="/logo.svg"
+                    alt="<SATHIS/>"
+                    className="w-[140px] sm:w-[160px] md:w-[180px] h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                  />
+                </motion.div>
+              </Link>
+            </div>
+
+            {/* Navigation - Center with Pill Effect */}
+            <div 
+              ref={navRef} 
+              className="hidden lg:flex items-center justify-center gap-1 relative"
+              onMouseLeave={() => setHoveredNavIndex(null)}
+            >
+              {/* Animated Pill Background */}
+              {activeNavIndex >= 0 && (
+                <PillNavEffect
+                  activeIndex={activeNavIndex}
+                  hoveredIndex={hoveredNavIndex}
+                  itemsCount={navItems.length}
+                  containerRef={navRef}
+                />
+              )}
+              
+              {navItems.map((item, index) => {
+                const isActive = pathname === item.href
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    data-cursor="link"
+                    data-nav-item
+                    onMouseEnter={() => setHoveredNavIndex(index)}
+                    className={`
+                      relative px-4 py-2 rounded-xl text-[0.875rem] font-medium
+                      transition-colors duration-300
+                      ${isActive ? 'text-white' : 'text-white/70 hover:text-white'}
+                    `}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center justify-end gap-2 sm:gap-3">
+              {/* Command Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                data-cursor="button"
+                data-cursor-text="⌘K"
+                className="hidden md:flex w-10 h-10 rounded-xl items-center justify-center transition-all duration-300"
+                style={{
+                  background: 'rgba(199, 21, 133, 0.08)',
+                  border: '1px solid rgba(199, 21, 133, 0.15)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(199, 21, 133, 0.15)'
+                  e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.25)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(199, 21, 133, 0.08)'
+                  e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.15)'
+                }}
+              >
+                <div className="flex items-center gap-0.5">
+                  <Command size={12} className="text-white/70" />
+                  <span className="text-[9px] text-white/50 font-semibold">K</span>
+                </div>
+              </motion.button>
+
+              {/* Availability Badge */}
+              <div 
+                className="hidden lg:flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-[0.8125rem] font-medium whitespace-nowrap"
+                style={{
+                  background: 'rgba(16, 185, 129, 0.08)',
+                  border: '1px solid rgba(16, 185, 129, 0.25)',
+                  color: '#10B981',
+                }}
+              >
+                <motion.span
+                  className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                  style={{ background: '#10B981' }}
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [1, 0.5, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <span className="hidden xl:inline">Available for Projects</span>
+                <span className="xl:hidden">Available</span>
+              </div>
+
+              {/* CV Button */}
+              <motion.a
+                href="/cv.pdf"
+                download
+                data-cursor="button"
+                whileHover={{ y: -1, scale: 1.02 }}
+                whileTap={{ y: 0, scale: 0.98 }}
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 text-[0.875rem] font-semibold text-white rounded-2xl transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
+                  boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px rgba(199, 21, 133, 0.4)',
+                  border: '1px solid rgba(199, 21, 133, 0.3)',
+                }}
+              >
+                <Download size={16} />
+                <span className="hidden sm:inline">CV</span>
+              </motion.a>
+
+              {/* Mobile Menu */}
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                data-cursor="button"
+                data-cursor-text={isMobileMenuOpen ? "Close" : "Menu"}
+                className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center transition-all"
+                style={{
+                  background: 'rgba(199, 21, 133, 0.08)',
+                  border: '1px solid rgba(199, 21, 133, 0.15)',
+                }}
+              >
+                {isMobileMenuOpen ? (
+                  <X size={20} className="text-white/80" />
+                ) : (
+                  <Menu size={20} className="text-white/80" />
+                )}
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden mt-4 pt-4"
+              style={{ 
+                borderTop: '1px solid rgba(199, 21, 133, 0.2)'
+              }}
+            >
+              <div className="flex flex-col gap-1">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href
+                  
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-cursor="link"
+                      className={`
+                        px-4 py-3 rounded-xl text-sm font-medium transition-all
+                        ${isActive ? 'text-white' : 'text-white/70'}
+                      `}
+                      style={{
+                        background: isActive ? 'rgba(199, 21, 133, 0.15)' : 'transparent',
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+                
+                <div className="h-px my-2" style={{ background: 'rgba(199, 21, 133, 0.2)' }} />
+                
+                <div className="flex items-center gap-2 px-4 py-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-sm text-green-500">Available for Projects</span>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </nav>
+      </motion.header>
+
+      {/* Hero Content - Part of Same Section */}
+      <div className="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-6 lg:px-8 pt-24 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-8">
+        <div className="max-w-6xl mx-auto text-center w-full">
+        {/* Availability Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center gap-2 mb-6 sm:mb-6 md:mb-7"
+        >
+          <div
+            className="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full"
+            style={{
+              background: 'rgba(16, 185, 129, 0.08)',
+              border: '1px solid rgba(16, 185, 129, 0.2)',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 4px 16px rgba(16, 185, 129, 0.1)',
+            }}
+          >
+            <Sparkles size={12} className="sm:w-3.5 sm:h-3.5 text-green-500" />
+            <motion.span
+              className="w-1.5 h-1.5 rounded-full bg-green-500"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [1, 0.5, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              style={{
+                boxShadow: '0 0 10px rgba(16, 185, 129, 0.5)',
+              }}
+            />
+            <span className="text-xs sm:text-sm font-medium text-green-500">
+              Available for Frontend & AI Projects
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Heading */}
+        <div className="mb-5 sm:mb-5 md:mb-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white mb-2 sm:mb-2"
+            style={{
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
+              fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+            }}
+          >
+            Sathis Ravishka
+          </motion.h1>
+
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold relative inline-block"
+            style={{
+              background: 'linear-gradient(135deg, #E91E8C 0%, #C71585 30%, #8B5CF6 70%, #7C3AED 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            Hettiarachchi
+            <span
+              className="absolute inset-0 -z-10"
+              style={{
+                background: 'linear-gradient(135deg, #E91E8C 0%, #C71585 30%, #8B5CF6 70%, #7C3AED 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: 'blur(35px)',
+                opacity: 0.5,
+              }}
+              aria-hidden="true"
+            >
+              Hettiarachchi
+            </span>
+          </motion.span>
+        </div>
+
+        {/* Subtitle */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-semibold text-white/90 mb-4 sm:mb-4 md:mb-5"
+        >
+          Frontend Developer & AI Integration Specialist
+        </motion.h2>
+
+        {/* Description with Decrypted Text Effect */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="text-xs sm:text-sm md:text-base lg:text-lg text-white/60 max-w-2xl mx-auto mb-6 sm:mb-7 md:mb-8 lg:mb-10 leading-relaxed text-center px-4"
+          style={{ minHeight: '2.5rem' }} // Prevent layout shift
+        >
+          <DecryptedText
+            text="Building modern web experiences with Next.js, TypeScript, and AI-assisted workflows from Cambridge, UK"
+            speed={80}
+            interval={2000}
+            className="text-xs sm:text-sm md:text-base leading-relaxed"
+          />
+        </motion.div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-3 md:gap-4 mb-8 sm:mb-8 md:mb-10 w-full max-w-md sm:max-w-none mx-auto"
+        >
+          {/* Primary Button */}
+          <Link href="/projects" className="w-full sm:w-auto">
+            <motion.button
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+              data-cursor="button"
+              className="group relative w-full px-6 sm:px-6 md:px-7 lg:px-8 py-3.5 sm:py-3 md:py-3.5 rounded-xl sm:rounded-2xl text-sm sm:text-sm md:text-base font-semibold text-white overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
+                boxShadow: '0 8px 24px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #E91E8C 0%, #9D6EFF 50%, #8B5CF6 100%)'
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(199, 21, 133, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)'
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-2">
+                View Projects
+                <ArrowRight size={18} className="sm:w-[18px] sm:h-[18px] group-hover:translate-x-1 transition-transform" />
+              </span>
+              <span
+                className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+                }}
+              />
+            </motion.button>
+          </Link>
+
+          {/* Secondary Button */}
+          <motion.a
+            href="/cv.pdf"
+            download
+            data-cursor="button"
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ y: 0, scale: 0.98 }}
+            className="flex items-center justify-center gap-2 sm:gap-2 px-6 sm:px-6 md:px-7 lg:px-8 py-3.5 sm:py-3 md:py-3.5 text-sm sm:text-sm md:text-base font-semibold text-white rounded-xl sm:rounded-2xl transition-all duration-300 w-full sm:w-auto"
+            style={{
+              background: 'linear-gradient(135deg, rgba(199, 21, 133, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(124, 58, 237, 0.15) 100%)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(199, 21, 133, 0.3)',
+              boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px rgba(199, 21, 133, 0.25)',
+            }}
+          >
+            <Download size={18} className="sm:w-[18px] sm:h-[18px]" />
+            Download CV
+          </motion.a>
+        </motion.div>
+
+        </div>
+      </div>
+
+      {/* Enhanced Stats Section - Seamlessly Integrated */}
+      <StatsSection />
+
+      {/* What I Do Section - Seamlessly Integrated */}
+      <WhatIDoSection />
+
+      {/* Logo Loop - Tech Stack Showcase */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.8 }}
+        className="relative z-10 w-full"
+      >
+        <LogoLoop />
+      </motion.div>
+
+      {/* Selected Work Section - Projects Showcase */}
+      <SelectedWorkSection />
+
+      {/* Smart Scroll Indicator - Detects Direction */}
+      <SmartScrollIndicator />
+    </section>
+  )
+}
+

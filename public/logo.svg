@@ -1,0 +1,44 @@
+<svg
+  width="200"
+  height="50"
+  viewBox="0 0 200 50"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="logo-gradient" x1="0" y1="0" x2="200" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7" />
+      <stop offset="0.5" stop-color="#8B5CF6" />
+      <stop offset="1" stop-color="#EC4899" />
+    </linearGradient>
+  </defs>
+  <!-- Left bracket "<" -->
+  <text
+    x="8"
+    y="33"
+    font-size="26"
+    font-family="Space Grotesk, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-weight="700"
+    fill="url(#logo-gradient)"
+  >&lt;</text>
+  <!-- "SATHIS" -->
+  <text
+    x="35"
+    y="33"
+    font-size="26"
+    font-family="Space Grotesk, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-weight="700"
+    letter-spacing="0.15em"
+    fill="#FFFFFF"
+  >SATHIS</text>
+  <!-- Right "/>" -->
+  <text
+    x="168"
+    y="33"
+    font-size="26"
+    font-family="Space Grotesk, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-weight="700"
+    fill="url(#logo-gradient)"
+  >/&gt;</text>
+</svg>
