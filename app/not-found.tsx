@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { Home, ArrowLeft } from 'lucide-react'
 import Container from '@/components/layout/Container'
 import Button from '@/components/ui/Button'
-import { slideUp } from '@/lib/animations'
+import { pageTransitions } from '@/lib/animations'
 
 export default function NotFound() {
   return (
@@ -14,7 +14,7 @@ export default function NotFound() {
         <motion.div
           initial="initial"
           animate="animate"
-          variants={slideUp}
+          variants={pageTransitions.slideUp}
           className="max-w-2xl mx-auto text-center"
         >
           <h1 className="text-display-xl font-display text-dark-text-primary mb-4">

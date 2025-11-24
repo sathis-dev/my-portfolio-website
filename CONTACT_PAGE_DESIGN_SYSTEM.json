@@ -1,0 +1,751 @@
+{
+  "designSystem": {
+    "metadata": {
+      "name": "Sathis Portfolio Design System - Contact Page",
+      "version": "1.0.0",
+      "description": "Comprehensive design system extracted from contact page for AI-driven consistent implementation",
+      "theme": "dark-mode-cyberpunk",
+      "primaryPalette": "purple-pink-gradient"
+    },
+
+    "colorPalette": {
+      "backgrounds": {
+        "page": {
+          "primary": "#0A0A0F",
+          "secondary": "#0D0D12",
+          "description": "Deep dark background for main page areas",
+          "usage": ["body", "main containers", "page wrapper"]
+        },
+        "heroGradient": {
+          "type": "radial-gradient",
+          "colors": {
+            "center": "rgba(139, 92, 246, 0.15)",
+            "middle": "rgba(168, 85, 247, 0.08)",
+            "outer": "rgba(10, 10, 15, 0.95)"
+          },
+          "position": "center top",
+          "description": "Radial gradient for hero sections with purple glow",
+          "usage": ["hero sections", "page headers", "spotlight areas"],
+          "DO_NOT_USE": ["cards", "buttons", "icons", "form elements"]
+        },
+        "cardBackground": {
+          "primary": "rgba(17, 17, 24, 0.6)",
+          "border": "rgba(255, 255, 255, 0.08)",
+          "backdropBlur": "12px",
+          "description": "Semi-transparent dark background for cards",
+          "usage": ["info cards", "feature cards", "content containers"],
+          "DO_NOT_USE": ["buttons", "form inputs", "icons"]
+        },
+        "formElements": {
+          "input": "rgba(17, 17, 24, 0.8)",
+          "inputBorder": "rgba(255, 255, 255, 0.06)",
+          "inputFocus": "rgba(139, 92, 246, 0.1)",
+          "inputFocusBorder": "rgba(139, 92, 246, 0.4)",
+          "description": "Form input backgrounds and borders",
+          "usage": ["text inputs", "textareas", "select dropdowns"],
+          "DO_NOT_USE": ["buttons", "cards", "text elements"]
+        }
+      },
+
+      "gradients": {
+        "primary": {
+          "type": "linear-gradient",
+          "angle": "135deg",
+          "colors": {
+            "start": "#EC4899",
+            "middle": "#A855F7",
+            "end": "#8B5CF6"
+          },
+          "cssValue": "linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #8B5CF6 100%)",
+          "description": "Pink-to-purple gradient for primary actions",
+          "usage": ["primary buttons", "CTA elements", "accent highlights"],
+          "DO_NOT_USE": ["backgrounds", "text", "icons", "borders"]
+        },
+        "buttonHover": {
+          "type": "linear-gradient",
+          "angle": "135deg",
+          "colors": {
+            "start": "#F472B6",
+            "middle": "#C084FC",
+            "end": "#A78BFA"
+          },
+          "cssValue": "linear-gradient(135deg, #F472B6 0%, #C084FC 50%, #A78BFA 100%)",
+          "description": "Lighter variant for button hover states",
+          "usage": ["button:hover", "interactive element hover states"]
+        }
+      },
+
+      "text": {
+        "primary": {
+          "color": "#FFFFFF",
+          "opacity": 1,
+          "usage": ["h1", "h2", "primary headings", "important labels"],
+          "DO_NOT_USE": ["body text", "descriptions", "placeholder text"]
+        },
+        "secondary": {
+          "color": "#A1A1AA",
+          "opacity": 1,
+          "usage": ["body text", "descriptions", "secondary information"],
+          "DO_NOT_USE": ["headings", "labels", "links"]
+        },
+        "tertiary": {
+          "color": "#71717A",
+          "opacity": 1,
+          "usage": ["placeholder text", "disabled text", "meta information"],
+          "DO_NOT_USE": ["primary content", "headings"]
+        },
+        "accent": {
+          "color": "#A855F7",
+          "usage": ["links", "interactive text", "highlighted information"],
+          "DO_NOT_USE": ["body text", "headings"]
+        },
+        "success": {
+          "color": "#10B981",
+          "usage": ["availability indicators", "success messages", "positive status"],
+          "DO_NOT_USE": ["general text", "headings"]
+        },
+        "required": {
+          "color": "#EF4444",
+          "usage": ["required field asterisks", "error messages"],
+          "DO_NOT_USE": ["general text", "icons"]
+        }
+      },
+
+      "icons": {
+        "accentIcon": {
+          "fill": "#A855F7",
+          "background": "none",
+          "description": "Purple accent for decorative icons",
+          "usage": ["location icon", "calendar icon", "decorative SVG icons"],
+          "DO_NOT_USE": ["card backgrounds", "button backgrounds"]
+        },
+        "successIcon": {
+          "fill": "#10B981",
+          "background": "none",
+          "description": "Green for availability/success icons",
+          "usage": ["availability icon", "checkmark icons"],
+          "DO_NOT_USE": ["navigation icons", "card backgrounds"]
+        },
+        "navigationIcon": {
+          "fill": "#FFFFFF",
+          "opacity": 0.7,
+          "hover": {
+            "fill": "#FFFFFF",
+            "opacity": 1
+          },
+          "description": "White icons for navigation",
+          "usage": ["header icons", "navigation menu icons"],
+          "DO_NOT_USE": ["decorative icons", "content icons"]
+        },
+        "socialIcon": {
+          "fill": "#A855F7",
+          "hover": {
+            "fill": "#C084FC"
+          },
+          "description": "Purple icons for social links",
+          "usage": ["email icon", "linkedin icon", "github icon"],
+          "DO_NOT_USE": ["navigation", "buttons"]
+        }
+      },
+
+      "borders": {
+        "subtle": "rgba(255, 255, 255, 0.06)",
+        "medium": "rgba(255, 255, 255, 0.08)",
+        "strong": "rgba(255, 255, 255, 0.12)",
+        "accent": "rgba(168, 85, 247, 0.4)",
+        "focus": "rgba(139, 92, 246, 0.6)"
+      },
+
+      "shadows": {
+        "card": {
+          "value": "0 4px 24px rgba(0, 0, 0, 0.4)",
+          "usage": ["cards", "elevated containers"],
+          "DO_NOT_USE": ["buttons", "icons", "text"]
+        },
+        "button": {
+          "value": "0 8px 32px rgba(236, 72, 153, 0.3)",
+          "hover": "0 12px 40px rgba(236, 72, 153, 0.4)",
+          "usage": ["primary buttons", "CTA elements"],
+          "DO_NOT_USE": ["cards", "form inputs"]
+        },
+        "glow": {
+          "value": "0 0 40px rgba(139, 92, 246, 0.3)",
+          "usage": ["accent elements", "focus states"],
+          "DO_NOT_USE": ["general shadows", "text"]
+        }
+      }
+    },
+
+    "typography": {
+      "fontFamilies": {
+        "primary": "var(--font-geist-sans)",
+        "fallback": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+      },
+
+      "headings": {
+        "h1": {
+          "fontSize": "clamp(2.5rem, 5vw, 4rem)",
+          "fontWeight": "700",
+          "lineHeight": "1.1",
+          "letterSpacing": "-0.02em",
+          "color": "#FFFFFF",
+          "usage": ["page titles", "hero headings"],
+          "example": "Get In Touch"
+        },
+        "h2": {
+          "fontSize": "clamp(1.5rem, 3vw, 2rem)",
+          "fontWeight": "600",
+          "lineHeight": "1.3",
+          "letterSpacing": "-0.01em",
+          "color": "#FFFFFF",
+          "usage": ["section headings", "card titles"],
+          "example": "Availability"
+        },
+        "h3": {
+          "fontSize": "1.125rem",
+          "fontWeight": "600",
+          "lineHeight": "1.5",
+          "color": "#FFFFFF",
+          "usage": ["subsection headings", "list headers"]
+        }
+      },
+
+      "body": {
+        "regular": {
+          "fontSize": "1rem",
+          "fontWeight": "400",
+          "lineHeight": "1.6",
+          "color": "#A1A1AA",
+          "usage": ["body text", "descriptions", "paragraphs"]
+        },
+        "small": {
+          "fontSize": "0.875rem",
+          "fontWeight": "400",
+          "lineHeight": "1.5",
+          "color": "#71717A",
+          "usage": ["meta information", "captions", "helper text"]
+        }
+      },
+
+      "labels": {
+        "formLabel": {
+          "fontSize": "0.875rem",
+          "fontWeight": "500",
+          "letterSpacing": "0.01em",
+          "color": "#FFFFFF",
+          "usage": ["form field labels"],
+          "requiredIndicator": {
+            "content": "*",
+            "color": "#EF4444",
+            "marginLeft": "0.25rem"
+          }
+        }
+      },
+
+      "links": {
+        "default": {
+          "fontSize": "inherit",
+          "fontWeight": "400",
+          "color": "#A855F7",
+          "textDecoration": "none",
+          "hover": {
+            "color": "#C084FC",
+            "textDecoration": "none"
+          }
+        }
+      }
+    },
+
+    "components": {
+      "buttons": {
+        "primary": {
+          "background": "linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #8B5CF6 100%)",
+          "color": "#FFFFFF",
+          "padding": "0.875rem 2rem",
+          "fontSize": "1rem",
+          "fontWeight": "600",
+          "borderRadius": "0.75rem",
+          "border": "none",
+          "boxShadow": "0 8px 32px rgba(236, 72, 153, 0.3)",
+          "transition": "all 0.3s ease",
+          "hover": {
+            "background": "linear-gradient(135deg, #F472B6 0%, #C084FC 50%, #A78BFA 100%)",
+            "boxShadow": "0 12px 40px rgba(236, 72, 153, 0.4)",
+            "transform": "translateY(-2px)"
+          },
+          "active": {
+            "transform": "translateY(0)"
+          },
+          "disabled": {
+            "opacity": 0.5,
+            "cursor": "not-allowed"
+          },
+          "icon": {
+            "marginLeft": "0.5rem",
+            "fill": "#FFFFFF"
+          },
+          "usage": ["submit buttons", "primary CTAs"],
+          "DO_NOT_USE": ["navigation", "secondary actions", "text links"]
+        },
+
+        "secondary": {
+          "background": "rgba(17, 17, 24, 0.6)",
+          "color": "#FFFFFF",
+          "padding": "0.75rem 1.5rem",
+          "fontSize": "0.875rem",
+          "fontWeight": "500",
+          "borderRadius": "0.625rem",
+          "border": "1px solid rgba(255, 255, 255, 0.08)",
+          "hover": {
+            "background": "rgba(17, 17, 24, 0.8)",
+            "borderColor": "rgba(168, 85, 247, 0.4)"
+          },
+          "usage": ["secondary actions", "download buttons"],
+          "DO_NOT_USE": ["primary CTAs", "form submissions"]
+        },
+
+        "cvButton": {
+          "background": "transparent",
+          "color": "#FFFFFF",
+          "padding": "0.75rem 1.5rem",
+          "fontSize": "0.875rem",
+          "fontWeight": "500",
+          "borderRadius": "0.625rem",
+          "border": "1px solid rgba(255, 255, 255, 0.12)",
+          "hover": {
+            "background": "rgba(168, 85, 247, 0.1)",
+            "borderColor": "rgba(168, 85, 247, 0.4)"
+          },
+          "icon": {
+            "marginLeft": "0.5rem",
+            "fill": "#A855F7"
+          },
+          "usage": ["download actions", "tertiary actions"]
+        }
+      },
+
+      "forms": {
+        "input": {
+          "background": "rgba(17, 17, 24, 0.8)",
+          "color": "#FFFFFF",
+          "padding": "0.875rem 1rem",
+          "fontSize": "0.875rem",
+          "borderRadius": "0.625rem",
+          "border": "1px solid rgba(255, 255, 255, 0.06)",
+          "outline": "none",
+          "transition": "all 0.3s ease",
+          "placeholder": {
+            "color": "#71717A"
+          },
+          "focus": {
+            "background": "rgba(139, 92, 246, 0.1)",
+            "borderColor": "rgba(139, 92, 246, 0.4)",
+            "boxShadow": "0 0 0 3px rgba(139, 92, 246, 0.1)"
+          },
+          "hover": {
+            "borderColor": "rgba(255, 255, 255, 0.1)"
+          },
+          "error": {
+            "borderColor": "rgba(239, 68, 68, 0.5)"
+          },
+          "usage": ["text inputs", "email inputs"],
+          "DO_NOT_USE": ["buttons", "cards"]
+        },
+
+        "textarea": {
+          "background": "rgba(17, 17, 24, 0.8)",
+          "color": "#FFFFFF",
+          "padding": "0.875rem 1rem",
+          "fontSize": "0.875rem",
+          "borderRadius": "0.625rem",
+          "border": "1px solid rgba(255, 255, 255, 0.06)",
+          "outline": "none",
+          "minHeight": "120px",
+          "resize": "vertical",
+          "transition": "all 0.3s ease",
+          "placeholder": {
+            "color": "#71717A"
+          },
+          "focus": {
+            "background": "rgba(139, 92, 246, 0.1)",
+            "borderColor": "rgba(139, 92, 246, 0.4)",
+            "boxShadow": "0 0 0 3px rgba(139, 92, 246, 0.1)"
+          },
+          "usage": ["message fields", "long text inputs"]
+        },
+
+        "select": {
+          "background": "rgba(17, 17, 24, 0.8)",
+          "color": "#FFFFFF",
+          "padding": "0.875rem 1rem",
+          "fontSize": "0.875rem",
+          "borderRadius": "0.625rem",
+          "border": "1px solid rgba(255, 255, 255, 0.06)",
+          "outline": "none",
+          "cursor": "pointer",
+          "icon": {
+            "fill": "#A1A1AA"
+          },
+          "focus": {
+            "background": "rgba(139, 92, 246, 0.1)",
+            "borderColor": "rgba(139, 92, 246, 0.4)"
+          },
+          "usage": ["dropdown selects", "subject selection"]
+        },
+
+        "label": {
+          "fontSize": "0.875rem",
+          "fontWeight": "500",
+          "color": "#FFFFFF",
+          "marginBottom": "0.5rem",
+          "display": "block",
+          "required": {
+            "color": "#EF4444",
+            "content": "*",
+            "marginLeft": "0.25rem"
+          }
+        }
+      },
+
+      "cards": {
+        "infoCard": {
+          "background": "rgba(17, 17, 24, 0.6)",
+          "backdropFilter": "blur(12px)",
+          "border": "1px solid rgba(255, 255, 255, 0.08)",
+          "borderRadius": "1rem",
+          "padding": "1.5rem",
+          "boxShadow": "0 4px 24px rgba(0, 0, 0, 0.4)",
+          "transition": "all 0.3s ease",
+          "hover": {
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "transform": "translateY(-2px)",
+            "boxShadow": "0 8px 32px rgba(0, 0, 0, 0.5)"
+          },
+          "usage": ["info sections", "feature cards", "content containers"],
+          "DO_NOT_USE": ["buttons", "form elements"]
+        },
+
+        "cardHeader": {
+          "marginBottom": "1rem",
+          "display": "flex",
+          "alignItems": "center",
+          "gap": "0.75rem",
+          "icon": {
+            "width": "1.25rem",
+            "height": "1.25rem",
+            "fill": "#A855F7",
+            "description": "Accent purple for card icons"
+          },
+          "title": {
+            "fontSize": "1.125rem",
+            "fontWeight": "600",
+            "color": "#FFFFFF"
+          }
+        },
+
+        "cardContent": {
+          "color": "#A1A1AA",
+          "fontSize": "0.875rem",
+          "lineHeight": "1.6",
+          "usage": ["card descriptions", "card body text"]
+        },
+
+        "availabilityCard": {
+          "extends": "infoCard",
+          "icon": {
+            "fill": "#10B981",
+            "description": "Green calendar icon for availability"
+          },
+          "statusText": {
+            "color": "#10B981",
+            "fontSize": "0.875rem",
+            "fontWeight": "500"
+          }
+        },
+
+        "locationCard": {
+          "extends": "infoCard",
+          "icon": {
+            "fill": "#A855F7",
+            "description": "Purple map pin icon"
+          }
+        }
+      },
+
+      "navigation": {
+        "header": {
+          "background": "rgba(10, 10, 15, 0.8)",
+          "backdropFilter": "blur(12px)",
+          "borderBottom": "1px solid rgba(255, 255, 255, 0.06)",
+          "padding": "1rem 0",
+          "position": "sticky",
+          "top": 0,
+          "zIndex": 50
+        },
+
+        "logo": {
+          "fontSize": "1.25rem",
+          "fontWeight": "700",
+          "color": "#FFFFFF",
+          "accent": {
+            "color": "#A855F7"
+          }
+        },
+
+        "navLink": {
+          "fontSize": "0.875rem",
+          "fontWeight": "500",
+          "color": "#A1A1AA",
+          "textDecoration": "none",
+          "padding": "0.5rem 0.75rem",
+          "borderRadius": "0.5rem",
+          "transition": "all 0.3s ease",
+          "hover": {
+            "color": "#FFFFFF",
+            "background": "rgba(168, 85, 247, 0.1)"
+          },
+          "active": {
+            "color": "#FFFFFF",
+            "background": "rgba(168, 85, 247, 0.15)"
+          }
+        },
+
+        "cvButton": {
+          "background": "linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #8B5CF6 100%)",
+          "color": "#FFFFFF",
+          "padding": "0.5rem 1rem",
+          "fontSize": "0.875rem",
+          "fontWeight": "600",
+          "borderRadius": "0.625rem",
+          "icon": {
+            "marginRight": "0.375rem",
+            "fill": "#FFFFFF"
+          }
+        }
+      },
+
+      "contactLinks": {
+        "container": {
+          "display": "flex",
+          "flexDirection": "column",
+          "gap": "0.75rem"
+        },
+
+        "link": {
+          "display": "flex",
+          "alignItems": "center",
+          "gap": "0.75rem",
+          "color": "#A1A1AA",
+          "textDecoration": "none",
+          "fontSize": "0.875rem",
+          "transition": "all 0.3s ease",
+          "icon": {
+            "width": "1rem",
+            "height": "1rem",
+            "fill": "#A855F7"
+          },
+          "hover": {
+            "color": "#FFFFFF",
+            "icon": {
+              "fill": "#C084FC"
+            }
+          },
+          "usage": ["email links", "social links", "external links"]
+        }
+      }
+    },
+
+    "spacing": {
+      "xs": "0.25rem",
+      "sm": "0.5rem",
+      "md": "0.75rem",
+      "lg": "1rem",
+      "xl": "1.5rem",
+      "2xl": "2rem",
+      "3xl": "3rem",
+      "4xl": "4rem",
+
+      "componentSpacing": {
+        "cardPadding": "1.5rem",
+        "cardGap": "1.5rem",
+        "formFieldGap": "1.25rem",
+        "sectionPadding": "4rem 0",
+        "containerPadding": "0 1.5rem"
+      }
+    },
+
+    "borderRadius": {
+      "sm": "0.5rem",
+      "md": "0.625rem",
+      "lg": "0.75rem",
+      "xl": "1rem",
+      "2xl": "1.5rem",
+
+      "componentBorderRadius": {
+        "card": "1rem",
+        "button": "0.75rem",
+        "input": "0.625rem",
+        "buttonSecondary": "0.625rem"
+      }
+    },
+
+    "animations": {
+      "transitions": {
+        "default": "all 0.3s ease",
+        "fast": "all 0.15s ease",
+        "slow": "all 0.5s ease"
+      },
+
+      "transforms": {
+        "buttonHover": "translateY(-2px)",
+        "cardHover": "translateY(-2px)",
+        "buttonActive": "translateY(0)"
+      },
+
+      "hover": {
+        "description": "Hover effects should be subtle and smooth",
+        "rules": [
+          "Lift elements slightly with translateY(-2px)",
+          "Brighten colors slightly",
+          "Increase shadow depth",
+          "Smooth 0.3s ease transition"
+        ]
+      }
+    },
+
+    "layout": {
+      "pageLayout": {
+        "maxWidth": "1280px",
+        "margin": "0 auto",
+        "padding": "0 1.5rem"
+      },
+
+      "heroSection": {
+        "padding": "4rem 0 6rem",
+        "textAlign": "center",
+        "background": "radial-gradient(circle at center top, rgba(139, 92, 246, 0.15) 0%, rgba(168, 85, 247, 0.08) 40%, rgba(10, 10, 15, 0.95) 80%)"
+      },
+
+      "contentGrid": {
+        "display": "grid",
+        "gridTemplateColumns": {
+          "desktop": "1fr 1fr",
+          "tablet": "1fr",
+          "mobile": "1fr"
+        },
+        "gap": "2rem",
+        "alignItems": "start"
+      }
+    },
+
+    "DO_NOT_RULES": {
+      "colorMisapplication": [
+        "DO NOT apply gradient backgrounds to icons - icons use solid fills",
+        "DO NOT apply card backgrounds to buttons - buttons have their own backgrounds",
+        "DO NOT use button gradients on text - text uses solid colors",
+        "DO NOT apply icon colors to borders - borders have separate color values",
+        "DO NOT use form input backgrounds on cards - they have different opacity values"
+      ],
+
+      "shadowMisapplication": [
+        "DO NOT apply button shadows to cards - different shadow specifications",
+        "DO NOT add shadows to icons - icons are flat",
+        "DO NOT add shadows to text - text should be crisp",
+        "DO NOT use glow shadows on standard elements - only for accent/focus"
+      ],
+
+      "spacingMisapplication": [
+        "DO NOT use card padding on form elements - different padding values",
+        "DO NOT use button padding on inputs - inputs have specific padding",
+        "DO NOT apply section padding to components - components have their own spacing"
+      ],
+
+      "typographyMisapplication": [
+        "DO NOT use heading colors for body text - body text is gray (#A1A1AA)",
+        "DO NOT use body font weight for headings - headings are 600-700 weight",
+        "DO NOT apply link colors to standard text - links are accent purple"
+      ],
+
+      "generalRules": [
+        "Always check component state (default, hover, focus, active) before applying styles",
+        "Gradients are ONLY for buttons and hero backgrounds, never for icons or text",
+        "Icons always use solid fill colors, never gradients or backgrounds",
+        "Form elements have specific focus states - don't use generic hover states",
+        "Card borders and form borders have different opacity values - don't mix them"
+      ]
+    },
+
+    "responsiveBreakpoints": {
+      "mobile": "0px",
+      "tablet": "768px",
+      "desktop": "1024px",
+      "wide": "1280px",
+
+      "adjustments": {
+        "mobile": {
+          "typography": {
+            "h1": "2.5rem",
+            "h2": "1.5rem"
+          },
+          "spacing": {
+            "sectionPadding": "2rem 0",
+            "containerPadding": "0 1rem"
+          },
+          "layout": {
+            "gridColumns": "1fr",
+            "cardGap": "1rem"
+          }
+        }
+      }
+    },
+
+    "accessibility": {
+      "contrastRatios": {
+        "headingOnDark": "21:1 (White on #0A0A0F)",
+        "bodyOnDark": "7:1 (#A1A1AA on #0A0A0F)",
+        "accentOnDark": "4.5:1 (#A855F7 on #0A0A0F)"
+      },
+
+      "focusStates": {
+        "outline": "3px solid rgba(139, 92, 246, 0.4)",
+        "outlineOffset": "2px",
+        "usage": ["all interactive elements", "form inputs", "buttons", "links"]
+      }
+    },
+
+    "implementationNotes": {
+      "cssVariables": {
+        "recommendation": "Convert all hex values to CSS custom properties for easy theming",
+        "example": {
+          "--color-background-primary": "#0A0A0F",
+          "--color-text-primary": "#FFFFFF",
+          "--gradient-primary": "linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #8B5CF6 100%)"
+        }
+      },
+
+      "componentStructure": {
+        "recommendation": "Use semantic HTML and component composition",
+        "example": "Card > CardHeader (icon + title) > CardContent (description + links)"
+      },
+
+      "performanceConsiderations": [
+        "Use backdrop-filter: blur() sparingly - it's GPU intensive",
+        "Optimize gradient rendering with will-change: transform on hover",
+        "Use transform for animations instead of position properties",
+        "Lazy load images and icons where possible"
+      ]
+    },
+
+    "personalInformation": {
+      "contact": {
+        "email": "sathis.rc.dev@gmail.com",
+        "github": "https://github.com/sathis-dev",
+        "linkedin": "https://www.linkedin.com/in/sathis-hettiarachchi-52b4b436a/"
+      },
+      "note": "This information should be used to populate contact sections, not as design system data"
+    }
+  }
+}
+
+
+

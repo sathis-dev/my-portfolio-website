@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * DarkVeil Design System v4.1 - Input Component
+ * Form input with proper touch targets and focus states
+ */
+
 import { InputHTMLAttributes, forwardRef } from 'react'
 import * as LucideIcons from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -23,16 +28,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="text-label font-medium text-dark-text-primary"
+            className="text-sm font-medium text-white"
           >
             {label}
-            {required && <span className="text-semantic-error ml-1">*</span>}
+            {required && <span className="text-red-500 ml-1">*</span>}
           </label>
         )}
         
         <div className="relative">
           {Icon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-dark-text-tertiary pointer-events-none">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary pointer-events-none">
               <Icon size={20} aria-hidden="true" />
             </div>
           )}
@@ -42,19 +47,49 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={type}
             className={cn(
-              'w-full h-11',
+              // Base styles
+              'w-full',
               Icon ? 'pl-10 pr-4' : 'px-4',
-              'py-3',
-              'bg-dark-bg-tertiary',
-              'border border-dark-border-subtle',
-              'rounded-input',
-              'text-body text-dark-text-primary',
-              'placeholder:text-dark-text-tertiary',
+              'py-3.5',
+              
+              // Design System v4.1 - Input styles
+              'bg-background-elevated',
+              'border',
+              'border-[rgba(255,255,255,0.06)]',
+              'rounded-[0.625rem]',
+              
+              // Typography
+              'text-base text-white',
+              'placeholder:text-text-tertiary',
+              
+              // Touch targets
+              'min-h-[48px]',
+              
+              // Transitions
               'transition-all duration-200',
               'outline-none',
-              'focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
-              error && 'border-semantic-error focus:border-semantic-error focus:ring-semantic-error/20',
+              
+              // Hover state
+              'hover:border-[rgba(255,255,255,0.1)]',
+              
+              // Focus state
+              'focus:bg-[rgba(139,92,246,0.1)]',
+              'focus:border-[rgba(139,92,246,0.4)]',
+              'focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1)]',
+              
+              // Error state
+              error && [
+                'border-red-500',
+                'focus:border-red-500',
+                'focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]',
+              ],
+              
+              // Disabled state
               'disabled:opacity-50 disabled:cursor-not-allowed',
+              
+              // Prevent iOS zoom
+              'text-[16px]',
+              
               className
             )}
             aria-invalid={error ? 'true' : 'false'}
@@ -67,7 +102,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <p
             id={errorId}
             role="alert"
-            className="flex items-center gap-1.5 text-body-sm text-semantic-error"
+            className="flex items-center gap-1.5 text-sm text-red-500"
           >
             <LucideIcons.AlertCircle size={16} aria-hidden="true" />
             {error}

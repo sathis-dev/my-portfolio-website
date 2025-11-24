@@ -119,7 +119,7 @@ export default function AboutPage() {
       </div>
 
       <Header />
-
+      
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto text-center">
@@ -243,14 +243,14 @@ export default function AboutPage() {
                     backdropFilter: 'blur(20px) saturate(90%)',
                     willChange: 'auto'
                   }}
-                >
+            >
                   <h3 className="text-2xl font-extrabold text-white mb-8">
                     <DecryptedText 
                       text="Quick Facts" 
                       speed={40}
                       interval={800}
                     />
-                  </h3>
+              </h3>
                   <div className="space-y-0">
                     {quickFacts.map((fact, index) => (
                       <motion.div
@@ -277,7 +277,7 @@ export default function AboutPage() {
                       </motion.div>
                     ))}
                   </div>
-                </div>
+              </div>
               </StarBorder>
             </motion.div>
           </div>
@@ -312,11 +312,11 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {skills.map((skill, index) => (
-              <motion.div
+          <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+            viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 style={{ willChange: 'opacity, transform' }}
               >
@@ -348,7 +348,7 @@ export default function AboutPage() {
                           boxShadow: '0 4px 16px rgba(139, 92, 246, 0.2)',
                           willChange: 'transform'
                         }}
-                      >
+                  >
                         <skill.icon size={28} style={{ color: '#8B5CF6' }} />
                       </div>
                     </MagneticButton>
@@ -364,7 +364,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                 </Tilt3DCard>
-              </motion.div>
+                </motion.div>
             ))}
           </div>
         </div>
@@ -473,7 +473,7 @@ export default function AboutPage() {
               className="w-full"
               speed={10}
               color="rgba(139, 92, 246, 0.8)"
-            >
+          >
               <div
                 className="rounded-3xl p-8 sm:p-12 w-full"
                 style={{
@@ -497,7 +497,7 @@ export default function AboutPage() {
                     }}
                   >
                     <Target size={28} style={{ color: '#8B5CF6' }} />
-                  </div>
+                </div>
                 </MagneticButton>
 
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
@@ -506,13 +506,13 @@ export default function AboutPage() {
                     speed={35}
                     interval={500}
                   />
-                </h2>
+                  </h2>
                 <p 
                   className="text-base mb-8"
                   style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                 >
-                  Continuously learning and improving my craft
-                </p>
+                    Continuously learning and improving my craft
+                  </p>
 
                 <div className="space-y-4">
                   {focusAreas.map((area, index) => (

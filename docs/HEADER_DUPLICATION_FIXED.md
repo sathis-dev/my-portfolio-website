@@ -198,3 +198,8 @@ If you want the **exact same header with all animations** on every page, I can:
 
 
 
+
+
+
+
+

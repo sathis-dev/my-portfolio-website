@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
-import { slideUp } from '@/lib/animations'
+import { pageTransitions } from '@/lib/animations'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 interface BreadcrumbItem {
@@ -29,7 +29,7 @@ export default function PageHeader({
         <motion.div
           initial="initial"
           animate="animate"
-          variants={slideUp}
+          variants={pageTransitions.slideUp}
           transition={{ delay: 0 }}
           className="mb-6 flex justify-center"
         >
@@ -40,7 +40,7 @@ export default function PageHeader({
       <motion.h1
         initial="initial"
         animate="animate"
-        variants={slideUp}
+        variants={pageTransitions.slideUp}
         transition={{ delay: breadcrumbs ? 0.1 : 0 }}
         className="text-display-lg font-display text-dark-text-primary"
       >
@@ -51,7 +51,7 @@ export default function PageHeader({
         <motion.p
           initial="initial"
           animate="animate"
-          variants={slideUp}
+          variants={pageTransitions.slideUp}
           transition={{ delay: breadcrumbs ? 0.2 : 0.1 }}
           className="text-body-lg text-dark-text-secondary mt-4 max-w-3xl mx-auto"
         >
@@ -63,7 +63,7 @@ export default function PageHeader({
         <motion.div
           initial="initial"
           animate="animate"
-          variants={slideUp}
+          variants={pageTransitions.slideUp}
           transition={{ delay: breadcrumbs ? 0.3 : 0.2 }}
           className="mt-8 flex gap-4 justify-center"
         >

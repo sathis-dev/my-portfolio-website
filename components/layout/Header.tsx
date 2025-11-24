@@ -68,22 +68,29 @@ export default function Header() {
       className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4"
       style={{
         pointerEvents: showHeader ? 'auto' : 'none',
+        // GPU acceleration
+        transform: 'translateZ(0)',
+        willChange: 'transform, opacity',
       }}
     >
       <nav
-        className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-500"
+        className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-300 ease-out"
         style={{
+          // Design System v4.1 - Header styles
           background: isScrolled 
-            ? 'rgba(39, 10, 33, 0.85)' 
-            : 'rgba(39, 10, 33, 0.6)',
-          backdropFilter: 'blur(20px) saturate(110%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(110%)',
+            ? 'var(--burgundy-medium)' 
+            : 'var(--burgundy-light)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
           border: `1px solid ${isScrolled 
-            ? 'rgba(199, 21, 133, 0.3)' 
-            : 'rgba(199, 21, 133, 0.2)'}`,
+            ? 'rgba(199, 21, 133, 0.25)' 
+            : 'rgba(199, 21, 133, 0.15)'}`,
           boxShadow: isScrolled
-            ? '0 8px 32px rgba(74, 20, 140, 0.35), inset 0 1px 0 rgba(199, 21, 133, 0.1)'
-            : '0 4px 20px rgba(74, 20, 140, 0.25), inset 0 1px 0 rgba(199, 21, 133, 0.05)',
+            ? '0 8px 24px rgba(74, 20, 140, 0.25)'
+            : '0 4px 16px rgba(74, 20, 140, 0.2)',
+          // GPU acceleration
+          transform: 'translateZ(0)',
+          willChange: 'background, border, box-shadow',
         }}
       >
         {/* Grid Layout */}
@@ -156,18 +163,21 @@ export default function Header() {
               whileTap={{ scale: 0.95 }}
               data-cursor="button"
               data-cursor-text="⌘K"
-              className="hidden md:flex w-10 h-10 rounded-xl items-center justify-center transition-all duration-300"
+              className="hidden md:flex w-10 h-10 rounded-xl items-center justify-center transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
               style={{
-                background: 'rgba(199, 21, 133, 0.08)',
-                border: '1px solid rgba(199, 21, 133, 0.15)',
+                background: 'var(--bg-magenta-subtle)',
+                border: '1px solid var(--border-light)',
+                // GPU acceleration
+                transform: 'translateZ(0)',
+                willChange: 'transform',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(199, 21, 133, 0.15)'
-                e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.25)'
+                e.currentTarget.style.background = 'var(--bg-magenta-light)'
+                e.currentTarget.style.borderColor = 'var(--border-medium)'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(199, 21, 133, 0.08)'
-                e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.15)'
+                e.currentTarget.style.background = 'var(--bg-magenta-subtle)'
+                e.currentTarget.style.borderColor = 'var(--border-light)'
               }}
             >
               <div className="flex items-center gap-0.5">
@@ -209,11 +219,13 @@ export default function Header() {
               data-cursor="button"
               whileHover={{ y: -1, scale: 1.02 }}
               whileTap={{ y: 0, scale: 0.98 }}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 text-[0.875rem] font-semibold text-white rounded-2xl transition-all duration-300"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 text-[0.875rem] font-semibold text-white rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 min-h-[44px]"
               style={{
-                background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
-                boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px rgba(199, 21, 133, 0.4)',
-                border: '1px solid rgba(199, 21, 133, 0.3)',
+                background: 'var(--gradient-primary)',
+                boxShadow: 'var(--shadow-magenta), var(--shadow-inset)',
+                // GPU acceleration
+                transform: 'translateZ(0)',
+                willChange: 'transform',
               }}
             >
               <Download size={16} />
@@ -226,10 +238,13 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-cursor="button"
               data-cursor-text={isMobileMenuOpen ? "Close" : "Menu"}
-              className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center transition-all"
+              className="lg:hidden w-12 h-12 rounded-xl flex items-center justify-center transition-all touch-manipulation min-h-[48px]"
               style={{
-                background: 'rgba(199, 21, 133, 0.08)',
-                border: '1px solid rgba(199, 21, 133, 0.15)',
+                background: 'var(--bg-magenta-subtle)',
+                border: '1px solid var(--border-light)',
+                // GPU acceleration
+                transform: 'translateZ(0)',
+                willChange: 'transform',
               }}
             >
               {isMobileMenuOpen ? (

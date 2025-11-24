@@ -4,50 +4,89 @@
 
 @layer base {
   :root {
-    /* DarkVeil-matched colors */
+    /* ==========================================
+       DarkVeil Design System v4.1
+       Performance-optimized CSS variables
+       ========================================== */
+    
+    /* Primary Colors */
     --color-magenta: #C71585;
     --color-magenta-light: #E91E8C;
+    --color-magenta-dark: #A01268;
     --color-purple: #8B5CF6;
+    --color-purple-light: #9D6EFF;
     --color-purple-dark: #7C3AED;
+    --color-violet: #7C3AED;
+    --color-violet-dark: #4A148C;
     
-    /* Background bases */
-    --bg-overlay: rgba(39, 10, 33, 0.3);
-    --bg-overlay-scrolled: rgba(39, 10, 33, 0.5);
+    /* Burgundy Overlay System */
+    --burgundy-light: rgba(39, 10, 33, 0.3);
+    --burgundy-medium: rgba(39, 10, 33, 0.5);
+    --burgundy-heavy: rgba(39, 10, 33, 0.7);
     
-    /* Borders */
-    --border-subtle: rgba(199, 21, 133, 0.15);
-    --border-default: rgba(199, 21, 133, 0.25);
-    --border-strong: rgba(199, 21, 133, 0.35);
+    /* Background System */
+    --bg-base: #0A0A0F;
+    --bg-elevated: rgba(17, 17, 24, 0.8);
+    --bg-overlay: rgba(10, 10, 15, 0.95);
     
-    /* Backgrounds */
-    --bg-subtle: rgba(199, 21, 133, 0.08);
-    --bg-default: rgba(199, 21, 133, 0.12);
-    --bg-medium: rgba(199, 21, 133, 0.15);
-    --bg-strong: rgba(199, 21, 133, 0.2);
+    /* Text Colors */
+    --text-primary: #FFFFFF;
+    --text-secondary: #A1A1AA;
+    --text-tertiary: #71717A;
+    --text-disabled: #52525B;
+    
+    /* Borders (Magenta-tinted) */
+    --border-subtle: rgba(199, 21, 133, 0.08);
+    --border-light: rgba(199, 21, 133, 0.15);
+    --border-medium: rgba(199, 21, 133, 0.25);
+    --border-strong: rgba(199, 21, 133, 0.4);
+    --border-card: rgba(255, 255, 255, 0.08);
+    --border-card-hover: rgba(255, 255, 255, 0.12);
+    
+    /* Input Borders */
+    --border-input: rgba(255, 255, 255, 0.06);
+    --border-input-hover: rgba(255, 255, 255, 0.1);
+    --border-input-focus: rgba(139, 92, 246, 0.4);
+    
+    /* Background Tints */
+    --bg-magenta-subtle: rgba(199, 21, 133, 0.08);
+    --bg-magenta-light: rgba(199, 21, 133, 0.12);
+    --bg-magenta-medium: rgba(199, 21, 133, 0.15);
+    --bg-purple-subtle: rgba(139, 92, 246, 0.1);
     
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%);
-    --gradient-primary-hover: linear-gradient(135deg, #E91E8C 0%, #9D6EFF 50%, #8B5CF6 100%);
+    --gradient-hover: linear-gradient(135deg, #E91E8C 0%, #9D6EFF 50%, #8B5CF6 100%);
     --gradient-text: linear-gradient(135deg, #E91E8C 0%, #C71585 30%, #8B5CF6 70%, #7C3AED 100%);
+    --gradient-radial: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, rgba(168, 85, 247, 0.08) 40%, rgba(10, 10, 15, 0.95) 100%);
     
-    /* Shadows */
+    /* Shadows (Purple/Magenta-tinted) */
     --shadow-sm: 0 2px 8px rgba(74, 20, 140, 0.15);
     --shadow-md: 0 4px 16px rgba(74, 20, 140, 0.2);
     --shadow-lg: 0 8px 24px rgba(74, 20, 140, 0.25);
+    --shadow-xl: 0 12px 32px rgba(74, 20, 140, 0.3);
     --shadow-magenta: 0 8px 24px rgba(199, 21, 133, 0.4);
     --shadow-magenta-hover: 0 12px 32px rgba(199, 21, 133, 0.5);
-  }
-
-  * {
-    @apply border-dark-border-subtle;
+    --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.3);
+    --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Animation Timings */
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Touch Targets */
+    --touch-target-min: 44px;
+    --touch-target-recommended: 48px;
   }
   
   body {
-    @apply bg-dark-bg-primary text-dark-text-secondary antialiased;
+    @apply bg-background-base text-text-secondary antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply text-dark-text-primary;
+    @apply text-text-primary;
   }
 
   /* Enhanced text visibility with shadows */
@@ -69,6 +108,9 @@
 }
 
 @layer utilities {
+  /* ==========================================
+     Accessibility Utilities
+     ========================================== */
   .sr-only {
     position: absolute;
     width: 1px;
@@ -92,52 +134,179 @@
     white-space: normal;
   }
   
+  /* ==========================================
+     GPU Acceleration Utilities (60+ FPS)
+     ========================================== */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  .gpu-transform {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+  
+  .performance-optimized {
+    transform: translateZ(0);
+    will-change: auto;
+    contain: layout style paint;
+    content-visibility: auto;
+  }
+  
+  /* ==========================================
+     Glassmorphism
+     ========================================== */
   .glass {
-    @apply bg-dark-bg-tertiary/40 backdrop-blur-glass border border-dark-border-subtle;
+    background: var(--bg-elevated);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-card);
   }
-
-  /* Color-matched utility classes from DarkVeil */
-  .bg-overlay {
-    background: var(--bg-overlay);
+  
+  .glass-header {
+    background: var(--burgundy-light);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-light);
   }
-
-  .bg-overlay-scrolled {
-    background: var(--bg-overlay-scrolled);
+  
+  /* ==========================================
+     Color Utilities
+     ========================================== */
+  .bg-burgundy-light {
+    background: var(--burgundy-light);
   }
-
+  
+  .bg-burgundy-medium {
+    background: var(--burgundy-medium);
+  }
+  
+  .bg-burgundy-heavy {
+    background: var(--burgundy-heavy);
+  }
+  
+  .bg-magenta-subtle {
+    background: var(--bg-magenta-subtle);
+  }
+  
+  .bg-magenta-light {
+    background: var(--bg-magenta-light);
+  }
+  
+  .bg-purple-subtle {
+    background: var(--bg-purple-subtle);
+  }
+  
+  /* ==========================================
+     Border Utilities
+     ========================================== */
   .border-magenta-subtle {
     border-color: var(--border-subtle);
   }
-
-  .border-magenta {
-    border-color: var(--border-default);
+  
+  .border-magenta-light {
+    border-color: var(--border-light);
   }
-
-  .bg-magenta-subtle {
-    background: var(--bg-subtle);
+  
+  .border-magenta-medium {
+    border-color: var(--border-medium);
   }
-
-  .bg-magenta {
-    background: var(--bg-default);
+  
+  .border-magenta-strong {
+    border-color: var(--border-strong);
   }
-
+  
+  .border-card {
+    border-color: var(--border-card);
+  }
+  
+  /* ==========================================
+     Gradient Utilities
+     ========================================== */
   .gradient-primary {
     background: var(--gradient-primary);
   }
-
+  
+  .gradient-hover {
+    background: var(--gradient-hover);
+  }
+  
   .gradient-text {
     background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
+  
+  /* ==========================================
+     Shadow Utilities
+     ========================================== */
   .shadow-magenta {
     box-shadow: var(--shadow-magenta);
   }
-
+  
   .shadow-magenta-hover:hover {
     box-shadow: var(--shadow-magenta-hover);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-inset {
+    box-shadow: var(--shadow-inset);
+  }
+  
+  /* ==========================================
+     Hover Effects (GPU-accelerated)
+     ========================================== */
+  .hover-lift {
+    transition: transform var(--duration-fast) var(--easing-standard);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+  
+  .hover-lift:active {
+    transform: translateY(0);
+  }
+  
+  .hover-scale {
+    transition: transform var(--duration-fast) var(--easing-standard);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover-scale:active {
+    transform: scale(1);
+  }
+  
+  .hover-glow {
+    transition: box-shadow var(--duration-normal) var(--easing-standard);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* ==========================================
+     Touch Optimization
+     ========================================== */
+  .touch-target {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+  
+  .touch-optimized {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -147,7 +316,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-dark-bg-secondary;
+  @apply bg-background-elevated;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -160,12 +329,12 @@
 
 /* Selection */
 ::selection {
-  @apply bg-primary-500/30 text-dark-text-primary;
+  @apply bg-primary-500/30 text-text-primary;
 }
 
 /* Focus visible */
 *:focus-visible {
-  @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-dark-bg-primary;
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-background-base;
 }
 
 /* Smooth scroll */

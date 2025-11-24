@@ -24,18 +24,30 @@ export default function SkillCard({ skill, className }: SkillCardProps) {
   }
 
   return (
-    <motion.div
+    <div
       className={cn(
-        'bg-dark-bg-tertiary/40 backdrop-blur-md',
-        'border border-dark-border-subtle',
-        'rounded-card',
+        // Design System v4.1 - Card styles
+        'bg-background-elevated backdrop-blur-[12px]',
+        'border border-card',
+        'rounded-2xl',
         'p-6',
-        'transition-all duration-300',
-        'hover:bg-dark-bg-tertiary/60 hover:border-dark-border-medium hover:shadow-card-hover hover:-translate-y-1',
+        
+        // GPU acceleration
+        'transform-gpu will-change-transform',
+        
+        // Transitions
+        'transition-all duration-300 ease-out',
+        
+        // Hover states
+        'hover:-translate-y-2',
+        'hover:border-[rgba(255,255,255,0.12)]',
+        'hover:shadow-[0_8px_32px_rgba(0,0,0,0.5)]',
+        
+        // Performance optimization
+        'contain-layout',
+        
         className
       )}
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.3 }}
     >
       {/* Header */}
       <div className="flex items-center gap-4 mb-4">
@@ -106,7 +118,7 @@ export default function SkillCard({ skill, className }: SkillCardProps) {
           </Badge>
         ))}
       </div>
-    </motion.div>
+    </div>
   )
 }
 

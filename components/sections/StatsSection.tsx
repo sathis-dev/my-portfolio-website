@@ -3,6 +3,8 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { Briefcase, Code2, Layers } from 'lucide-react'
+import { NumberTicker } from '@/components/ui/number-ticker'
+import { BlurFade } from '@/components/ui/blur-fade'
 
 const stats = [
   {
@@ -29,32 +31,15 @@ const stats = [
 ]
 
 function Counter({ end, duration = 2, suffix = '' }: { end: number; duration?: number; suffix?: string }) {
-  const [count, setCount] = useState(0)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
-  useEffect(() => {
-    if (!isInView) return
-
-    let startTime: number
-    let animationFrame: number
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / (duration * 1000), 1)
-      
-      setCount(Math.floor(progress * end))
-      
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
-      }
-    }
-
-    animationFrame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [end, duration, isInView])
-
-  return <span ref={ref}>{count}{suffix}</span>
+  // Use the new NumberTicker component for better performance
+  return (
+    <NumberTicker
+      value={end}
+      duration={duration}
+      suffix={suffix}
+      className="text-4xl sm:text-5xl md:text-6xl font-bold"
+    />
+  )
 }
 
 export default function StatsSection() {

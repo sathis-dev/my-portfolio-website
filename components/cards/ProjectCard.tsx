@@ -27,20 +27,33 @@ export default function ProjectCard({
 
   return (
     <Link href={`/projects/${project.slug}`}>
-      <motion.article
+      <article
         className={cn(
           'group relative',
-          'bg-dark-bg-tertiary/40 backdrop-blur-md',
-          'border border-dark-border-subtle',
-          'rounded-card',
+          // Design System v4.1 - Card styles
+          'bg-background-elevated backdrop-blur-[12px]',
+          'border border-card',
+          'rounded-2xl',
           'overflow-hidden',
-          'transition-all duration-300',
-          'hover:bg-dark-bg-tertiary/60 hover:border-dark-border-medium hover:shadow-accent',
+          
+          // GPU acceleration
+          'transform-gpu will-change-transform',
+          
+          // Transitions
+          'transition-all duration-300 ease-out',
+          
+          // Hover states
+          'hover:-translate-y-2',
+          'hover:border-[rgba(255,255,255,0.12)]',
+          'hover:shadow-[0_8px_32px_rgba(0,0,0,0.5)]',
+          
+          // Performance optimization
+          'contain-layout',
+          
+          // Grid layout
           isFeatured && 'col-span-2 row-span-2',
           className
         )}
-        whileHover={{ y: -8 }}
-        transition={{ duration: 0.3 }}
       >
         {/* Thumbnail */}
         <div className="relative aspect-video overflow-hidden">
@@ -116,7 +129,7 @@ export default function ProjectCard({
             <ArrowRight size={20} />
           </div>
         </div>
-      </motion.article>
+      </article>
     </Link>
   )
 }

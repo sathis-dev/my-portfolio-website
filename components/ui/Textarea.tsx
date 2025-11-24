@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * DarkVeil Design System v4.1 - Textarea Component
+ * Form textarea with proper touch targets and focus states
+ */
+
 import { TextareaHTMLAttributes, forwardRef } from 'react'
 import * as LucideIcons from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -19,10 +24,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={textareaId}
-            className="text-label font-medium text-dark-text-primary"
+            className="text-sm font-medium text-white"
           >
             {label}
-            {required && <span className="text-semantic-error ml-1">*</span>}
+            {required && <span className="text-red-500 ml-1">*</span>}
           </label>
         )}
         
@@ -30,19 +35,48 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={textareaId}
           ref={ref}
           className={cn(
+            // Base styles
             'w-full min-h-[120px]',
-            'px-4 py-3',
-            'bg-dark-bg-tertiary',
-            'border border-dark-border-subtle',
-            'rounded-input',
-            'text-body text-dark-text-primary',
-            'placeholder:text-dark-text-tertiary',
+            'px-4 py-3.5',
+            
+            // Design System v4.1 - Input styles
+            'bg-background-elevated',
+            'border',
+            'border-[rgba(255,255,255,0.06)]',
+            'rounded-[0.625rem]',
+            
+            // Typography
+            'text-base text-white',
+            'placeholder:text-text-tertiary',
+            
+            // Transitions
             'transition-all duration-200',
             'outline-none',
+            
+            // Resize
             'resize-vertical',
-            'focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
-            error && 'border-semantic-error focus:border-semantic-error focus:ring-semantic-error/20',
+            
+            // Hover state
+            'hover:border-[rgba(255,255,255,0.1)]',
+            
+            // Focus state
+            'focus:bg-[rgba(139,92,246,0.1)]',
+            'focus:border-[rgba(139,92,246,0.4)]',
+            'focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1)]',
+            
+            // Error state
+            error && [
+              'border-red-500',
+              'focus:border-red-500',
+              'focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]',
+            ],
+            
+            // Disabled state
             'disabled:opacity-50 disabled:cursor-not-allowed',
+            
+            // Prevent iOS zoom
+            'text-[16px]',
+            
             className
           )}
           aria-invalid={error ? 'true' : 'false'}
@@ -54,7 +88,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <p
             id={errorId}
             role="alert"
-            className="flex items-center gap-1.5 text-body-sm text-semantic-error"
+            className="flex items-center gap-1.5 text-sm text-red-500"
           >
             <LucideIcons.AlertCircle size={16} aria-hidden="true" />
             {error}
