@@ -704,6 +704,11 @@ html {
 
 /* Mobile Optimizations (< 640px) */
 @media (max-width: 640px) {
+  /* Lighter background for mobile - Better visibility */
+  body {
+    background: #1A1A24 !important; /* Lighter than desktop #0A0A0F */
+  }
+
   /* Base container adjustments */
   .container {
     padding-left: 1.5rem;
@@ -721,10 +726,19 @@ html {
     min-height: 44px; /* iOS recommended minimum */
   }
 
-  /* Better text readability */
+  /* Better text readability with lighter shadow */
   body {
     font-size: 0.9375rem; /* 15px */
     line-height: 1.6;
+  }
+  
+  /* Enhanced text visibility for mobile */
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  p, span, div, a {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
   /* Responsive images */
@@ -828,6 +842,28 @@ html {
   input, textarea, select {
     font-size: 16px; /* Prevents iOS zoom on focus */
     padding: 0.875rem 1rem;
+  }
+  
+  /* Lighter DarkVeil effect on mobile */
+  .mobile-darkveil {
+    opacity: 0.2 !important; /* Lighter than desktop 0.4 */
+  }
+  
+  /* Lighter overlay on mobile */
+  .mobile-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.25) 100%) !important;
+  }
+  
+  /* Enhanced header for mobile with stronger blur */
+  .mobile-header-nav {
+    background: rgba(39, 10, 33, 0.75) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid rgba(199, 21, 133, 0.35) !important;
+    box-shadow: 
+      0 8px 32px rgba(74, 20, 140, 0.4),
+      0 4px 16px rgba(199, 21, 133, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
 }
 

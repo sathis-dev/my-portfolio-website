@@ -253,3 +253,5 @@ All while maintaining:
 - Mobile responsiveness
 
 **The result: A portfolio that's both beautiful and functional, guaranteed to impress any visitor!** 🚀
+
+

@@ -74,20 +74,20 @@ export default function Header() {
       }}
     >
       <nav
-        className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-300 ease-out"
+        className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-300 ease-out mobile-header-nav"
         style={{
           // Design System v4.1 - Header styles
           background: isScrolled 
             ? 'var(--burgundy-medium)' 
             : 'var(--burgundy-light)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
           border: `1px solid ${isScrolled 
-            ? 'rgba(199, 21, 133, 0.25)' 
-            : 'rgba(199, 21, 133, 0.15)'}`,
+            ? 'rgba(199, 21, 133, 0.3)' 
+            : 'rgba(199, 21, 133, 0.2)'}`,
           boxShadow: isScrolled
-            ? '0 8px 24px rgba(74, 20, 140, 0.25)'
-            : '0 4px 16px rgba(74, 20, 140, 0.2)',
+            ? '0 8px 32px rgba(74, 20, 140, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            : '0 4px 20px rgba(74, 20, 140, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
           // GPU acceleration
           transform: 'translateZ(0)',
           willChange: 'background, border, box-shadow',
@@ -212,24 +212,34 @@ export default function Header() {
               <span className="xl:hidden">Available</span>
             </div>
 
-            {/* CV Button */}
+            {/* CV Button - Professional Design */}
             <motion.a
               href="/cv.pdf"
               download
               data-cursor="button"
               whileHover={{ y: -1, scale: 1.02 }}
               whileTap={{ y: 0, scale: 0.98 }}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 text-[0.875rem] font-semibold text-white rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 min-h-[44px]"
+              className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 text-[0.875rem] font-semibold text-white rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 min-h-[44px] sm:min-h-[48px] relative overflow-hidden group"
               style={{
                 background: 'var(--gradient-primary)',
                 boxShadow: 'var(--shadow-magenta), var(--shadow-inset)',
+                border: '1px solid rgba(199, 21, 133, 0.3)',
                 // GPU acceleration
                 transform: 'translateZ(0)',
                 willChange: 'transform',
               }}
             >
-              <Download size={16} />
-              <span className="hidden sm:inline">CV</span>
+              <Download size={18} className="relative z-10" />
+              <span className="hidden sm:inline relative z-10">Download CV</span>
+              <span className="sm:hidden relative z-10">CV</span>
+              
+              {/* Animated gradient overlay on hover */}
+              <motion.div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: 'var(--gradient-hover)',
+                }}
+              />
             </motion.a>
 
             {/* Mobile Menu */}
@@ -256,18 +266,26 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Enhanced with Glassmorphism */}
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden mt-4 pt-4"
+            className="lg:hidden mt-4 pt-4 rounded-2xl overflow-hidden"
             style={{ 
-              borderTop: '1px solid rgba(199, 21, 133, 0.2)'
+              borderTop: '1px solid rgba(199, 21, 133, 0.3)',
+              background: 'rgba(39, 10, 33, 0.6)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(199, 21, 133, 0.25)',
+              boxShadow: '0 8px 32px rgba(74, 20, 140, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              // GPU acceleration
+              transform: 'translateZ(0)',
+              willChange: 'transform, opacity',
             }}
           >
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 p-3">
               {navItems.map((item) => {
                 const isActive = pathname === item.href
                 
@@ -278,11 +296,16 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     data-cursor="link"
                     className={`
-                      px-4 py-3 rounded-xl text-sm font-medium transition-all
-                      ${isActive ? 'text-white' : 'text-white/70'}
+                      px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-300
+                      ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}
+                      min-h-[48px] flex items-center
                     `}
                     style={{
-                      background: isActive ? 'rgba(199, 21, 133, 0.15)' : 'transparent',
+                      background: isActive 
+                        ? 'linear-gradient(135deg, rgba(199, 21, 133, 0.25) 0%, rgba(139, 92, 246, 0.2) 100%)' 
+                        : 'transparent',
+                      border: isActive ? '1px solid rgba(199, 21, 133, 0.3)' : '1px solid transparent',
+                      boxShadow: isActive ? '0 4px 12px rgba(199, 21, 133, 0.2)' : 'none',
                     }}
                   >
                     {item.label}
@@ -290,11 +313,36 @@ export default function Header() {
                 )
               })}
               
-              <div className="h-px my-2" style={{ background: 'rgba(199, 21, 133, 0.2)' }} />
+              <div 
+                className="h-px my-3" 
+                style={{ 
+                  background: 'linear-gradient(90deg, transparent, rgba(199, 21, 133, 0.5), transparent)' 
+                }} 
+              />
               
-              <div className="flex items-center gap-2 px-4 py-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm text-green-500">Available for Projects</span>
+              <div 
+                className="flex items-center gap-2.5 px-5 py-3.5 rounded-xl"
+                style={{
+                  background: 'rgba(16, 185, 129, 0.12)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                }}
+              >
+                <motion.span 
+                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ background: '#10B981' }}
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [1, 0.6, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <span className="text-sm font-medium" style={{ color: '#10B981' }}>
+                  Available for Projects
+                </span>
               </div>
             </div>
           </motion.div>

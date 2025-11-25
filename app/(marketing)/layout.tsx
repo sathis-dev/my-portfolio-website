@@ -9,7 +9,7 @@ export default function MarketingLayout({
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       {/* Global DarkVeil Background - Covers Everything */}
-      <div className="fixed inset-0 -z-10" style={{ opacity: 0.4 }}>
+      <div className="fixed inset-0 -z-10 mobile-darkveil">
         <DarkVeil
           hueShift={280}
           noiseIntensity={0.015}
@@ -23,7 +23,7 @@ export default function MarketingLayout({
 
       {/* Dark Overlay for Enhanced Content Contrast */}
       <div 
-        className="fixed inset-0 -z-9"
+        className="fixed inset-0 -z-9 mobile-overlay"
         style={{
           background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%)',
           pointerEvents: 'none'

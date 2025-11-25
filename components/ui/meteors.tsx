@@ -142,3 +142,5 @@ export function StaticMeteors({ number = 10, className }: MeteorsProps) {
     </div>
   )
 }
+
+
