@@ -54,25 +54,57 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Close mobile menu when navigating and prevent body scroll
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+  }, [pathname])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
+
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ 
-        opacity: showHeader ? 1 : 0,
-        y: showHeader ? 0 : -100,
-      }}
-      transition={{ 
-        duration: 0.4, 
-        ease: [0.4, 0, 0.2, 1],
-      }}
-      className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4"
-      style={{
-        pointerEvents: showHeader ? 'auto' : 'none',
-        // GPU acceleration
-        transform: 'translateZ(0)',
-        willChange: 'transform, opacity',
-      }}
-    >
+    <>
+      {/* Mobile Menu Overlay - Blocks content underneath */}
+      {isMobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden"
+          style={{ zIndex: 49 }}
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ 
+          opacity: showHeader ? 1 : 0,
+          y: showHeader ? 0 : -100,
+        }}
+        transition={{ 
+          duration: 0.4, 
+          ease: [0.4, 0, 0.2, 1],
+        }}
+        className="fixed top-0 left-0 right-0 px-4 sm:px-6 py-4"
+        style={{
+          pointerEvents: showHeader ? 'auto' : 'none',
+          // Higher z-index when mobile menu is open
+          zIndex: isMobileMenuOpen ? 9997 : 50,
+          // GPU acceleration
+          transform: 'translateZ(0)',
+          willChange: 'transform, opacity',
+        }}
+      >
       <nav
         className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-300 ease-out mobile-header-nav"
         style={{
@@ -272,6 +304,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            onClick={(e) => e.stopPropagation()}
             className="lg:hidden mt-4 pt-4 rounded-2xl overflow-hidden"
             style={{ 
               borderTop: '1px solid rgba(199, 21, 133, 0.3)',
@@ -285,7 +318,7 @@ export default function Header() {
               willChange: 'transform, opacity',
             }}
           >
-            <div className="flex flex-col gap-1 p-3">
+            <div className="flex flex-col gap-1 p-3" onClick={(e) => e.stopPropagation()}>
               {navItems.map((item) => {
                 const isActive = pathname === item.href
                 
@@ -293,7 +326,10 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setIsMobileMenuOpen(false)
+                    }}
                     data-cursor="link"
                     className={`
                       px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-300
@@ -349,6 +385,7 @@ export default function Header() {
         )}
       </nav>
     </motion.header>
+    </>
   )
 }
 
