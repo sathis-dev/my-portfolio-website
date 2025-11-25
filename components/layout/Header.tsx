@@ -1,391 +1,379 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, Download, Sparkles, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Download, Command, Menu, X } from 'lucide-react'
-import { PillNavEffect } from '@/components/ui/pill-nav-effect'
 
-const navItems = [
-  { label: 'HOME', href: '/' },
-  { label: 'PROJECTS', href: '/projects' },
-  { label: 'ABOUT', href: '/about' },
-  { label: 'SKILLS', href: '/skills' },
-  { label: 'EXPERIENCE', href: '/experience' },
-  { label: 'CONTACT', href: '/contact' },
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'About', href: '/about' },
+  { name: 'Skills', href: '/skills' },
+  { name: 'Experience', href: '/experience' },
+  { name: 'Contact', href: '/contact' }
 ]
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [hoveredNavIndex, setHoveredNavIndex] = useState<number | null>(null)
-  const [showHeader, setShowHeader] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  const navRef = useRef<HTMLDivElement>(null)
-  const lastScrollY = useRef(0)
-  
-  // Calculate active nav index for pill effect
-  const activeNavIndex = navItems.findIndex(item => item.href === pathname)
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      // Update scrolled state (for header styling)
-      setIsScrolled(currentScrollY > 20)
-      
-      // Determine scroll direction and header visibility
-      if (currentScrollY < 20) {
-        // At top of page - always show header
-        setShowHeader(true)
-      } else if (currentScrollY < lastScrollY.current) {
-        // Scrolling UP - show header
-        setShowHeader(true)
-      } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        // Scrolling DOWN (and past 100px) - hide header
-        setShowHeader(false)
-      }
-      
-      lastScrollY.current = currentScrollY
+      setIsScrolled(window.scrollY > 20)
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu when navigating and prevent body scroll
+  // Close mobile menu when route changes
   useEffect(() => {
-    setIsMobileMenuOpen(false)
+    setMobileMenuOpen(false)
   }, [pathname])
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
+    if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = 'unset'
     }
     return () => {
-      document.body.style.overflow = ''
+      document.body.style.overflow = 'unset'
     }
-  }, [isMobileMenuOpen])
+  }, [mobileMenuOpen])
 
   return (
     <>
-      {/* Mobile Menu Overlay - Blocks content underneath */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden"
-          style={{ zIndex: 49 }}
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
+      {/* Desktop & Mobile Header */}
       <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ 
-          opacity: showHeader ? 1 : 0,
-          y: showHeader ? 0 : -100,
-        }}
-        transition={{ 
-          duration: 0.4, 
-          ease: [0.4, 0, 0.2, 1],
-        }}
-        className="fixed top-0 left-0 right-0 px-4 sm:px-6 py-4"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          pointerEvents: showHeader ? 'auto' : 'none',
-          // Higher z-index when mobile menu is open
-          zIndex: isMobileMenuOpen ? 9997 : 50,
-          // GPU acceleration
-          transform: 'translateZ(0)',
-          willChange: 'transform, opacity',
-        }}
-      >
-      <nav
-        className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-300 ease-out mobile-header-nav"
-        style={{
-          // Design System v4.1 - Header styles
           background: isScrolled 
-            ? 'var(--burgundy-medium)' 
-            : 'var(--burgundy-light)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: `1px solid ${isScrolled 
-            ? 'rgba(199, 21, 133, 0.3)' 
-            : 'rgba(199, 21, 133, 0.2)'}`,
-          boxShadow: isScrolled
-            ? '0 8px 32px rgba(74, 20, 140, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-            : '0 4px 20px rgba(74, 20, 140, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
-          // GPU acceleration
-          transform: 'translateZ(0)',
-          willChange: 'background, border, box-shadow',
+            ? 'rgba(10, 5, 15, 0.95)' 
+            : 'rgba(10, 5, 15, 0.8)',
+          backdropFilter: 'blur(20px) saturate(100%)',
+          borderBottom: `1px solid ${isScrolled ? 'rgba(199, 21, 133, 0.3)' : 'rgba(199, 21, 133, 0.2)'}`,
+          boxShadow: isScrolled 
+            ? '0 8px 32px rgba(0, 0, 0, 0.4)' 
+            : '0 4px 16px rgba(0, 0, 0, 0.2)'
         }}
       >
-        {/* Grid Layout */}
-        <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4 lg:gap-8">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link 
-              href="/"
-              data-cursor="link"
-              data-cursor-text="Home"
-              className="group"
-            >
-              <motion.div 
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            
+            {/* Logo */}
+            <Link href="/">
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center transition-all duration-300"
+                className="flex items-center gap-2 cursor-pointer"
               >
-                <img
-                  src="/logo.svg"
-                  alt="<SATHIS/>"
-                  className="w-[140px] sm:w-[160px] md:w-[180px] h-auto opacity-90 group-hover:opacity-100 transition-opacity"
-                />
-              </motion.div>
-            </Link>
-          </div>
-
-          {/* Navigation - Center with Pill Effect */}
-          <div 
-            ref={navRef} 
-            className="hidden lg:flex items-center justify-center gap-1 relative"
-            onMouseLeave={() => setHoveredNavIndex(null)}
-          >
-            {/* Animated Pill Background */}
-            {activeNavIndex >= 0 && (
-              <PillNavEffect
-                activeIndex={activeNavIndex}
-                hoveredIndex={hoveredNavIndex}
-                itemsCount={navItems.length}
-                containerRef={navRef}
-              />
-            )}
-            
-            {navItems.map((item, index) => {
-              const isActive = pathname === item.href
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  data-cursor="link"
-                  data-nav-item
-                  onMouseEnter={() => setHoveredNavIndex(index)}
-                  className={`
-                    relative px-4 py-2 rounded-xl text-[0.875rem] font-medium
-                    transition-colors duration-300
-                    ${isActive ? 'text-white' : 'text-white/70 hover:text-white'}
-                  `}
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
+                    boxShadow: '0 4px 16px rgba(199, 21, 133, 0.4)'
+                  }}
                 >
-                  {item.label}
-                </Link>
-              )
-            })}
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center justify-end gap-2 sm:gap-3">
-            {/* Command Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              data-cursor="button"
-              data-cursor-text="⌘K"
-              className="hidden md:flex w-10 h-10 rounded-xl items-center justify-center transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-              style={{
-                background: 'var(--bg-magenta-subtle)',
-                border: '1px solid var(--border-light)',
-                // GPU acceleration
-                transform: 'translateZ(0)',
-                willChange: 'transform',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--bg-magenta-light)'
-                e.currentTarget.style.borderColor = 'var(--border-medium)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'var(--bg-magenta-subtle)'
-                e.currentTarget.style.borderColor = 'var(--border-light)'
-              }}
-            >
-              <div className="flex items-center gap-0.5">
-                <Command size={12} className="text-white/70" />
-                <span className="text-[9px] text-white/50 font-semibold">K</span>
-              </div>
-            </motion.button>
-
-            {/* Availability Badge */}
-            <div 
-              className="hidden lg:flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-[0.8125rem] font-medium whitespace-nowrap"
-              style={{
-                background: 'rgba(16, 185, 129, 0.08)',
-                border: '1px solid rgba(16, 185, 129, 0.25)',
-                color: '#10B981',
-              }}
-            >
-              <motion.span
-                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ background: '#10B981' }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [1, 0.5, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-              <span className="hidden xl:inline">Available for Projects</span>
-              <span className="xl:hidden">Available</span>
-            </div>
-
-            {/* CV Button - Professional Design */}
-            <motion.a
-              href="/cv.pdf"
-              download
-              data-cursor="button"
-              whileHover={{ y: -1, scale: 1.02 }}
-              whileTap={{ y: 0, scale: 0.98 }}
-              className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 text-[0.875rem] font-semibold text-white rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 min-h-[44px] sm:min-h-[48px] relative overflow-hidden group"
-              style={{
-                background: 'var(--gradient-primary)',
-                boxShadow: 'var(--shadow-magenta), var(--shadow-inset)',
-                border: '1px solid rgba(199, 21, 133, 0.3)',
-                // GPU acceleration
-                transform: 'translateZ(0)',
-                willChange: 'transform',
-              }}
-            >
-              <Download size={18} className="relative z-10" />
-              <span className="hidden sm:inline relative z-10">Download CV</span>
-              <span className="sm:hidden relative z-10">CV</span>
-              
-              {/* Animated gradient overlay on hover */}
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: 'var(--gradient-hover)',
-                }}
-              />
-            </motion.a>
-
-            {/* Mobile Menu */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              data-cursor="button"
-              data-cursor-text={isMobileMenuOpen ? "Close" : "Menu"}
-              className="lg:hidden w-12 h-12 rounded-xl flex items-center justify-center transition-all touch-manipulation min-h-[48px]"
-              style={{
-                background: 'var(--bg-magenta-subtle)',
-                border: '1px solid var(--border-light)',
-                // GPU acceleration
-                transform: 'translateZ(0)',
-                willChange: 'transform',
-              }}
-            >
-              {isMobileMenuOpen ? (
-                <X size={20} className="text-white/80" />
-              ) : (
-                <Menu size={20} className="text-white/80" />
-              )}
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Mobile Menu - Enhanced with Glassmorphism */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            onClick={(e) => e.stopPropagation()}
-            className="lg:hidden mt-4 pt-4 rounded-2xl overflow-hidden"
-            style={{ 
-              borderTop: '1px solid rgba(199, 21, 133, 0.3)',
-              background: 'rgba(39, 10, 33, 0.6)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(199, 21, 133, 0.25)',
-              boxShadow: '0 8px 32px rgba(74, 20, 140, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-              // GPU acceleration
-              transform: 'translateZ(0)',
-              willChange: 'transform, opacity',
-            }}
-          >
-            <div className="flex flex-col gap-1 p-3" onClick={(e) => e.stopPropagation()}>
-              {navItems.map((item) => {
-                const isActive = pathname === item.href
-                
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setIsMobileMenuOpen(false)
-                    }}
-                    data-cursor="link"
-                    className={`
-                      px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-300
-                      ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}
-                      min-h-[48px] flex items-center
-                    `}
+                  <Sparkles size={20} className="text-white" />
+                </div>
+                <div className="hidden sm:block">
+                  <p 
+                    className="text-xl font-extrabold tracking-tight"
                     style={{
-                      background: isActive 
-                        ? 'linear-gradient(135deg, rgba(199, 21, 133, 0.25) 0%, rgba(139, 92, 246, 0.2) 100%)' 
-                        : 'transparent',
-                      border: isActive ? '1px solid rgba(199, 21, 133, 0.3)' : '1px solid transparent',
-                      boxShadow: isActive ? '0 4px 12px rgba(199, 21, 133, 0.2)' : 'none',
+                      background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
                     }}
                   >
-                    {item.label}
+                    &lt;/ SATHIS &gt;
+                  </p>
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {navigation.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link key={item.name} href={item.href}>
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="relative px-4 py-2 rounded-xl transition-all duration-300"
+                      style={{
+                        background: isActive 
+                          ? 'rgba(199, 21, 133, 0.15)' 
+                          : 'transparent',
+                        border: isActive
+                          ? '1px solid rgba(199, 21, 133, 0.3)'
+                          : '1px solid transparent'
+                      }}
+                    >
+                      <span 
+                        className="text-sm font-semibold transition-colors duration-300"
+                        style={{
+                          color: isActive ? '#E91E8C' : 'rgba(255, 255, 255, 0.85)'
+                        }}
+                      >
+                        {item.name}
+                      </span>
+                      
+                      {/* Active indicator */}
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeNav"
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 rounded-full"
+                          style={{
+                            background: 'linear-gradient(90deg, transparent, #E91E8C, transparent)'
+                          }}
+                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </motion.div>
                   </Link>
                 )
               })}
+            </nav>
+
+            {/* Right Side Actions */}
+            <div className="flex items-center gap-3">
               
-              <div 
-                className="h-px my-3" 
-                style={{ 
-                  background: 'linear-gradient(90deg, transparent, rgba(199, 21, 133, 0.5), transparent)' 
-                }} 
-              />
-              
-              <div 
-                className="flex items-center gap-2.5 px-5 py-3.5 rounded-xl"
+              {/* Availability Badge - Desktop */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-full"
                 style={{
-                  background: 'rgba(16, 185, 129, 0.12)',
-                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  background: 'rgba(16, 185, 129, 0.1)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)'
                 }}
               >
-                <motion.span 
-                  className="w-2 h-2 rounded-full flex-shrink-0"
-                  style={{ background: '#10B981' }}
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [1, 0.6, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-                <span className="text-sm font-medium" style={{ color: '#10B981' }}>
+                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-xs font-semibold text-green-400">
                   Available for Projects
                 </span>
-              </div>
+              </motion.div>
+
+              {/* CV Button */}
+              <motion.a
+                href="/cv.pdf"
+                download
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
+                  boxShadow: '0 4px 16px rgba(199, 21, 133, 0.4)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
+              >
+                <Download size={16} />
+                <span className="hidden md:inline">CV</span>
+              </motion.a>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 rounded-xl transition-all duration-300"
+                style={{
+                  background: mobileMenuOpen 
+                    ? 'rgba(199, 21, 133, 0.15)' 
+                    : 'rgba(139, 92, 246, 0.15)',
+                  border: '1px solid rgba(139, 92, 246, 0.3)'
+                }}
+                aria-label="Toggle menu"
+              >
+                <AnimatePresence mode="wait">
+                  {mobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X size={24} style={{ color: '#E91E8C' }} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu size={24} style={{ color: '#8B5CF6' }} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </div>
-          </motion.div>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+
+            {/* Mobile Menu */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed top-20 right-0 bottom-0 w-full max-w-sm z-40 lg:hidden overflow-y-auto"
+              style={{
+                background: 'rgba(26, 15, 31, 0.98)',
+                backdropFilter: 'blur(30px) saturate(120%)',
+                borderLeft: '1px solid rgba(199, 21, 133, 0.3)',
+                boxShadow: '-8px 0 32px rgba(0, 0, 0, 0.5)'
+              }}
+            >
+              <div className="p-6 space-y-6">
+                
+                {/* Mobile Availability Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="flex items-center gap-3 p-4 rounded-2xl"
+                  style={{
+                    background: 'rgba(16, 185, 129, 0.2)',
+                    border: '1px solid rgba(16, 185, 129, 0.4)'
+                  }}
+                >
+                  <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
+                  <div>
+                    <p className="text-sm font-bold text-green-400">Available for Projects</p>
+                    <p className="text-xs text-green-400/80">Response time: 24-48 hours</p>
+                  </div>
+                </motion.div>
+
+                {/* Mobile Navigation */}
+                <nav className="space-y-2">
+                  {navigation.map((item, index) => {
+                    const isActive = pathname === item.href
+                    return (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + index * 0.05 }}
+                      >
+                        <Link href={item.href}>
+                          <motion.div
+                            whileTap={{ scale: 0.95 }}
+                            className="flex items-center justify-between p-4 rounded-2xl transition-all duration-300"
+                            style={{
+                              background: isActive 
+                                ? 'rgba(199, 21, 133, 0.2)' 
+                                : 'rgba(139, 92, 246, 0.05)',
+                              border: isActive
+                                ? '1px solid rgba(199, 21, 133, 0.4)'
+                                : '1px solid transparent'
+                            }}
+                          >
+                            <span 
+                              className="text-lg font-bold"
+                              style={{
+                                color: isActive ? '#E91E8C' : 'rgba(255, 255, 255, 0.95)'
+                              }}
+                            >
+                              {item.name}
+                            </span>
+                            {isActive && (
+                              <Zap size={20} style={{ color: '#E91E8C' }} />
+                            )}
+                          </motion.div>
+                        </Link>
+                      </motion.div>
+                    )
+                  })}
+                </nav>
+
+                {/* Mobile CV Button */}
+                <motion.a
+                  href="/cv.pdf"
+                  download
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center gap-3 w-full p-4 rounded-2xl text-base font-bold text-white"
+                  style={{
+                    background: 'linear-gradient(135deg, #E91E8C 0%, #9D6EFF 100%)',
+                    boxShadow: '0 4px 16px rgba(233, 30, 140, 0.5)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)'
+                  }}
+                >
+                  <Download size={20} />
+                  Download CV
+                </motion.a>
+
+                {/* Social Links */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="pt-6 border-t"
+                  style={{
+                    borderColor: 'rgba(199, 21, 133, 0.2)'
+                  }}
+                >
+                  <p className="text-sm font-semibold mb-4" style={{ color: 'rgba(255, 255, 255, 0.95)' }}>
+                    Connect with me
+                  </p>
+                  <div className="flex gap-3">
+                    {[
+                      { icon: '💼', href: 'https://www.linkedin.com/in/sathis-hettiarachchi-52b4b436a/', label: 'LinkedIn' },
+                      { icon: '🔗', href: 'https://github.com/sathis-dev', label: 'GitHub' },
+                      { icon: '✉️', href: 'mailto:sathis.rc.dev@gmail.com', label: 'Email' }
+                    ].map((social) => (
+                      <motion.a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileTap={{ scale: 0.9 }}
+                        className="flex-1 flex items-center justify-center p-3 rounded-xl"
+                        style={{
+                          background: 'rgba(139, 92, 246, 0.15)',
+                          border: '1px solid rgba(139, 92, 246, 0.3)'
+                        }}
+                      >
+                        <span className="text-2xl">{social.icon}</span>
+                      </motion.a>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
-      </nav>
-    </motion.header>
+      </AnimatePresence>
     </>
   )
 }
-

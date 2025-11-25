@@ -946,3 +946,68 @@ html {
   }
 }
 
+/* ========================================
+   Mobile-First Design System Overrides
+   Desktop: Dark & Mysterious | Mobile: Light & Readable
+   ======================================== */
+
+/* Mobile-Specific Color System (< 1024px) */
+@media (max-width: 1024px) {
+  /* 30% Lighter background for mobile readability */
+  body {
+    background: #1A0F1F !important;
+  }
+
+  /* Lighten all glass cards for better mobile visibility */
+  [style*="rgba(10, 5, 15"] {
+    background: rgba(26, 15, 31, 0.7) !important;
+  }
+
+  /* Increase text contrast on mobile for readability */
+  body * {
+    --mobile-text-boost: 1.1;
+  }
+
+  /* Brighter borders on mobile for better definition */
+  [style*="border"][style*="rgba(199, 21, 133"] {
+    border-color: rgba(199, 21, 133, 0.4) !important;
+  }
+
+  /* Status badge - brighter and more visible on mobile */
+  [style*="rgba(16, 185, 129"] {
+    background: rgba(16, 185, 129, 0.2) !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
+  }
+
+  /* Buttons - brighter gradient for better visibility */
+  button[style*="linear-gradient"],
+  a[style*="linear-gradient"] {
+    background: linear-gradient(135deg, #E91E8C 0%, #9D6EFF 100%) !important;
+  }
+
+  /* Cards - lighter background with better contrast */
+  [class*="card"] {
+    background: rgba(26, 15, 31, 0.7) !important;
+    border-color: rgba(199, 21, 133, 0.4) !important;
+  }
+
+  /* Enhanced backdrop blur for mobile */
+  [style*="backdropFilter"],
+  [style*="backdrop-filter"] {
+    backdrop-filter: blur(20px) saturate(100%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(100%) !important;
+  }
+}
+
+/* Desktop-only: Preserve dark aesthetic (>= 1025px) */
+@media (min-width: 1025px) {
+  body {
+    background: #0A050F !important;
+  }
+
+  /* Keep desktop cards dark and mysterious */
+  [style*="rgba(26, 15, 31"] {
+    background: rgba(10, 5, 15, 0.4) !important;
+  }
+}
+
