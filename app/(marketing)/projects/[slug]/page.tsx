@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Calendar, Clock, ExternalLink, Github, Star } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import Header from '@/components/layout/Header'
 
 // Project data (in a real app, this would come from a CMS or database)
 const projects = {
@@ -239,9 +238,6 @@ export default function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <Header />
-      
       {/* Immersive Hero */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Background Gradient */}

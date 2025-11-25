@@ -17,7 +17,6 @@ import {
   BookOpen,
   Download
 } from 'lucide-react'
-import Header from '@/components/layout/Header'
 import { DecryptedText } from '@/components/ui/decrypted-text'
 
 const stats = [
@@ -236,8 +235,6 @@ export default function ExperiencePage() {
           }}
         />
       </div>
-
-      <Header />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">

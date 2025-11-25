@@ -9,7 +9,6 @@ import {
   Target,
   BookOpen
 } from 'lucide-react'
-import Header from '@/components/layout/Header'
 import { DecryptedText } from '@/components/ui/decrypted-text'
 import { StarBorder } from '@/components/ui/star-border'
 import { Tilt3DCard } from '@/components/ui/Tilt3DCard'
@@ -117,8 +116,6 @@ export default function AboutPage() {
           }}
         />
       </div>
-
-      <Header />
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">

@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Star, Globe, Brain, Briefcase, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import BentoEffects from '@/components/ui/BentoEffects'
-import Header from '@/components/layout/Header'
 
 const categories = [
   { id: 'all', label: 'All Projects', icon: null },
@@ -105,9 +104,6 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <Header />
-      
       {/* Compact Hero */}
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1400px] mx-auto text-center">

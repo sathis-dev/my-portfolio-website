@@ -21,7 +21,6 @@ import {
   getRateLimitTimeRemaining,
   formatTimeRemaining
 } from '@/lib/emailjs'
-import Header from '@/components/layout/Header'
 import { Confetti } from '@/components/ui/confetti'
 import { BlurFade } from '@/components/ui/blur-fade'
 import { Ripple } from '@/components/ui/ripple'
@@ -196,8 +195,6 @@ export default function ContactPage() {
           }}
         />
       </div>
-
-      <Header />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">

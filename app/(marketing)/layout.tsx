@@ -1,4 +1,5 @@
 import Footer from '@/components/layout/Footer'
+import Header from '@/components/layout/Header'
 import DarkVeil from '@/components/effects/DarkVeil'
 
 export default function MarketingLayout({
@@ -29,6 +30,9 @@ export default function MarketingLayout({
           pointerEvents: 'none'
         }}
       />
+
+      {/* Unified Header - Appears on ALL pages */}
+      <Header />
       
       {/* Main Content */}
       <main id="main-content" className="relative">

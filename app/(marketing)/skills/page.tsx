@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Code2, Server, Wrench, Sparkles, Palette } from 'lucide-react'
-import Header from '@/components/layout/Header'
 import { DecryptedText } from '@/components/ui/decrypted-text'
 import { Tilt3DCard } from '@/components/ui/Tilt3DCard'
 import { skills, skillCategories, getSkillsByCategory } from '@/data/skills'
@@ -134,8 +133,6 @@ export default function SkillsPage() {
           }}
         />
       </div>
-
-      <Header />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">
