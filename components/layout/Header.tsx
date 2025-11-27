@@ -282,7 +282,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Advanced Mobile Menu Overlay */}
+        {/* Advanced Mobile Menu - Slides Down */}
         {isMobileMenuOpen && (
           <>
             {/* Backdrop with Blur */}
@@ -291,43 +291,33 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-md"
-              style={{ zIndex: 9998 }}
+              className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm"
+              style={{ zIndex: 9998, top: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
-            {/* Menu Panel */}
+            {/* Menu Panel - Slides Down from Header */}
             <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm overflow-y-auto"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="lg:hidden fixed left-4 right-4 overflow-hidden"
               style={{
+                top: '90px',
                 background: 'linear-gradient(135deg, rgba(10, 5, 15, 0.98) 0%, rgba(20, 10, 25, 0.98) 100%)',
                 backdropFilter: 'blur(40px) saturate(120%)',
-                borderLeft: '1px solid rgba(199, 21, 133, 0.3)',
-                boxShadow: '-8px 0 40px rgba(199, 21, 133, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(199, 21, 133, 0.3)',
+                borderRadius: '24px',
+                boxShadow: '0 20px 60px rgba(199, 21, 133, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                 zIndex: 9999,
+                maxHeight: 'calc(100vh - 110px)',
+                overflowY: 'auto',
               }}
             >
-              {/* Close Button */}
-              <div className="flex justify-end p-6 pb-2">
-                <motion.button
-                  whileTap={{ scale: 0.9, rotate: 90 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
-                  style={{
-                    background: 'rgba(199, 21, 133, 0.1)',
-                    border: '1px solid rgba(199, 21, 133, 0.2)',
-                  }}
-                >
-                  <X size={20} className="text-white/80" />
-                </motion.button>
-              </div>
 
               {/* Navigation Links */}
-              <nav className="px-6 py-4">
+              <nav className="p-4">
                 <div className="flex flex-col gap-2">
                   {navItems.map((item, index) => {
                     const isActive = pathname === item.href
@@ -397,14 +387,14 @@ export default function Header() {
               </nav>
 
               {/* Divider */}
-              <div className="mx-6 my-4 h-px" style={{ background: 'rgba(199, 21, 133, 0.2)' }} />
+              <div className="mx-4 my-2 h-px" style={{ background: 'rgba(199, 21, 133, 0.2)' }} />
 
               {/* CTA Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.4 }}
-                className="px-6 py-4 space-y-3"
+                className="px-4 pb-4 space-y-3"
               >
                 {/* Let's Talk Button */}
                 <Link
@@ -443,7 +433,7 @@ export default function Header() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.4 }}
-                className="px-6 py-6 mt-auto"
+                className="px-4 pb-4"
               >
                 <div 
                   className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl"
