@@ -114,7 +114,7 @@ export default function SmartScrollIndicator() {
   const content = getIndicatorContent()
 
   return (
-    <>
+    <div className="hidden lg:block">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[3px] z-[9999]"
@@ -220,7 +220,7 @@ export default function SmartScrollIndicator() {
           </motion.button>
         )}
       </AnimatePresence>
-    </>
+    </div>
   )
 }
 
