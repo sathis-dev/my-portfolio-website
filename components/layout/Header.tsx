@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Download, Sparkles, Zap } from 'lucide-react'
+import { Menu, X, Download, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -73,17 +73,13 @@ export default function Header() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer"
               >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{
-                    background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
-                    boxShadow: '0 4px 16px rgba(199, 21, 133, 0.4)'
-                  }}
-                >
-                  <Sparkles size={20} className="text-white" />
-                </div>
+                <img 
+                  src="/logo.svg" 
+                  alt="Sathis Logo" 
+                  className="w-10 h-10"
+                />
                 <div className="hidden sm:block">
                   <p 
                     className="text-xl font-extrabold tracking-tight"
