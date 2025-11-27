@@ -104,50 +104,132 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Compact Hero */}
-      <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1400px] mx-auto text-center">
+      {/* Premium Hero Section */}
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Animated Gradient Orbs */}
+        <div className="absolute inset-0 pointer-events-none">
+          <motion.div 
+            className="absolute top-20 left-1/4 w-96 h-96 rounded-full blur-3xl"
+            style={{ background: 'radial-gradient(circle, rgba(199, 21, 133, 0.4) 0%, transparent 70%)' }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+          <motion.div 
+            className="absolute top-20 right-1/4 w-80 h-80 rounded-full blur-3xl"
+            style={{ background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%)' }}
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        </div>
+
+        <div className="max-w-[1400px] mx-auto text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
           >
+            {/* Premium Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-8"
+              style={{
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(199, 21, 133, 0.15) 100%)',
+                border: '1px solid rgba(139, 92, 246, 0.3)',
+                boxShadow: '0 4px 20px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+              >
+                <Star size={18} className="text-purple-400" fill="currentColor" />
+              </motion.div>
+              <span className="text-sm font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Featured Portfolio
+              </span>
+            </motion.div>
+
             <h1 
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4"
-              style={{
-                letterSpacing: '-0.02em',
-                textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6"
+              style={{ 
+                letterSpacing: '-0.03em',
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #F472B6 40%, #A855F7 70%, #C084FC 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textShadow: '0 0 80px rgba(199, 21, 133, 0.3)',
               }}
+              data-cursor="hover"
+              data-cursor-text="My Work"
             >
-              My Work
+              My Projects
             </h1>
-            <p 
-              className="text-base sm:text-lg max-w-[900px] mx-auto leading-relaxed px-4"
-              style={{
-                color: 'rgba(255, 255, 255, 0.85)',
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)'
-              }}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-lg sm:text-xl text-white/75 max-w-[800px] mx-auto leading-relaxed"
             >
-              A collection of real and in-progress projects that show how I think, build, and use AI in modern web experiences.
-            </p>
+              Building exceptional web experiences with{' '}
+              <span 
+                className="font-bold"
+                style={{
+                  background: 'linear-gradient(135deg, #F472B6 0%, #EC4899 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >modern frameworks</span>,{' '}
+              <span 
+                className="font-bold"
+                style={{
+                  background: 'linear-gradient(135deg, #A855F7 0%, #8B5CF6 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >AI integration</span>, and{' '}
+              <span 
+                className="font-bold"
+                style={{
+                  background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >thoughtful design</span>
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Filter Bar */}
+      {/* Premium Filter Bar */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        className="sticky top-20 z-40 px-4 sm:px-6 lg:px-8 mb-12"
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="sticky top-20 z-40 px-4 sm:px-6 lg:px-8 mb-16"
       >
         <div 
-          className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-center gap-3 p-3 rounded-2xl"
+          className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-center gap-2 p-2.5 rounded-3xl"
           style={{
-            background: 'rgba(10, 5, 15, 0.85)',
-            backdropFilter: 'blur(20px) saturate(100%)',
-            border: '1px solid rgba(199, 21, 133, 0.2)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+            background: 'linear-gradient(135deg, rgba(39, 10, 33, 0.95) 0%, rgba(20, 10, 25, 0.95) 100%)',
+            backdropFilter: 'blur(30px) saturate(120%)',
+            border: '1px solid rgba(199, 21, 133, 0.3)',
+            boxShadow: '0 8px 32px rgba(199, 21, 133, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
           }}
         >
           {categories.map((category) => {
@@ -158,38 +240,51 @@ export default function ProjectsPage() {
               <motion.button
                 key={category.id}
                 onClick={() => handleFilter(category.id)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 data-cursor="button"
                 data-cursor-text={category.label}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300"
+                className="flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden"
                 style={{
                   background: isActive 
-                    ? 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)'
-                    : 'transparent',
+                    ? 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)'
+                    : 'rgba(255, 255, 255, 0.03)',
                   color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.7)',
                   border: isActive 
                     ? '1px solid rgba(255, 255, 255, 0.2)'
-                    : '1px solid transparent',
-                  boxShadow: isActive ? '0 4px 12px rgba(199, 21, 133, 0.3)' : 'none'
+                    : '1px solid rgba(255, 255, 255, 0.08)',
+                  boxShadow: isActive 
+                    ? '0 6px 20px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)' 
+                    : 'none'
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.background = 'rgba(199, 21, 133, 0.1)'
+                    e.currentTarget.style.background = 'rgba(199, 21, 133, 0.15)'
                     e.currentTarget.style.color = '#FFFFFF'
+                    e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.3)'
                     e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.3)'
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)'
                     e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'
-                    e.currentTarget.style.borderColor = 'transparent'
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
                   }
                 }}
               >
-                {Icon && <Icon size={16} />}
-                {category.label}
+                {Icon && <Icon size={18} className={isActive ? 'text-white' : 'text-purple-400'} />}
+                <span>{category.label}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeFilter"
+                    className="absolute inset-0 -z-10 rounded-full"
+                    style={{
+                      background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
+                    }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
               </motion.button>
             )
           })}
