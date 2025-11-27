@@ -46,8 +46,31 @@ next-env.d.ts
 *.swp
 *.swo
 *~
+.cursor/
 
 # OS
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Documentation (keep only README.md)
+*.md
+!README.md
+
+# Design System & Development Files
+*design-system*.json
+*DESIGN_SYSTEM*.json
+*REACTBITS*.json
+*REACT_BITS*.json
+EnhancedHeader*.jsx
+HeaderPreview.jsx
+mobile-theme-fixes.css
+
+# Setup & Configuration Scripts
+setup-email.js
+check-emailjs-config.js
+
+# Template Files
+*.template
+env.template
+env.local.template
