@@ -21,7 +21,6 @@ import {
   getRateLimitTimeRemaining,
   formatTimeRemaining
 } from '@/lib/emailjs'
-import { Confetti } from '@/components/ui/confetti'
 import { BlurFade } from '@/components/ui/blur-fade'
 import { Ripple } from '@/components/ui/ripple'
 
@@ -166,15 +165,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Confetti Effect for Success */}
-      <Confetti 
-        active={submitSuccess} 
-        duration={5} 
-        particleCount={100}
-        spread={90}
-        origin={{ x: 50, y: 30 }}
-      />
-      
       {/* Continuous Background */}
       <div 
         className="fixed inset-0 -z-10"
