@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Download, Command, Menu, X, Star } from 'lucide-react'
+import { Menu, X, Star } from 'lucide-react'
 import { PillNavEffect } from '@/components/ui/pill-nav-effect'
 
 const navItems = [
@@ -195,76 +195,6 @@ export default function Header() {
               <span>GitHub</span>
             </a>
 
-            {/* Command Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              data-cursor="button"
-              data-cursor-text="⌘K"
-              className="hidden md:flex w-10 h-10 rounded-xl items-center justify-center transition-all duration-300"
-              style={{
-                background: 'rgba(199, 21, 133, 0.08)',
-                border: '1px solid rgba(199, 21, 133, 0.15)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(199, 21, 133, 0.15)'
-                e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.25)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(199, 21, 133, 0.08)'
-                e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.15)'
-              }}
-            >
-              <div className="flex items-center gap-0.5">
-                <Command size={12} className="text-white/70" />
-                <span className="text-[9px] text-white/50 font-semibold">K</span>
-              </div>
-            </motion.button>
-
-            {/* Availability Badge */}
-            <div 
-              className="hidden lg:flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-[0.8125rem] font-medium whitespace-nowrap"
-              style={{
-                background: 'rgba(16, 185, 129, 0.08)',
-                border: '1px solid rgba(16, 185, 129, 0.25)',
-                color: '#10B981',
-              }}
-            >
-              <motion.span
-                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ background: '#10B981' }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [1, 0.5, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-              <span className="hidden xl:inline">Available for Projects</span>
-              <span className="xl:hidden">Available</span>
-            </div>
-
-            {/* CV Button */}
-            <motion.a
-              href="/cv.pdf"
-              download
-              data-cursor="button"
-              whileHover={{ y: -1, scale: 1.02 }}
-              whileTap={{ y: 0, scale: 0.98 }}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 text-[0.875rem] font-semibold text-white rounded-2xl transition-all duration-300"
-              style={{
-                background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
-                boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px rgba(199, 21, 133, 0.4)',
-                border: '1px solid rgba(199, 21, 133, 0.3)',
-              }}
-            >
-              <Download size={16} />
-              <span className="hidden sm:inline">CV</span>
-            </motion.a>
-
             {/* Mobile Menu */}
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -319,13 +249,6 @@ export default function Header() {
                   </Link>
                 )
               })}
-              
-              <div className="h-px my-2" style={{ background: 'rgba(199, 21, 133, 0.2)' }} />
-              
-              <div className="flex items-center gap-2 px-4 py-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm text-green-500">Available for Projects</span>
-              </div>
             </div>
           </motion.div>
         )}
