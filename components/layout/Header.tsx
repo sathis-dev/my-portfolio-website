@@ -69,31 +69,15 @@ export default function Header() {
           <div className="flex items-center justify-between h-20">
             
             {/* Logo */}
-            <Link href="/">
-              <motion.div
+            <Link href="/" className="cursor-pointer">
+              <motion.img
+                src="/logo.svg"
+                alt="Sathis Logo"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 cursor-pointer"
-              >
-                <img 
-                  src="/logo.svg" 
-                  alt="Sathis Logo" 
-                  className="w-10 h-10"
-                />
-                <div className="hidden sm:block">
-                  <p 
-                    className="text-xl font-extrabold tracking-tight"
-                    style={{
-                      background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
-                    }}
-                  >
-                    &lt;/ SATHIS &gt;
-                  </p>
-                </div>
-              </motion.div>
+                className="h-8 w-auto"
+                style={{ objectFit: 'contain' }}
+              />
             </Link>
 
             {/* Desktop Navigation */}
