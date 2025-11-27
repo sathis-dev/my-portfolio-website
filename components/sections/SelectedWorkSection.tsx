@@ -21,7 +21,7 @@ const projects = [
       'Thinking about accessibility and emotional experience, not just features'
     ],
     techStack: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Claude API'],
-    image: '/images/projects/silent-help/thumbnail.jpg',
+    image: '/images/projects/silent-help/Silent Help.jpg',
     featured: true,
     status: 'development' as const,
     statusLabel: 'In Active Development'
@@ -39,7 +39,7 @@ const projects = [
       'Preparing the structure so future blog and case-study content is easy to add'
     ],
     techStack: ['WordPress', 'Stax Theme', 'CSS', 'JavaScript', 'PHP'],
-    image: '/images/projects/brimston/thumbnail.jpg',
+    image: '/images/projects/brimston/Brimstone Energy.png',
     featured: false,
     status: 'completed' as const,
     statusLabel: 'Completed'
