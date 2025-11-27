@@ -1,0 +1,298 @@
+{
+  "designSystemProfile": {
+    "name": "ReactBits.dev Header Design System",
+    "version": "1.0",
+    "inspiration": "ReactBits.dev - Minimal, refined aesthetic",
+    "aesthetic": "Dark, ultra-clean with subtle gradients and refined typography",
+    "designPhilosophy": "Extreme minimalism with strategic use of color"
+  },
+
+  "colorPalette": {
+    "backgrounds": {
+      "pageBackground": {
+        "hex": "#0A0A0F",
+        "usage": "Main page background - pure dark"
+      },
+      "headerBackground": {
+        "value": "rgba(10, 10, 15, 0.6)",
+        "backdropFilter": "blur(20px) saturate(100%)",
+        "usage": "Header with glassmorphism",
+        "border": "1px solid rgba(255, 255, 255, 0.06)"
+      }
+    },
+    "navigation": {
+      "textDefault": {
+        "hex": "rgba(255, 255, 255, 0.7)",
+        "usage": "Inactive navigation links"
+      },
+      "textActive": {
+        "hex": "#FFFFFF",
+        "usage": "Active navigation link (with bullet indicator)"
+      },
+      "activeDot": {
+        "hex": "#8B5CF6",
+        "usage": "Bullet point indicator for active nav item",
+        "size": "4px",
+        "position": "before text, left aligned"
+      }
+    },
+    "buttons": {
+      "primaryCTA": {
+        "background": "linear-gradient(135deg, #7C3AED 0%, #A855F7 100%)",
+        "text": "#FFFFFF",
+        "border": "1px solid rgba(255, 255, 255, 0.1)",
+        "shadow": "0 4px 16px rgba(124, 58, 237, 0.3)",
+        "hover": {
+          "background": "linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%)",
+          "shadow": "0 6px 24px rgba(124, 58, 237, 0.5)",
+          "transform": "translateY(-1px)"
+        }
+      },
+      "githubStar": {
+        "background": "rgba(255, 255, 255, 0.08)",
+        "text": "#FFFFFF",
+        "border": "1px solid rgba(255, 255, 255, 0.1)",
+        "icon": "#FFD700",
+        "fontSize": "0.875rem",
+        "fontWeight": "600"
+      }
+    },
+    "logo": {
+      "icon": {
+        "color": "#8B5CF6",
+        "size": "24px"
+      },
+      "text": {
+        "color": "#FFFFFF",
+        "fontSize": "1.125rem",
+        "fontWeight": "600",
+        "fontFamily": "'Space Grotesk', 'Inter', sans-serif"
+      }
+    }
+  },
+
+  "elementStyling": {
+    "header": {
+      "container": {
+        "height": "72px",
+        "background": "rgba(10, 10, 15, 0.6)",
+        "backdropFilter": "blur(20px) saturate(100%)",
+        "borderBottom": "1px solid rgba(255, 255, 255, 0.06)",
+        "position": "fixed",
+        "zIndex": "1000",
+        "padding": "0 32px"
+      },
+      "layout": {
+        "display": "flex",
+        "justifyContent": "space-between",
+        "alignItems": "center",
+        "maxWidth": "1400px",
+        "margin": "0 auto"
+      }
+    },
+    "logo": {
+      "container": {
+        "display": "flex",
+        "alignItems": "center",
+        "gap": "8px",
+        "cursor": "pointer"
+      },
+      "icon": {
+        "width": "24px",
+        "height": "24px",
+        "color": "#8B5CF6"
+      },
+      "text": {
+        "fontSize": "1.125rem",
+        "fontWeight": "600",
+        "color": "#FFFFFF",
+        "fontFamily": "'Space Grotesk', 'Inter', sans-serif",
+        "letterSpacing": "-0.01em"
+      }
+    },
+    "navigation": {
+      "container": {
+        "display": "flex",
+        "alignItems": "center",
+        "gap": "32px"
+      },
+      "link": {
+        "default": {
+          "fontSize": "0.9375rem",
+          "fontWeight": "500",
+          "color": "rgba(255, 255, 255, 0.7)",
+          "padding": "8px 0",
+          "position": "relative",
+          "transition": "color 0.2s ease",
+          "textDecoration": "none"
+        },
+        "hover": {
+          "color": "#FFFFFF"
+        },
+        "active": {
+          "color": "#FFFFFF",
+          "fontWeight": "600"
+        }
+      },
+      "activeDot": {
+        "width": "4px",
+        "height": "4px",
+        "borderRadius": "50%",
+        "background": "#8B5CF6",
+        "position": "absolute",
+        "left": "-12px",
+        "top": "50%",
+        "transform": "translateY(-50%)",
+        "boxShadow": "0 0 6px rgba(139, 92, 246, 0.6)"
+      }
+    },
+    "ctaButton": {
+      "container": {
+        "display": "flex",
+        "alignItems": "center",
+        "gap": "12px"
+      },
+      "primary": {
+        "padding": "10px 24px",
+        "borderRadius": "12px",
+        "background": "linear-gradient(135deg, #7C3AED 0%, #A855F7 100%)",
+        "color": "#FFFFFF",
+        "fontSize": "0.875rem",
+        "fontWeight": "600",
+        "border": "1px solid rgba(255, 255, 255, 0.1)",
+        "boxShadow": "0 4px 16px rgba(124, 58, 237, 0.3)",
+        "cursor": "pointer",
+        "transition": "all 0.3s ease",
+        "hover": {
+          "background": "linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%)",
+          "boxShadow": "0 6px 24px rgba(124, 58, 237, 0.5)",
+          "transform": "translateY(-1px)"
+        }
+      },
+      "github": {
+        "display": "flex",
+        "alignItems": "center",
+        "gap": "8px",
+        "padding": "10px 20px",
+        "borderRadius": "12px",
+        "background": "rgba(255, 255, 255, 0.08)",
+        "border": "1px solid rgba(255, 255, 255, 0.1)",
+        "fontSize": "0.875rem",
+        "fontWeight": "600",
+        "color": "#FFFFFF",
+        "transition": "all 0.2s ease",
+        "hover": {
+          "background": "rgba(255, 255, 255, 0.12)",
+          "borderColor": "rgba(255, 255, 255, 0.15)"
+        },
+        "icon": {
+          "color": "#FFD700",
+          "size": "16px"
+        }
+      }
+    }
+  },
+
+  "spacing": {
+    "headerHeight": "72px",
+    "headerPadding": "0 32px",
+    "logoGap": "8px",
+    "navGap": "32px",
+    "buttonGap": "12px"
+  },
+
+  "typography": {
+    "fontFamilies": {
+      "primary": "'Space Grotesk', 'Inter', system-ui, sans-serif",
+      "monospace": "'JetBrains Mono', 'Fira Code', monospace"
+    },
+    "logo": {
+      "fontSize": "1.125rem",
+      "fontWeight": "600",
+      "letterSpacing": "-0.01em"
+    },
+    "navigation": {
+      "fontSize": "0.9375rem",
+      "fontWeight": "500",
+      "fontWeightActive": "600"
+    },
+    "button": {
+      "fontSize": "0.875rem",
+      "fontWeight": "600"
+    }
+  },
+
+  "animations": {
+    "headerScroll": {
+      "scrolled": {
+        "background": "rgba(10, 10, 15, 0.95)",
+        "borderColor": "rgba(255, 255, 255, 0.08)",
+        "boxShadow": "0 4px 24px rgba(0, 0, 0, 0.4)"
+      }
+    },
+    "navHover": {
+      "duration": "0.2s",
+      "easing": "ease",
+      "property": "color"
+    },
+    "buttonHover": {
+      "duration": "0.3s",
+      "easing": "ease",
+      "properties": ["background", "box-shadow", "transform"]
+    },
+    "heroName": {
+      "variant": "gradient-shimmer",
+      "duration": "3s",
+      "easing": "ease-in-out",
+      "infinite": true,
+      "gradient": "linear-gradient(90deg, #EC4899 0%, #A855F7 20%, #C084FC 40%, #FFFFFF 50%, #C084FC 60%, #A855F7 80%, #EC4899 100%)",
+      "backgroundSize": "200% auto",
+      "animation": "shimmer 3s linear infinite"
+    }
+  },
+
+  "effects": {
+    "glassmorphism": {
+      "background": "rgba(10, 10, 15, 0.6)",
+      "backdropFilter": "blur(20px) saturate(100%)",
+      "border": "1px solid rgba(255, 255, 255, 0.06)"
+    },
+    "shadows": {
+      "header": "0 4px 24px rgba(0, 0, 0, 0.4)",
+      "buttonPrimary": "0 4px 16px rgba(124, 58, 237, 0.3)",
+      "buttonPrimaryHover": "0 6px 24px rgba(124, 58, 237, 0.5)",
+      "activeDot": "0 0 6px rgba(139, 92, 246, 0.6)"
+    }
+  },
+
+  "DO_NOT_RULES": [
+    "DO NOT use pill-shaped container for navigation - ReactBits uses simple inline links",
+    "DO NOT add background to navigation links - they are transparent with only text color",
+    "DO NOT use card-style containers for nav items - keep them minimal",
+    "DO NOT apply gradients to navigation text - only buttons get gradients",
+    "DO NOT use rounded pill backgrounds for nav - only the active dot indicator",
+    "DO NOT add heavy borders - ReactBits uses subtle 1px borders with low opacity",
+    "DO NOT use multiple colors for nav links - only white with opacity variations",
+    "DO NOT center-align navigation - it should be naturally spaced with gaps"
+  ],
+
+  "componentRules": {
+    "header": {
+      "structure": "Logo (left) → Navigation (center-left) → CTA Buttons (right)",
+      "spacing": "Natural spacing with justify-between, no forced centering",
+      "simplicity": "Extremely minimal - no containers around nav items"
+    },
+    "navigation": {
+      "style": "Inline text links with NO background containers",
+      "activeState": "Bullet dot indicator (•) positioned to the left of text",
+      "hoverState": "Text color change from 70% white to 100% white",
+      "noContainers": "Links are bare text, no pills, no backgrounds"
+    },
+    "buttons": {
+      "primary": "Gradient background with subtle border and shadow",
+      "secondary": "Transparent background with white tint on hover",
+      "starButton": "Icon + text combination with gold star icon"
+    }
+  }
+}
+

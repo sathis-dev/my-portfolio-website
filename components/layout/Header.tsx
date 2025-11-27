@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Star } from 'lucide-react'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -58,272 +59,210 @@ export default function Header() {
   return (
     <>
       <style jsx global>{`
-        /* Enhanced Header Styles - ReactBits Inspired */
-        .enhanced-header {
+        /* ReactBits.dev Exact Header Styles */
+        .reactbits-header {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
           z-index: 1000;
+          height: 72px;
+          background: rgba(10, 10, 15, 0.6);
+          backdrop-filter: blur(20px) saturate(100%);
+          -webkit-backdrop-filter: blur(20px) saturate(100%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
           transition: all 0.3s ease;
         }
 
-        .enhanced-header.desktop {
-          height: 72px;
-          background: rgba(10, 10, 15, 0.85);
-          backdrop-filter: blur(20px) saturate(180%);
-          -webkit-backdrop-filter: blur(20px) saturate(180%);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .enhanced-header.desktop.scrolled {
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        .reactbits-header.scrolled {
           background: rgba(10, 10, 15, 0.95);
+          border-bottom-color: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
         }
 
-        .enhanced-header.mobile {
-          height: 64px;
-          background: rgba(28, 28, 40, 0.95);
-          backdrop-filter: blur(16px) saturate(150%);
-          -webkit-backdrop-filter: blur(16px) saturate(150%);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-          z-index: 1001;
-        }
-
-        .enhanced-header.mobile.scrolled {
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .header-container {
+        .reactbits-container {
           max-width: 1400px;
           margin: 0 auto;
           height: 100%;
+          padding: 0 32px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          pointer-events: auto;
         }
 
-        .header-container.desktop {
-          padding: 0 48px;
-        }
-
-        .header-container.mobile {
-          padding: 0 20px;
-        }
-
-        /* Logo */
-        .logo {
+        /* Logo - Keep Original */
+        .reactbits-logo {
           display: flex;
           align-items: center;
-          gap: 2px;
-          font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-          font-weight: 600;
-          color: #FFFFFF;
+          gap: 8px;
           text-decoration: none;
           transition: opacity 0.2s ease;
         }
 
-        .logo:hover {
+        .reactbits-logo:hover {
           opacity: 0.9;
         }
 
-        .logo.desktop {
-          font-size: 1.125rem;
-        }
-
-        .logo.mobile {
-          font-size: 1rem;
-        }
-
-        .logo-bracket {
+        .reactbits-logo-bracket {
           font-family: 'JetBrains Mono', 'Fira Code', monospace;
-          color: #A855F7;
+          font-size: 1.125rem;
           font-weight: 500;
+          color: #8B5CF6;
         }
 
-        .logo-text {
-          background: linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #C084FC 100%);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          letter-spacing: 0.02em;
+        .reactbits-logo-text {
+          font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+          font-size: 1.125rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          color: #FFFFFF;
         }
 
-        /* Navigation Pill Container */
-        .nav-pill-container {
+        /* Navigation - Simple Inline Links (ReactBits Style) */
+        .reactbits-nav {
           display: flex;
           align-items: center;
-          gap: 4px;
-          padding: 6px;
-          background: rgba(30, 30, 42, 0.9);
-          border-radius: 50px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          gap: 32px;
+          margin-left: 48px;
         }
 
-        .nav-item {
+        .reactbits-nav-link {
           position: relative;
-          padding: 10px 18px;
-          border-radius: 50px;
-          font-size: 0.9rem;
+          font-size: 0.9375rem;
           font-weight: 500;
-          font-family: 'Inter', system-ui, sans-serif;
           color: rgba(255, 255, 255, 0.7);
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          transition: all 0.25s ease;
           text-decoration: none;
-          white-space: nowrap;
+          transition: color 0.2s ease;
+          padding: 8px 0;
         }
 
-        .nav-item:hover {
+        .reactbits-nav-link:hover {
           color: #FFFFFF;
-          background: rgba(255, 255, 255, 0.08);
         }
 
-        .nav-item.active {
+        .reactbits-nav-link.active {
           color: #FFFFFF;
-          background: rgba(168, 85, 247, 0.2);
-          box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.3);
-          padding-left: 24px;
+          font-weight: 600;
+          padding-left: 16px;
         }
 
-        .nav-item.active::before {
-          content: '';
+        .reactbits-nav-link.active::before {
+          content: '•';
           position: absolute;
-          left: 10px;
+          left: 0;
           top: 50%;
           transform: translateY(-50%);
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #A855F7;
-          box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+          color: #8B5CF6;
+          font-size: 1.2rem;
+          line-height: 0;
         }
 
-        /* Availability Badge */
-        .availability-badge {
+        /* CTA Buttons */
+        .reactbits-cta {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .reactbits-btn-primary {
           display: flex;
           align-items: center;
           gap: 8px;
-          padding: 8px 16px;
-          border-radius: 50px;
-          background: rgba(16, 185, 129, 0.1);
-          border: 1px solid rgba(16, 185, 129, 0.25);
-          font-size: 0.8rem;
-          font-weight: 500;
-          color: #10B981;
+          padding: 10px 24px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
+          color: #FFFFFF;
+          font-size: 0.875rem;
+          font-weight: 600;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+          cursor: pointer;
+          text-decoration: none;
           transition: all 0.3s ease;
         }
 
-        .availability-badge:hover {
-          background: rgba(16, 185, 129, 0.15);
-          border-color: rgba(16, 185, 129, 0.4);
+        .reactbits-btn-primary:hover {
+          background: linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%);
+          box-shadow: 0 6px 24px rgba(124, 58, 237, 0.5);
+          transform: translateY(-1px);
         }
 
-        .availability-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: #10B981;
-          animation: pulseGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseGlow {
-          0%, 100% { 
-            opacity: 1; 
-            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-          }
-          50% { 
-            opacity: 0.6; 
-            box-shadow: 0 0 16px rgba(16, 185, 129, 0.8);
-          }
-        }
-
-        /* CV Button */
-        .cv-button {
+        .reactbits-btn-github {
           display: flex;
           align-items: center;
           gap: 8px;
           padding: 10px 20px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           color: #FFFFFF;
           font-size: 0.875rem;
           font-weight: 600;
-          border: none;
           cursor: pointer;
-          box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
-          transition: all 0.3s ease;
           text-decoration: none;
+          transition: all 0.2s ease;
         }
 
-        .cv-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 25px rgba(168, 85, 247, 0.5);
+        .reactbits-btn-github:hover {
+          background: rgba(255, 255, 255, 0.12);
+          border-color: rgba(255, 255, 255, 0.15);
         }
 
-        .cv-button:active {
-          transform: translateY(0);
+        .github-star-icon {
+          color: #FFD700;
         }
 
-        /* Mobile Menu */
-        .menu-button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        /* Mobile Styles */
+        .mobile-menu-button {
+          display: none;
           width: 44px;
           height: 44px;
+          align-items: center;
+          justify-content: center;
           border-radius: 12px;
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(255, 255, 255, 0.12);
           cursor: pointer;
-          transition: all 0.25s ease;
-          pointer-events: auto;
-          position: relative;
-          z-index: 1002;
+          transition: all 0.2s ease;
         }
 
-        .menu-button:hover {
+        .mobile-menu-button:hover {
           background: rgba(255, 255, 255, 0.12);
         }
 
-        .menu-icon {
+        .hamburger-icon {
           display: flex;
           flex-direction: column;
           gap: 5px;
           width: 20px;
         }
 
-        .menu-icon span {
-          display: block;
+        .hamburger-icon span {
           height: 2px;
           background: #FFFFFF;
           border-radius: 2px;
           transition: all 0.3s ease;
         }
 
-        .menu-icon.open span:nth-child(1) {
+        .hamburger-icon.open span:nth-child(1) {
           transform: rotate(45deg) translate(5px, 5px);
         }
 
-        .menu-icon.open span:nth-child(2) {
+        .hamburger-icon.open span:nth-child(2) {
           opacity: 0;
         }
 
-        .menu-icon.open span:nth-child(3) {
+        .hamburger-icon.open span:nth-child(3) {
           transform: rotate(-45deg) translate(5px, -5px);
         }
 
         .mobile-menu-overlay {
           position: fixed;
-          top: 64px;
+          top: 72px;
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(28, 28, 40, 0.98);
+          background: rgba(10, 10, 15, 0.98);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           z-index: 999;
@@ -331,30 +270,10 @@ export default function Header() {
           display: flex;
           flex-direction: column;
           overflow-y: auto;
-          animation: slideInFromRight 0.3s ease-out;
+          animation: fadeSlideIn 0.3s ease-out;
         }
 
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes slideInFromLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes slideInFromRight {
+        @keyframes fadeSlideIn {
           from {
             opacity: 0;
             transform: translateY(10px);
@@ -369,9 +288,24 @@ export default function Header() {
           display: flex;
           flex-direction: column;
           gap: 8px;
+          list-style: none;
           margin: 0;
           padding: 0;
-          list-style: none;
+        }
+
+        .mobile-nav-item {
+          animation: slideInFromLeft 0.3s ease-out both;
+        }
+
+        @keyframes slideInFromLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
 
         .mobile-nav-link {
@@ -380,13 +314,13 @@ export default function Header() {
           justify-content: space-between;
           padding: 16px 20px;
           border-radius: 14px;
-          font-size: 1.125rem;
-          font-weight: 500;
-          color: rgba(255, 255, 255, 0.85);
           background: rgba(255, 255, 255, 0.04);
           border: 1px solid rgba(255, 255, 255, 0.08);
+          color: rgba(255, 255, 255, 0.85);
+          font-size: 1.125rem;
+          font-weight: 500;
           text-decoration: none;
-          transition: all 0.25s ease;
+          transition: all 0.2s ease;
         }
 
         .mobile-nav-link:hover {
@@ -395,8 +329,8 @@ export default function Header() {
         }
 
         .mobile-nav-link.active {
-          background: rgba(168, 85, 247, 0.15);
-          border-color: rgba(168, 85, 247, 0.3);
+          background: rgba(139, 92, 246, 0.15);
+          border-color: rgba(139, 92, 246, 0.3);
           color: #FFFFFF;
         }
 
@@ -409,20 +343,6 @@ export default function Header() {
           gap: 12px;
         }
 
-        .mobile-availability {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          padding: 14px 20px;
-          border-radius: 14px;
-          background: rgba(16, 185, 129, 0.1);
-          border: 1px solid rgba(16, 185, 129, 0.2);
-          font-size: 0.9rem;
-          font-weight: 500;
-          color: #10B981;
-        }
-
         .mobile-cv-button {
           display: flex;
           align-items: center;
@@ -430,98 +350,83 @@ export default function Header() {
           gap: 10px;
           padding: 16px 24px;
           border-radius: 14px;
-          background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+          background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
           color: #FFFFFF;
           font-size: 1rem;
           font-weight: 600;
           border: none;
-          cursor: pointer;
-          box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+          box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
           text-decoration: none;
-          transition: all 0.3s ease;
+          cursor: pointer;
         }
 
         .mobile-cv-button:active {
           transform: scale(0.98);
         }
 
-        .desktop-only {
-          display: none;
-        }
+        @media (max-width: 1023px) {
+          .reactbits-nav,
+          .reactbits-cta {
+            display: none;
+          }
 
-        .mobile-only {
-          display: flex;
-        }
-
-        @media (min-width: 1024px) {
-          .desktop-only {
+          .mobile-menu-button {
             display: flex;
           }
-          .mobile-only {
-            display: none;
+
+          .reactbits-container {
+            padding: 0 20px;
           }
         }
       `}</style>
 
-      {/* Desktop Header */}
-      <header className={`enhanced-header desktop desktop-only ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="header-container desktop">
-          {/* Logo */}
-          <Link href="/" className="logo desktop">
-            <span className="logo-bracket">&lt;</span>
-            <span className="logo-text">SATHIS</span>
-            <span className="logo-bracket">/&gt;</span>
+      {/* ReactBits Header */}
+      <header className={`reactbits-header ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="reactbits-container">
+          {/* Logo - Keep Original */}
+          <Link href="/" className="reactbits-logo">
+            <span className="reactbits-logo-bracket">&lt;</span>
+            <span className="reactbits-logo-text">SATHIS</span>
+            <span className="reactbits-logo-bracket">/&gt;</span>
           </Link>
 
-          {/* Navigation Pill Container */}
-          <nav className="nav-pill-container">
+          {/* Navigation - ReactBits Style (Simple Inline Links) */}
+          <nav className="reactbits-nav">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`nav-item ${pathname === item.href ? 'active' : ''}`}
+                className={`reactbits-nav-link ${pathname === item.href ? 'active' : ''}`}
               >
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          {/* Right Section */}
-          <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div className="availability-badge">
-              <span className="availability-dot"></span>
-              <span>Available for Projects</span>
-            </div>
-            <a href="/cv.pdf" download className="cv-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              <span>CV</span>
+          {/* CTA Buttons - ReactBits Style */}
+          <div className="reactbits-cta">
+            <Link href="/contact" className="reactbits-btn-primary">
+              Let&apos;s Talk
+            </Link>
+            <a 
+              href="https://github.com/sathis-dev" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="reactbits-btn-github"
+            >
+              <Star size={16} className="github-star-icon" fill="#FFD700" />
+              <span>GitHub</span>
             </a>
           </div>
-        </div>
-      </header>
 
-      {/* Mobile Header */}
-      <header className={`enhanced-header mobile mobile-only ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="header-container mobile">
-          {/* Logo */}
-          <Link href="/" className="logo mobile">
-            <span className="logo-bracket">&lt;</span>
-            <span className="logo-text">SATHIS</span>
-            <span className="logo-bracket">/&gt;</span>
-          </Link>
-
-          {/* Menu Button */}
+          {/* Mobile Menu Button */}
           <button
-            className="menu-button"
+            className="mobile-menu-button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
-            <div className={`menu-icon ${isMenuOpen ? 'open' : ''}`}>
+            <div className={`hamburger-icon ${isMenuOpen ? 'open' : ''}`}>
               <span></span>
               <span></span>
               <span></span>
@@ -530,65 +435,41 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu Backdrop and Overlay */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <>
-          {/* Backdrop */}
-          <div 
-            className="mobile-menu-backdrop mobile-only" 
-            onClick={() => setIsMenuOpen(false)}
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'rgba(0, 0, 0, 0.6)',
-              zIndex: 998,
-              animation: 'fadeIn 0.3s ease-out'
-            }}
-          />
-          
-          {/* Menu Overlay */}
-          <div className="mobile-menu-overlay mobile-only">
-            <ul className="mobile-nav-list">
-              {navigation.map((item, index) => (
-                <li 
-                  key={item.name}
-                  style={{
-                    animation: `slideInFromLeft 0.3s ease-out ${0.05 * index}s both`
-                  }}
+        <div className="mobile-menu-overlay">
+          <ul className="mobile-nav-list">
+            {navigation.map((item, index) => (
+              <li 
+                key={item.name}
+                className="mobile-nav-item"
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <Link
+                  href={item.href}
+                  className={`mobile-nav-link ${pathname === item.href ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <Link
-                    href={item.href}
-                    className={`mobile-nav-link ${pathname === item.href ? 'active' : ''}`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <span>{item.name}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="9 18 15 12 9 6" />
-                    </svg>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                  <span>{item.name}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-            <div className="mobile-cta-section">
-              <div className="mobile-availability">
-                <span className="availability-dot"></span>
-                <span>Available for Projects</span>
-              </div>
-              <a href="/cv.pdf" download className="mobile-cv-button" onClick={() => setIsMenuOpen(false)}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                <span>Download CV</span>
-              </a>
-            </div>
+          <div className="mobile-cta-section">
+            <a href="/cv.pdf" download className="mobile-cv-button" onClick={() => setIsMenuOpen(false)}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Download CV</span>
+            </a>
           </div>
-        </>
+        </div>
       )}
     </>
   )

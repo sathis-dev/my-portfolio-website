@@ -67,11 +67,66 @@ export default function HeroSection() {
           </SparklesEffect>
         </BlurFade>
 
-        {/* Heading with Blur Fade */}
+        {/* Heading with Advanced Shimmer Animation */}
+        <style jsx>{`
+          @keyframes gradientShimmer {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+
+          .shimmer-text {
+            background: linear-gradient(
+              90deg,
+              #EC4899 0%,
+              #A855F7 20%,
+              #C084FC 40%,
+              #FFFFFF 50%,
+              #C084FC 60%,
+              #A855F7 80%,
+              #EC4899 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShimmer 3s linear infinite;
+          }
+
+          .shimmer-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+              90deg,
+              #EC4899 0%,
+              #A855F7 20%,
+              #C084FC 40%,
+              #FFFFFF 50%,
+              #C084FC 60%,
+              #A855F7 80%,
+              #EC4899 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShimmer 3s linear infinite;
+            filter: blur(40px);
+            opacity: 0.6;
+            z-index: -1;
+          }
+        `}</style>
+        
         <div className="mb-5 sm:mb-5 md:mb-6">
           <BlurFade delay={0.4} inView={true}>
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white mb-2 sm:mb-2"
+              className="shimmer-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold mb-2 sm:mb-2 relative"
               style={{
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
@@ -79,35 +134,26 @@ export default function HeroSection() {
               }}
             >
               Sathis Ravishka
+              <span className="shimmer-glow" aria-hidden="true">
+                Sathis Ravishka
+              </span>
             </h1>
           </BlurFade>
 
           <BlurFade delay={0.6} inView={true}>
-            <span
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold relative inline-block"
+            <h1
+              className="shimmer-text block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold relative"
               style={{
-                background: 'linear-gradient(135deg, #E91E8C 0%, #C71585 30%, #8B5CF6 70%, #7C3AED 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
               }}
             >
               Hettiarachchi
-              <span
-                className="absolute inset-0 -z-10"
-                style={{
-                  background: 'linear-gradient(135deg, #E91E8C 0%, #C71585 30%, #8B5CF6 70%, #7C3AED 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  filter: 'blur(35px)',
-                  opacity: 0.5,
-                }}
-                aria-hidden="true"
-              >
+              <span className="shimmer-glow" aria-hidden="true">
                 Hettiarachchi
               </span>
-            </span>
+            </h1>
           </BlurFade>
         </div>
 
