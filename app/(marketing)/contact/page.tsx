@@ -178,6 +178,8 @@ export default function ContactPage() {
               style={{
                 letterSpacing: '-0.02em'
               }}
+              data-cursor="hover"
+              data-cursor-text="Contact"
             >
               Get In Touch
             </h1>
@@ -397,6 +399,8 @@ export default function ContactPage() {
                   disabled={isSubmitting}
                   whileHover={!isSubmitting ? { y: -2 } : {}}
                   whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                  data-cursor="button"
+                  data-cursor-text={isSubmitting ? "Sending..." : "Send"}
                   className="w-full py-5 rounded-2xl text-base font-bold text-white transition-all duration-300 flex items-center justify-center gap-3"
                   style={{
                     background: isSubmitting 
