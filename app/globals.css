@@ -1011,3 +1011,168 @@ html {
   }
 }
 
+/* ============================================
+   ENHANCED MOBILE THEME - REACTBITS INSPIRED
+   Design System v2.0 Implementation
+   ============================================ */
+
+/* Enhanced Mobile Backgrounds - LIGHTER FOR VISIBILITY */
+@media (max-width: 1023px) {
+  body {
+    background: #1C1C28 !important;
+  }
+  
+  /* Section backgrounds - lighter */
+  section,
+  .section,
+  [class*="section"] {
+    background-color: #252535;
+  }
+  
+  /* Cards - more visible with higher contrast */
+  .card,
+  [class*="card"],
+  .stat-card,
+  [class*="stat"] {
+    background: rgba(40, 40, 55, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+  
+  /* Text contrast improvements */
+  p, span, div {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #FFFFFF;
+  }
+  
+  /* Aurora/gradient backgrounds - more visible on mobile */
+  .aurora,
+  [class*="aurora"],
+  .hero::before,
+  .hero-background {
+    opacity: 1 !important;
+    filter: brightness(1.4);
+  }
+  
+  /* Improve button visibility */
+  button,
+  .btn,
+  [class*="button"] {
+    font-weight: 600;
+  }
+  
+  /* Better border visibility */
+  .border,
+  [class*="border"] {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* Hero Section Mobile Enhancements */
+@media (max-width: 1023px) {
+  .hero,
+  [class*="hero"],
+  #hero {
+    position: relative;
+  }
+  
+  /* Enhanced aurora glow for mobile */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150%;
+    height: 60%;
+    background: radial-gradient(
+      ellipse 80% 50% at 50% 0%,
+      rgba(168, 85, 247, 0.4) 0%,
+      rgba(236, 72, 153, 0.3) 30%,
+      rgba(6, 182, 212, 0.15) 60%,
+      transparent 80%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* Additional ambient glow */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: -20%;
+    width: 60%;
+    height: 40%;
+    background: radial-gradient(
+      circle at center,
+      rgba(168, 85, 247, 0.2) 0%,
+      transparent 70%
+    );
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* Stat Cards Mobile Enhancement */
+@media (max-width: 1023px) {
+  .stat-card,
+  [class*="stat-card"] {
+    background: rgba(40, 40, 55, 0.9) !important;
+    border: 1px solid rgba(168, 85, 247, 0.2) !important;
+    backdrop-filter: blur(10px);
+  }
+  
+  .stat-card:hover {
+    border-color: rgba(168, 85, 247, 0.4) !important;
+  }
+  
+  /* Icon containers in cards */
+  .stat-card .icon,
+  .stat-card [class*="icon"] {
+    background: rgba(168, 85, 247, 0.2) !important;
+  }
+}
+
+/* Form Elements Mobile */
+@media (max-width: 1023px) {
+  input,
+  textarea,
+  select {
+    background: rgba(40, 40, 55, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+  }
+  
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #A855F7 !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+  }
+}
+
+/* Scrollbar Styling - Mobile Optimized */
+@media (max-width: 1023px) {
+  ::-webkit-scrollbar-track {
+    background: #1C1C28;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.4);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.6);
+  }
+}
+

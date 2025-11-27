@@ -1,8 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Download, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -17,7 +15,7 @@ const navigation = [
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -29,14 +27,25 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Close menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMenuOpen(false)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   // Close mobile menu when route changes
   useEffect(() => {
-    setMobileMenuOpen(false)
+    setIsMenuOpen(false)
   }, [pathname])
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
+    if (isMenuOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'unset'
@@ -44,316 +53,482 @@ export default function Header() {
     return () => {
       document.body.style.overflow = 'unset'
     }
-  }, [mobileMenuOpen])
+  }, [isMenuOpen])
 
   return (
     <>
-      {/* Desktop & Mobile Header */}
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={{
-          background: isScrolled 
-            ? 'rgba(10, 5, 15, 0.95)' 
-            : 'rgba(10, 5, 15, 0.8)',
-          backdropFilter: 'blur(20px) saturate(100%)',
-          borderBottom: `1px solid ${isScrolled ? 'rgba(199, 21, 133, 0.3)' : 'rgba(199, 21, 133, 0.2)'}`,
-          boxShadow: isScrolled 
-            ? '0 8px 32px rgba(0, 0, 0, 0.4)' 
-            : '0 4px 16px rgba(0, 0, 0, 0.2)'
-        }}
-      >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            
-            {/* Logo */}
-            <Link href="/" className="cursor-pointer">
-              <motion.img
-                src="/logo.svg"
-                alt="Sathis Logo"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="h-8 w-auto"
-                style={{ objectFit: 'contain' }}
-              />
-            </Link>
+      <style jsx global>{`
+        /* Enhanced Header Styles - ReactBits Inspired */
+        .enhanced-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          transition: all 0.3s ease;
+        }
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navigation.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                  <Link key={item.name} href={item.href}>
-                    <motion.div
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="relative px-4 py-2 rounded-xl transition-all duration-300"
-                      style={{
-                        background: isActive 
-                          ? 'rgba(199, 21, 133, 0.15)' 
-                          : 'transparent',
-                        border: isActive
-                          ? '1px solid rgba(199, 21, 133, 0.3)'
-                          : '1px solid transparent'
-                      }}
-                    >
-                      <span 
-                        className="text-sm font-semibold transition-colors duration-300"
-                        style={{
-                          color: isActive ? '#E91E8C' : 'rgba(255, 255, 255, 0.85)'
-                        }}
-                      >
-                        {item.name}
-                      </span>
-                      
-                      {/* Active indicator */}
-                      {isActive && (
-                        <motion.div
-                          layoutId="activeNav"
-                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 rounded-full"
-                          style={{
-                            background: 'linear-gradient(90deg, transparent, #E91E8C, transparent)'
-                          }}
-                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                        />
-                      )}
-                    </motion.div>
-                  </Link>
-                )
-              })}
-            </nav>
+        .enhanced-header.desktop {
+          height: 72px;
+          background: rgba(10, 10, 15, 0.85);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-            {/* Right Side Actions */}
-            <div className="flex items-center gap-3">
-              
-              {/* Availability Badge - Desktop */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-                className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-full"
-                style={{
-                  background: 'rgba(16, 185, 129, 0.1)',
-                  border: '1px solid rgba(16, 185, 129, 0.3)'
-                }}
+        .enhanced-header.desktop.scrolled {
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+          background: rgba(10, 10, 15, 0.95);
+        }
+
+        .enhanced-header.mobile {
+          height: 64px;
+          background: rgba(28, 28, 40, 0.95);
+          backdrop-filter: blur(16px) saturate(150%);
+          -webkit-backdrop-filter: blur(16px) saturate(150%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .enhanced-header.mobile.scrolled {
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-container {
+          max-width: 1400px;
+          margin: 0 auto;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .header-container.desktop {
+          padding: 0 48px;
+        }
+
+        .header-container.mobile {
+          padding: 0 20px;
+        }
+
+        /* Logo */
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+          font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+          font-weight: 600;
+          color: #FFFFFF;
+          text-decoration: none;
+          transition: opacity 0.2s ease;
+        }
+
+        .logo:hover {
+          opacity: 0.9;
+        }
+
+        .logo.desktop {
+          font-size: 1.125rem;
+        }
+
+        .logo.mobile {
+          font-size: 1rem;
+        }
+
+        .logo-bracket {
+          font-family: 'JetBrains Mono', 'Fira Code', monospace;
+          color: #A855F7;
+          font-weight: 500;
+        }
+
+        .logo-text {
+          background: linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #C084FC 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          letter-spacing: 0.02em;
+        }
+
+        /* Navigation Pill Container */
+        .nav-pill-container {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 6px;
+          background: rgba(30, 30, 42, 0.9);
+          border-radius: 50px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item {
+          position: relative;
+          padding: 10px 18px;
+          border-radius: 50px;
+          font-size: 0.9rem;
+          font-weight: 500;
+          font-family: 'Inter', system-ui, sans-serif;
+          color: rgba(255, 255, 255, 0.7);
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          text-decoration: none;
+          white-space: nowrap;
+        }
+
+        .nav-item:hover {
+          color: #FFFFFF;
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-item.active {
+          color: #FFFFFF;
+          background: rgba(168, 85, 247, 0.2);
+          box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.3);
+          padding-left: 24px;
+        }
+
+        .nav-item.active::before {
+          content: '';
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #A855F7;
+          box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+        }
+
+        /* Availability Badge */
+        .availability-badge {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border-radius: 50px;
+          background: rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(16, 185, 129, 0.25);
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: #10B981;
+          transition: all 0.3s ease;
+        }
+
+        .availability-badge:hover {
+          background: rgba(16, 185, 129, 0.15);
+          border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .availability-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #10B981;
+          animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+          0%, 100% { 
+            opacity: 1; 
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+          }
+          50% { 
+            opacity: 0.6; 
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.8);
+          }
+        }
+
+        /* CV Button */
+        .cv-button {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 20px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+          color: #FFFFFF;
+          font-size: 0.875rem;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+          transition: all 0.3s ease;
+          text-decoration: none;
+        }
+
+        .cv-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 25px rgba(168, 85, 247, 0.5);
+        }
+
+        .cv-button:active {
+          transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .menu-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          cursor: pointer;
+          transition: all 0.25s ease;
+        }
+
+        .menu-button:hover {
+          background: rgba(255, 255, 255, 0.12);
+        }
+
+        .menu-icon {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          width: 20px;
+        }
+
+        .menu-icon span {
+          display: block;
+          height: 2px;
+          background: #FFFFFF;
+          border-radius: 2px;
+          transition: all 0.3s ease;
+        }
+
+        .menu-icon.open span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-icon.open span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .menu-icon.open span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-menu-overlay {
+          position: fixed;
+          top: 64px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(28, 28, 40, 0.98);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          z-index: 999;
+          padding: 24px 20px;
+          display: flex;
+          flex-direction: column;
+          overflow-y: auto;
+        }
+
+        .mobile-nav-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+
+        .mobile-nav-link {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 20px;
+          border-radius: 14px;
+          font-size: 1.125rem;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          text-decoration: none;
+          transition: all 0.25s ease;
+        }
+
+        .mobile-nav-link:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .mobile-nav-link.active {
+          background: rgba(168, 85, 247, 0.15);
+          border-color: rgba(168, 85, 247, 0.3);
+          color: #FFFFFF;
+        }
+
+        .mobile-cta-section {
+          margin-top: auto;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .mobile-availability {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 14px 20px;
+          border-radius: 14px;
+          background: rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(16, 185, 129, 0.2);
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #10B981;
+        }
+
+        .mobile-cv-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 16px 24px;
+          border-radius: 14px;
+          background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+          color: #FFFFFF;
+          font-size: 1rem;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+
+        .mobile-cv-button:active {
+          transform: scale(0.98);
+        }
+
+        .desktop-only {
+          display: none;
+        }
+
+        .mobile-only {
+          display: flex;
+        }
+
+        @media (min-width: 1024px) {
+          .desktop-only {
+            display: flex;
+          }
+          .mobile-only {
+            display: none;
+          }
+        }
+      `}</style>
+
+      {/* Desktop Header */}
+      <header className={`enhanced-header desktop desktop-only ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="header-container desktop">
+          {/* Logo */}
+          <Link href="/" className="logo desktop">
+            <span className="logo-bracket">&lt;</span>
+            <span className="logo-text">SATHIS</span>
+            <span className="logo-bracket">/&gt;</span>
+          </Link>
+
+          {/* Navigation Pill Container */}
+          <nav className="nav-pill-container">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`nav-item ${pathname === item.href ? 'active' : ''}`}
               >
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-xs font-semibold text-green-400">
-                  Available for Projects
-                </span>
-              </motion.div>
+                {item.name}
+              </Link>
+            ))}
+          </nav>
 
-              {/* CV Button */}
-              <motion.a
-                href="/cv.pdf"
-                download
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
-                  boxShadow: '0 4px 16px rgba(199, 21, 133, 0.4)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)'
-                }}
-              >
-                <Download size={16} />
-                <span className="hidden md:inline">CV</span>
-              </motion.a>
-
-              {/* Mobile Menu Button */}
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-xl transition-all duration-300"
-                style={{
-                  background: mobileMenuOpen 
-                    ? 'rgba(199, 21, 133, 0.15)' 
-                    : 'rgba(139, 92, 246, 0.15)',
-                  border: '1px solid rgba(139, 92, 246, 0.3)'
-                }}
-                aria-label="Toggle menu"
-              >
-                <AnimatePresence mode="wait">
-                  {mobileMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X size={24} style={{ color: '#E91E8C' }} />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu size={24} style={{ color: '#8B5CF6' }} />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+          {/* Right Section */}
+          <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="availability-badge">
+              <span className="availability-dot"></span>
+              <span>Available for Projects</span>
             </div>
+            <a href="/cv.pdf" download className="cv-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>CV</span>
+            </a>
           </div>
         </div>
-      </motion.header>
+      </header>
+
+      {/* Mobile Header */}
+      <header className={`enhanced-header mobile mobile-only ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="header-container mobile">
+          {/* Logo */}
+          <Link href="/" className="logo mobile">
+            <span className="logo-bracket">&lt;</span>
+            <span className="logo-text">SATHIS</span>
+            <span className="logo-bracket">/&gt;</span>
+          </Link>
+
+          {/* Menu Button */}
+          <button
+            className="menu-button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <div className={`menu-icon ${isMenuOpen ? 'open' : ''}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
+      </header>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-
-            {/* Mobile Menu */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-20 right-0 bottom-0 w-full max-w-sm z-40 lg:hidden overflow-y-auto"
-              style={{
-                background: 'rgba(26, 15, 31, 0.98)',
-                backdropFilter: 'blur(30px) saturate(120%)',
-                borderLeft: '1px solid rgba(199, 21, 133, 0.3)',
-                boxShadow: '-8px 0 32px rgba(0, 0, 0, 0.5)'
-              }}
-            >
-              <div className="p-6 space-y-6">
-                
-                {/* Mobile Availability Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="flex items-center gap-3 p-4 rounded-2xl"
-                  style={{
-                    background: 'rgba(16, 185, 129, 0.2)',
-                    border: '1px solid rgba(16, 185, 129, 0.4)'
-                  }}
+      {isMenuOpen && (
+        <div className="mobile-menu-overlay mobile-only">
+          <ul className="mobile-nav-list">
+            {navigation.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.href}
+                  className={`mobile-nav-link ${pathname === item.href ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-                  <div>
-                    <p className="text-sm font-bold text-green-400">Available for Projects</p>
-                    <p className="text-xs text-green-400/80">Response time: 24-48 hours</p>
-                  </div>
-                </motion.div>
+                  <span>{item.name}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-                {/* Mobile Navigation */}
-                <nav className="space-y-2">
-                  {navigation.map((item, index) => {
-                    const isActive = pathname === item.href
-                    return (
-                      <motion.div
-                        key={item.name}
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 + index * 0.05 }}
-                      >
-                        <Link href={item.href}>
-                          <motion.div
-                            whileTap={{ scale: 0.95 }}
-                            className="flex items-center justify-between p-4 rounded-2xl transition-all duration-300"
-                            style={{
-                              background: isActive 
-                                ? 'rgba(199, 21, 133, 0.2)' 
-                                : 'rgba(139, 92, 246, 0.05)',
-                              border: isActive
-                                ? '1px solid rgba(199, 21, 133, 0.4)'
-                                : '1px solid transparent'
-                            }}
-                          >
-                            <span 
-                              className="text-lg font-bold"
-                              style={{
-                                color: isActive ? '#E91E8C' : 'rgba(255, 255, 255, 0.95)'
-                              }}
-                            >
-                              {item.name}
-                            </span>
-                            {isActive && (
-                              <Zap size={20} style={{ color: '#E91E8C' }} />
-                            )}
-                          </motion.div>
-                        </Link>
-                      </motion.div>
-                    )
-                  })}
-                </nav>
-
-                {/* Mobile CV Button */}
-                <motion.a
-                  href="/cv.pdf"
-                  download
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center gap-3 w-full p-4 rounded-2xl text-base font-bold text-white"
-                  style={{
-                    background: 'linear-gradient(135deg, #E91E8C 0%, #9D6EFF 100%)',
-                    boxShadow: '0 4px 16px rgba(233, 30, 140, 0.5)',
-                    border: '1px solid rgba(255, 255, 255, 0.3)'
-                  }}
-                >
-                  <Download size={20} />
-                  Download CV
-                </motion.a>
-
-                {/* Social Links */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="pt-6 border-t"
-                  style={{
-                    borderColor: 'rgba(199, 21, 133, 0.2)'
-                  }}
-                >
-                  <p className="text-sm font-semibold mb-4" style={{ color: 'rgba(255, 255, 255, 0.95)' }}>
-                    Connect with me
-                  </p>
-                  <div className="flex gap-3">
-                    {[
-                      { icon: '💼', href: 'https://www.linkedin.com/in/sathis-hettiarachchi-52b4b436a/', label: 'LinkedIn' },
-                      { icon: '🔗', href: 'https://github.com/sathis-dev', label: 'GitHub' },
-                      { icon: '✉️', href: 'mailto:sathis.rc.dev@gmail.com', label: 'Email' }
-                    ].map((social) => (
-                      <motion.a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileTap={{ scale: 0.9 }}
-                        className="flex-1 flex items-center justify-center p-3 rounded-xl"
-                        style={{
-                          background: 'rgba(139, 92, 246, 0.15)',
-                          border: '1px solid rgba(139, 92, 246, 0.3)'
-                        }}
-                      >
-                        <span className="text-2xl">{social.icon}</span>
-                      </motion.a>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          <div className="mobile-cta-section">
+            <div className="mobile-availability">
+              <span className="availability-dot"></span>
+              <span>Available for Projects</span>
+            </div>
+            <a href="/cv.pdf" download className="mobile-cv-button" onClick={() => setIsMenuOpen(false)}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Download CV</span>
+            </a>
+          </div>
+        </div>
+      )}
     </>
   )
 }
