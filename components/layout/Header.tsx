@@ -72,50 +72,76 @@ export default function Header() {
       }}
     >
       <nav
-        className="max-w-[1400px] mx-auto rounded-2xl px-4 sm:px-6 py-3 transition-all duration-500"
+        className="max-w-[1400px] mx-auto rounded-3xl px-4 sm:px-6 py-4 transition-all duration-500 relative overflow-hidden"
         style={{
           background: isScrolled 
-            ? 'rgba(39, 10, 33, 0.85)' 
-            : 'rgba(39, 10, 33, 0.6)',
-          backdropFilter: 'blur(20px) saturate(110%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(110%)',
+            ? 'linear-gradient(135deg, rgba(39, 10, 33, 0.95) 0%, rgba(20, 10, 25, 0.95) 100%)' 
+            : 'linear-gradient(135deg, rgba(39, 10, 33, 0.7) 0%, rgba(20, 10, 25, 0.7) 100%)',
+          backdropFilter: 'blur(30px) saturate(120%)',
+          WebkitBackdropFilter: 'blur(30px) saturate(120%)',
           border: `1px solid ${isScrolled 
-            ? 'rgba(199, 21, 133, 0.3)' 
-            : 'rgba(199, 21, 133, 0.2)'}`,
+            ? 'rgba(199, 21, 133, 0.35)' 
+            : 'rgba(199, 21, 133, 0.25)'}`,
           boxShadow: isScrolled
-            ? '0 8px 32px rgba(74, 20, 140, 0.35), inset 0 1px 0 rgba(199, 21, 133, 0.1)'
-            : '0 4px 20px rgba(74, 20, 140, 0.25), inset 0 1px 0 rgba(199, 21, 133, 0.05)',
+            ? '0 8px 40px rgba(199, 21, 133, 0.25), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+            : '0 4px 24px rgba(199, 21, 133, 0.2), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
         }}
       >
+        {/* Premium Border Glow */}
+        <div 
+          className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          style={{
+            background: 'linear-gradient(135deg, rgba(199, 21, 133, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
+            borderRadius: '24px',
+          }}
+        />
         {/* Grid Layout */}
         <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4 lg:gap-8">
-          {/* Logo */}
+          {/* Premium Logo with Glow Effect */}
           <div className="flex items-center">
             <Link 
               href="/"
               data-cursor="link"
               data-cursor-text="Home"
-              className="group"
+              className="group relative"
             >
               <motion.div 
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center transition-all duration-300"
+                className="relative transition-all duration-300"
               >
+                {/* Glow Effect on Hover */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.3) 0%, transparent 70%)',
+                    filter: 'blur(20px)',
+                    zIndex: -1,
+                  }}
+                />
                 <img
                   src="/logo.svg"
                   alt="<SATHIS/>"
-                  className="w-[140px] sm:w-[160px] md:w-[180px] h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                  className="w-[140px] sm:w-[160px] md:w-[180px] h-auto opacity-90 group-hover:opacity-100 transition-all duration-300"
+                  style={{
+                    filter: 'drop-shadow(0 4px 12px rgba(199, 21, 133, 0.2))',
+                  }}
                 />
               </motion.div>
             </Link>
           </div>
 
-          {/* Navigation - Center with Pill Effect */}
+          {/* Advanced Navigation - Premium Design */}
           <div 
             ref={navRef} 
-            className="hidden lg:flex items-center justify-center gap-1 relative"
+            className="hidden lg:flex items-center gap-2 relative px-3 py-2 rounded-full"
             onMouseLeave={() => setHoveredNavIndex(null)}
+            style={{
+              background: 'linear-gradient(135deg, rgba(39, 10, 33, 0.7) 0%, rgba(20, 10, 25, 0.7) 100%)',
+              backdropFilter: 'blur(20px) saturate(120%)',
+              border: '1px solid rgba(199, 21, 133, 0.25)',
+              boxShadow: '0 4px 24px rgba(199, 21, 133, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+            }}
           >
             {/* Animated Pill Background */}
             {activeNavIndex >= 0 && (
@@ -129,88 +155,197 @@ export default function Header() {
             
             {navItems.map((item, index) => {
               const isActive = pathname === item.href
+              const Icon = item.icon
+              
               return (
-                <Link
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  data-cursor="link"
-                  data-nav-item
-                  onMouseEnter={() => setHoveredNavIndex(index)}
-                  className={`
-                    relative px-4 py-2 rounded-xl text-[0.875rem] font-medium
-                    transition-colors duration-300
-                    ${isActive ? 'text-white' : 'text-white/70 hover:text-white'}
-                  `}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    href={item.href}
+                    data-cursor="link"
+                    data-nav-item
+                    onMouseEnter={() => setHoveredNavIndex(index)}
+                    className="group relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300"
+                    style={{
+                      color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.7)',
+                    }}
+                  >
+                    <Icon 
+                      size={16} 
+                      className={`transition-all duration-300 ${
+                        isActive 
+                          ? 'text-pink-500' 
+                          : 'text-purple-400 opacity-0 group-hover:opacity-100'
+                      }`}
+                    />
+                    <span className="text-[0.875rem] font-medium">
+                      {item.label}
+                    </span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                        style={{
+                          background: '#E91E8C',
+                          boxShadow: '0 0 8px rgba(233, 30, 140, 0.8)',
+                        }}
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
               )
             })}
           </div>
 
-          {/* Actions */}
+          {/* Premium Actions Section */}
           <div className="flex items-center justify-end gap-3">
-            {/* Let's Talk Button */}
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            {/* Availability Badge - Premium Design */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="hidden xl:flex items-center gap-2.5 px-4 py-2.5 rounded-full"
+              style={{
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.08) 100%)',
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+                boxShadow: '0 4px 16px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              <motion.div
+                className="relative w-2.5 h-2.5 rounded-full"
+                style={{ background: '#10B981' }}
+                animate={{
+                  scale: [1, 1.2, 1],
+                  boxShadow: [
+                    '0 0 0 0 rgba(16, 185, 129, 0.7)',
+                    '0 0 0 6px rgba(16, 185, 129, 0)',
+                    '0 0 0 0 rgba(16, 185, 129, 0)'
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              />
+              <span className="text-xs font-semibold text-emerald-400 tracking-wide">
+                AVAILABLE
+              </span>
+            </motion.div>
+
+            {/* Let's Talk Button - Premium Design */}
+            <motion.div 
+              whileHover={{ y: -2, scale: 1.02 }} 
+              whileTap={{ scale: 0.98 }}
+            >
               <Link
                 href="/contact"
-                className="hidden md:flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 group"
+                className="hidden md:flex items-center gap-2.5 px-6 py-3 text-sm font-bold text-white transition-all duration-300 group relative overflow-hidden"
                 style={{
-                  background: 'linear-gradient(135deg, #A855F7 0%, #C084FC 100%)',
-                  borderRadius: '14px',
-                  boxShadow: '0 4px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                  background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
+                  borderRadius: '16px',
+                  boxShadow: '0 4px 20px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(199, 21, 133, 0.3)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 6px 28px rgba(168, 85, 247, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25)'
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #E91E8C 0%, #9D6EFF 50%, #8B5CF6 100%)'
+                  e.currentTarget.style.boxShadow = '0 6px 28px rgba(199, 21, 133, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 0 1px rgba(199, 21, 133, 0.4)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(199, 21, 133, 0.3)'
                 }}
               >
-                <span>Let&apos;s Talk</span>
-                <svg 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="transition-transform group-hover:translate-x-0.5"
+                <span className="relative z-10">Let&apos;s Talk</span>
+                <motion.div
+                  className="relative z-10"
+                  animate={{
+                    x: [0, 2, 0],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
                 >
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                  <ArrowRight size={16} />
+                </motion.div>
+                {/* Shimmer Effect */}
+                <motion.div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+                  }}
+                  animate={{
+                    x: ['-100%', '100%'],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'linear',
+                    repeatDelay: 3,
+                  }}
+                />
               </Link>
             </motion.div>
 
-            {/* GitHub Button */}
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            {/* GitHub Button - Premium Glass Design */}
+            <motion.div 
+              whileHover={{ y: -2, scale: 1.02 }} 
+              whileTap={{ scale: 0.98 }}
+            >
               <a
                 href="https://github.com/sathis-dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white/90 transition-all duration-300"
+                className="hidden md:flex items-center gap-2.5 px-5 py-3 text-sm font-bold transition-all duration-300 group relative"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: '14px',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(20px)',
+                  borderRadius: '16px',
                   border: '1px solid rgba(255, 255, 255, 0.15)',
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
+                  color: 'rgba(255, 255, 255, 0.9)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)'
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)'
+                  e.currentTarget.style.boxShadow = '0 6px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
                   e.currentTarget.style.color = '#FFFFFF'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
                   e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)'
                 }}
               >
-                <Star size={16} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
+                <motion.div
+                  animate={{
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }}
+                >
+                  <Star size={16} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
+                </motion.div>
                 <span>GitHub</span>
+                <span 
+                  className="text-xs opacity-60 group-hover:opacity-100 transition-opacity"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    padding: '2px 6px',
+                    borderRadius: '6px',
+                  }}
+                >
+                  3.1K
+                </span>
               </a>
             </motion.div>
 
