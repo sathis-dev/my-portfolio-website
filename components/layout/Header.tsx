@@ -97,7 +97,7 @@ export default function Header() {
         />
         {/* Grid Layout */}
         <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4 lg:gap-8">
-          {/* Premium Logo with Glow Effect */}
+          {/* Premium Logo with Enhanced Visibility */}
           <div className="flex items-center">
             <Link 
               href="/"
@@ -106,25 +106,26 @@ export default function Header() {
               className="group relative"
             >
               <motion.div 
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.08, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="relative transition-all duration-300"
               >
-                {/* Glow Effect on Hover */}
+                {/* Enhanced Glow Effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
-                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.3) 0%, transparent 70%)',
-                    filter: 'blur(20px)',
+                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.4) 0%, rgba(139, 92, 246, 0.3) 50%, transparent 70%)',
+                    filter: 'blur(25px)',
                     zIndex: -1,
                   }}
                 />
                 <img
                   src="/logo.svg"
                   alt="<SATHIS/>"
-                  className="w-[140px] sm:w-[160px] md:w-[180px] h-auto opacity-90 group-hover:opacity-100 transition-all duration-300"
+                  className="w-[160px] sm:w-[180px] md:w-[200px] h-auto transition-all duration-300"
                   style={{
-                    filter: 'drop-shadow(0 4px 12px rgba(199, 21, 133, 0.2))',
+                    filter: 'drop-shadow(0 4px 16px rgba(199, 21, 133, 0.4)) brightness(1.1)',
+                    opacity: 1,
                   }}
                 />
               </motion.div>
@@ -244,7 +245,7 @@ export default function Header() {
             >
               <Link
                 href="/contact"
-                className="hidden md:flex items-center gap-2.5 px-6 py-3 text-sm font-bold text-white transition-all duration-300 group relative overflow-hidden"
+                className="hidden md:flex items-center gap-2.5 px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 group relative overflow-hidden whitespace-nowrap"
                 style={{
                   background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
                   borderRadius: '16px',
