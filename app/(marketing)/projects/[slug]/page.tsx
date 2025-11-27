@@ -167,6 +167,54 @@ const projects = {
       'Integrating AI APIs (OpenAI) while managing costs and implementing rate limiting'
     ]
   },
+  'brimston-energy': {
+    title: 'Brimston Energy Website',
+    subtitle: 'WordPress Website Redesign',
+    description: 'A complete redesign of Brimston Energy\'s marketing site using the Stax WordPress theme. I\'m restructuring page layouts, typography and content sections to make the site feel modern, trustworthy and easier to maintain. The focus is on clear storytelling for an energy company, better calls-to-action and solid performance.',
+    image: '/images/projects/brimston/brimstone-energy-thumbnail.png',
+    categories: ['WordPress', 'Web Design', 'SEO'],
+    status: 'Completed',
+    statusColor: '#3B82F6',
+    date: '2024',
+    duration: '2 months',
+    role: 'WordPress Developer & Designer',
+    techStack: ['WordPress', 'Stax Theme', 'CSS', 'JavaScript', 'PHP'],
+    links: {
+      live: 'https://brimstonenergy.co.uk',
+      github: ''
+    },
+    overview: 'Brimston Energy needed a modernized website with cleaner structure and better user experience, but required a solution that wouldn\'t disrupt their live site during development and would be maintainable by non-technical editors.',
+    features: [
+      {
+        title: 'WordPress Theme Customization',
+        description: 'Customized the Stax theme to create a unique, branded experience while maintaining update compatibility and theme integrity.'
+      },
+      {
+        title: 'Responsive Design',
+        description: 'Optimized layouts for all devices ensuring consistent experience across desktop, tablet, and mobile platforms.'
+      },
+      {
+        title: 'SEO Optimization',
+        description: 'Implemented SEO best practices, meta tags, structured data, and performance optimizations for better search visibility.'
+      },
+      {
+        title: 'Content Management',
+        description: 'Created reusable page sections and components that non-technical team members can easily manage and update.'
+      }
+    ],
+    challenges: [
+      'Working within WordPress theme limitations while achieving custom designs',
+      'Balancing technical energy information with accessible language',
+      'Optimizing performance while maintaining visual richness',
+      'Creating maintainable systems for non-technical editors'
+    ],
+    learnings: [
+      'WordPress theme customization without breaking updates',
+      'Client communication and expectation management',
+      'WordPress performance and SEO best practices',
+      'Creating maintainable systems for non-technical users'
+    ]
+  },
   'studypilot-ai': {
     title: 'StudyPilot AI',
     subtitle: 'Assignment & Project Planner for Students',
