@@ -148,52 +148,68 @@ export default function Header() {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-end gap-2 sm:gap-3">
+          <div className="flex items-center justify-end gap-3">
             {/* Let's Talk Button */}
-            <Link
-              href="/contact"
-              className="hidden md:flex items-center px-4 py-2.5 rounded-xl text-[0.875rem] font-semibold text-white transition-all duration-300"
-              style={{
-                background: 'linear-gradient(135deg, #7C3AED 0%, #A855F7 100%)',
-                boxShadow: '0 4px 16px rgba(124, 58, 237, 0.3)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%)'
-                e.currentTarget.style.boxShadow = '0 6px 24px rgba(124, 58, 237, 0.5)'
-                e.currentTarget.style.transform = 'translateY(-1px)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #7C3AED 0%, #A855F7 100%)'
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(124, 58, 237, 0.3)'
-                e.currentTarget.style.transform = 'translateY(0)'
-              }}
-            >
-              Let&apos;s Talk
-            </Link>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                href="/contact"
+                className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 group"
+                style={{
+                  background: 'linear-gradient(135deg, #A855F7 0%, #C084FC 100%)',
+                  boxShadow: '0 4px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 6px 28px rgba(168, 85, 247, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                }}
+              >
+                <span>Let&apos;s Talk</span>
+                <svg 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="transition-transform group-hover:translate-x-0.5"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+            </motion.div>
 
             {/* GitHub Button */}
-            <a
-              href="https://github.com/sathis-dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl text-[0.875rem] font-semibold text-white transition-all duration-300"
-              style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)'
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              <Star size={16} className="text-yellow-400" fill="#FFD700" />
-              <span>GitHub</span>
-            </a>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <a
+                href="https://github.com/sathis-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white/90 transition-all duration-300"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+                  e.currentTarget.style.color = '#FFFFFF'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'
+                  e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)'
+                }}
+              >
+                <Star size={16} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
+                <span>GitHub</span>
+              </a>
+            </motion.div>
 
             {/* Mobile Menu */}
             <motion.button
