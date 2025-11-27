@@ -4,16 +4,16 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Star } from 'lucide-react'
+import { Menu, X, Star, Home, Briefcase, User, Code, Award, Mail, ArrowRight } from 'lucide-react'
 import { PillNavEffect } from '@/components/ui/pill-nav-effect'
 
 const navItems = [
-  { label: 'HOME', href: '/' },
-  { label: 'PROJECTS', href: '/projects' },
-  { label: 'ABOUT', href: '/about' },
-  { label: 'SKILLS', href: '/skills' },
-  { label: 'EXPERIENCE', href: '/experience' },
-  { label: 'CONTACT', href: '/contact' },
+  { label: 'HOME', href: '/', icon: Home },
+  { label: 'PROJECTS', href: '/projects', icon: Briefcase },
+  { label: 'ABOUT', href: '/about', icon: User },
+  { label: 'SKILLS', href: '/skills', icon: Code },
+  { label: 'EXPERIENCE', href: '/experience', icon: Award },
+  { label: 'CONTACT', href: '/contact', icon: Mail },
 ]
 
 export default function Header() {
@@ -65,9 +65,10 @@ export default function Header() {
         duration: 0.4, 
         ease: [0.4, 0, 0.2, 1],
       }}
-      className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4"
+      className="fixed top-0 left-0 right-0 px-4 sm:px-6 py-4"
       style={{
         pointerEvents: showHeader ? 'auto' : 'none',
+        zIndex: 9999,
       }}
     >
       <nav
@@ -153,9 +154,10 @@ export default function Header() {
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="/contact"
-                className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 group"
+                className="hidden md:flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 group"
                 style={{
                   background: 'linear-gradient(135deg, #A855F7 0%, #C084FC 100%)',
+                  borderRadius: '14px',
                   boxShadow: '0 4px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                 }}
                 onMouseEnter={(e) => {
@@ -188,10 +190,11 @@ export default function Header() {
                 href="https://github.com/sathis-dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white/90 transition-all duration-300"
+                className="hidden md:flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white/90 transition-all duration-300"
                 style={{
                   background: 'rgba(255, 255, 255, 0.1)',
                   backdropFilter: 'blur(10px)',
+                  borderRadius: '14px',
                   border: '1px solid rgba(255, 255, 255, 0.15)',
                   boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                 }}
@@ -211,62 +214,264 @@ export default function Header() {
               </a>
             </motion.div>
 
-            {/* Mobile Menu */}
+            {/* Advanced Mobile Menu Button */}
             <motion.button
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              data-cursor="button"
-              data-cursor-text={isMobileMenuOpen ? "Close" : "Menu"}
-              className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center transition-all"
+              className="lg:hidden relative overflow-hidden rounded-2xl flex flex-col items-center justify-center gap-1 px-4 py-2 transition-all duration-300"
               style={{
-                background: 'rgba(199, 21, 133, 0.08)',
-                border: '1px solid rgba(199, 21, 133, 0.15)',
+                background: isMobileMenuOpen
+                  ? 'linear-gradient(135deg, rgba(199, 21, 133, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)'
+                  : 'rgba(199, 21, 133, 0.08)',
+                border: isMobileMenuOpen
+                  ? '1px solid rgba(199, 21, 133, 0.3)'
+                  : '1px solid rgba(199, 21, 133, 0.15)',
+                boxShadow: isMobileMenuOpen
+                  ? '0 4px 16px rgba(199, 21, 133, 0.3)'
+                  : 'none',
               }}
             >
-              {isMobileMenuOpen ? (
-                <X size={20} className="text-white/80" />
-              ) : (
-                <Menu size={20} className="text-white/80" />
-              )}
+              <div className="flex flex-col gap-1">
+                <motion.span
+                  className="h-0.5 rounded-full"
+                  style={{ 
+                    width: '20px',
+                    background: isMobileMenuOpen ? '#E91E8C' : '#FFFFFF'
+                  }}
+                  animate={{
+                    rotate: isMobileMenuOpen ? 45 : 0,
+                    y: isMobileMenuOpen ? 5 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.span
+                  className="h-0.5 rounded-full"
+                  style={{ 
+                    width: '20px',
+                    background: '#FFFFFF'
+                  }}
+                  animate={{
+                    opacity: isMobileMenuOpen ? 0 : 1,
+                  }}
+                  transition={{ duration: 0.2 }}
+                />
+                <motion.span
+                  className="h-0.5 rounded-full"
+                  style={{ 
+                    width: '20px',
+                    background: isMobileMenuOpen ? '#E91E8C' : '#FFFFFF'
+                  }}
+                  animate={{
+                    rotate: isMobileMenuOpen ? -45 : 0,
+                    y: isMobileMenuOpen ? -5 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+              <span 
+                className="text-[0.625rem] font-semibold uppercase tracking-wider transition-colors duration-300"
+                style={{ 
+                  color: isMobileMenuOpen ? '#E91E8C' : 'rgba(255, 255, 255, 0.7)',
+                  marginTop: '2px'
+                }}
+              >
+                {isMobileMenuOpen ? 'CLOSE' : 'MENU'}
+              </span>
             </motion.button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Advanced Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden mt-4 pt-4"
-            style={{ 
-              borderTop: '1px solid rgba(199, 21, 133, 0.2)'
-            }}
-          >
-            <div className="flex flex-col gap-1">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href
-                
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    data-cursor="link"
-                    className={`
-                      px-4 py-3 rounded-xl text-sm font-medium transition-all
-                      ${isActive ? 'text-white' : 'text-white/70'}
-                    `}
-                    style={{
-                      background: isActive ? 'rgba(199, 21, 133, 0.15)' : 'transparent',
+          <>
+            {/* Backdrop with Blur */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-md"
+              style={{ zIndex: 9998 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm overflow-y-auto"
+              style={{
+                background: 'linear-gradient(135deg, rgba(10, 5, 15, 0.98) 0%, rgba(20, 10, 25, 0.98) 100%)',
+                backdropFilter: 'blur(40px) saturate(120%)',
+                borderLeft: '1px solid rgba(199, 21, 133, 0.3)',
+                boxShadow: '-8px 0 40px rgba(199, 21, 133, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                zIndex: 9999,
+              }}
+            >
+              {/* Close Button */}
+              <div className="flex justify-end p-6 pb-2">
+                <motion.button
+                  whileTap={{ scale: 0.9, rotate: 90 }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
+                  style={{
+                    background: 'rgba(199, 21, 133, 0.1)',
+                    border: '1px solid rgba(199, 21, 133, 0.2)',
+                  }}
+                >
+                  <X size={20} className="text-white/80" />
+                </motion.button>
+              </div>
+
+              {/* Navigation Links */}
+              <nav className="px-6 py-4">
+                <div className="flex flex-col gap-2">
+                  {navItems.map((item, index) => {
+                    const isActive = pathname === item.href
+                    const Icon = item.icon
+                    
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ 
+                          delay: 0.1 + (index * 0.05),
+                          duration: 0.4,
+                          ease: [0.4, 0, 0.2, 1]
+                        }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300"
+                          style={{
+                            background: isActive 
+                              ? 'linear-gradient(135deg, rgba(199, 21, 133, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)'
+                              : 'rgba(255, 255, 255, 0.03)',
+                            border: isActive
+                              ? '1px solid rgba(199, 21, 133, 0.4)'
+                              : '1px solid rgba(255, 255, 255, 0.05)',
+                          }}
+                        >
+                          <div
+                            className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
+                            style={{
+                              background: isActive 
+                                ? 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)'
+                                : 'rgba(139, 92, 246, 0.1)',
+                              boxShadow: isActive
+                                ? '0 4px 16px rgba(199, 21, 133, 0.4)'
+                                : 'none',
+                            }}
+                          >
+                            <Icon 
+                              size={18} 
+                              className={isActive ? 'text-white' : 'text-purple-400'}
+                            />
+                          </div>
+                          <span 
+                            className="text-lg font-semibold transition-colors duration-300"
+                            style={{
+                              color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.7)'
+                            }}
+                          >
+                            {item.label}
+                          </span>
+                          {isActive && (
+                            <motion.div
+                              layoutId="activeMobile"
+                              className="ml-auto"
+                            >
+                              <ArrowRight size={18} className="text-pink-500" />
+                            </motion.div>
+                          )}
+                        </Link>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </nav>
+
+              {/* Divider */}
+              <div className="mx-6 my-4 h-px" style={{ background: 'rgba(199, 21, 133, 0.2)' }} />
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="px-6 py-4 space-y-3"
+              >
+                {/* Let's Talk Button */}
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-2xl text-base font-semibold text-white transition-all duration-300"
+                  style={{
+                    background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
+                    boxShadow: '0 8px 24px rgba(199, 21, 133, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                  }}
+                >
+                  <Mail size={18} />
+                  <span>Let&apos;s Talk</span>
+                  <ArrowRight size={18} className="ml-auto" />
+                </Link>
+
+                {/* GitHub Button */}
+                <a
+                  href="https://github.com/sathis-dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-2xl text-base font-semibold text-white/90 transition-all duration-300"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(10px)',
+                  }}
+                >
+                  <Star size={18} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
+                  <span>GitHub Profile</span>
+                </a>
+              </motion.div>
+
+              {/* Footer Info */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.4 }}
+                className="px-6 py-6 mt-auto"
+              >
+                <div 
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl"
+                  style={{
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                  }}
+                >
+                  <motion.span
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: '#10B981' }}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [1, 0.5, 1],
                     }}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              })}
-            </div>
-          </motion.div>
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  />
+                  <span className="text-sm font-medium text-green-400">
+                    Available for Projects
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
+          </>
         )}
       </nav>
     </motion.header>

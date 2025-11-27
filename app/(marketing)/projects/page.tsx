@@ -139,7 +139,7 @@ export default function ProjectsPage() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
-        className="sticky top-20 z-[100] px-4 sm:px-6 lg:px-8 mb-12"
+        className="sticky top-20 z-40 px-4 sm:px-6 lg:px-8 mb-12"
       >
         <div 
           className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-center gap-3 p-3 rounded-2xl"
