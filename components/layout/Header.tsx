@@ -87,6 +87,7 @@ export default function Header() {
           backdrop-filter: blur(16px) saturate(150%);
           -webkit-backdrop-filter: blur(16px) saturate(150%);
           border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+          z-index: 1001;
         }
 
         .enhanced-header.mobile.scrolled {
@@ -100,6 +101,7 @@ export default function Header() {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          pointer-events: auto;
         }
 
         .header-container.desktop {
@@ -279,6 +281,9 @@ export default function Header() {
           border: 1px solid rgba(255, 255, 255, 0.12);
           cursor: pointer;
           transition: all 0.25s ease;
+          pointer-events: auto;
+          position: relative;
+          z-index: 1002;
         }
 
         .menu-button:hover {
@@ -326,6 +331,38 @@ export default function Header() {
           display: flex;
           flex-direction: column;
           overflow-y: auto;
+          animation: slideInFromRight 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInFromLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideInFromRight {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         .mobile-nav-list {
@@ -493,41 +530,65 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Backdrop and Overlay */}
       {isMenuOpen && (
-        <div className="mobile-menu-overlay mobile-only">
-          <ul className="mobile-nav-list">
-            {navigation.map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={item.href}
-                  className={`mobile-nav-link ${pathname === item.href ? 'active' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
+        <>
+          {/* Backdrop */}
+          <div 
+            className="mobile-menu-backdrop mobile-only" 
+            onClick={() => setIsMenuOpen(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.6)',
+              zIndex: 998,
+              animation: 'fadeIn 0.3s ease-out'
+            }}
+          />
+          
+          {/* Menu Overlay */}
+          <div className="mobile-menu-overlay mobile-only">
+            <ul className="mobile-nav-list">
+              {navigation.map((item, index) => (
+                <li 
+                  key={item.name}
+                  style={{
+                    animation: `slideInFromLeft 0.3s ease-out ${0.05 * index}s both`
+                  }}
                 >
-                  <span>{item.name}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  <Link
+                    href={item.href}
+                    className={`mobile-nav-link ${pathname === item.href ? 'active' : ''}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span>{item.name}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-          <div className="mobile-cta-section">
-            <div className="mobile-availability">
-              <span className="availability-dot"></span>
-              <span>Available for Projects</span>
+            <div className="mobile-cta-section">
+              <div className="mobile-availability">
+                <span className="availability-dot"></span>
+                <span>Available for Projects</span>
+              </div>
+              <a href="/cv.pdf" download className="mobile-cv-button" onClick={() => setIsMenuOpen(false)}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span>Download CV</span>
+              </a>
             </div>
-            <a href="/cv.pdf" download className="mobile-cv-button" onClick={() => setIsMenuOpen(false)}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              <span>Download CV</span>
-            </a>
           </div>
-        </div>
+        </>
       )}
     </>
   )

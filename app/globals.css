@@ -460,13 +460,17 @@ canvas {
 header {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 header nav {
   pointer-events: auto;
   will-change: transform, opacity;
   transform: translateZ(0);
+}
+
+header * {
+  pointer-events: auto;
 }
 
 /* Star Border - GPU Accelerated Smooth Animations */
