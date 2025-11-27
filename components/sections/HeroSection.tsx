@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { Meteors } from '@/components/ui/meteors'
 import { Sparkles as SparklesEffect } from '@/components/ui/sparkles'
 import { BlurFade } from '@/components/ui/blur-fade'
-import { Ripple } from '@/components/ui/ripple'
 import { DecryptedText } from '@/components/ui/decrypted-text'
 import { LogoLoop } from '@/components/ui/logo-loop'
 import StatsSection from './StatsSection'
@@ -136,42 +135,38 @@ export default function HeroSection() {
         {/* CTA Buttons with Ripple Effect */}
         <BlurFade delay={1.2} inView={true}>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-3 md:gap-4 mb-8 sm:mb-8 md:mb-10 w-full max-w-md sm:max-w-none mx-auto">
-          {/* Primary Button with Sparkles */}
-          <SparklesEffect hoverable={true} className="w-full sm:w-auto">
-            <Link href="/projects" className="w-full sm:w-auto block">
-              <Ripple trigger="click" color="rgba(255, 255, 255, 0.3)">
-                <motion.button
-                  whileHover={{ y: -2 }}
-                  whileTap={{ y: 0 }}
-                  data-cursor="button"
-                  className="group relative w-full px-6 sm:px-6 md:px-7 lg:px-8 py-3.5 sm:py-3 md:py-3.5 rounded-xl sm:rounded-2xl text-sm sm:text-sm md:text-base font-semibold text-white overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
-                    boxShadow: '0 8px 24px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #E91E8C 0%, #9D6EFF 50%, #8B5CF6 100%)'
-                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(199, 21, 133, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)'
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                  }}
-                >
-                  <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-2">
-                    View Projects
-                    <ArrowRight size={18} className="sm:w-[18px] sm:h-[18px] group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <span
-                    className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
-                    }}
-                  />
-                </motion.button>
-              </Ripple>
-            </Link>
-          </SparklesEffect>
+          {/* Primary Button */}
+          <Link href="/projects" className="w-full sm:w-auto block">
+            <motion.button
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ y: 0, scale: 0.98 }}
+              data-cursor="button"
+              className="group relative w-full px-8 py-4 rounded-2xl text-base font-semibold text-white overflow-hidden transition-all duration-300"
+              style={{
+                background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
+                boxShadow: '0 8px 24px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #E91E8C 0%, #9D6EFF 50%, #8B5CF6 100%)'
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(199, 21, 133, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)'
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                View Projects
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+              <span
+                className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                }}
+              />
+            </motion.button>
+          </Link>
 
           {/* Secondary Button */}
           <motion.a
