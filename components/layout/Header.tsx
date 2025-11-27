@@ -97,7 +97,7 @@ export default function Header() {
         />
         {/* Grid Layout */}
         <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4 lg:gap-8">
-          {/* Premium Logo with Enhanced Visibility */}
+          {/* Premium Logo - LARGE & PROMINENT */}
           <div className="flex items-center">
             <Link 
               href="/"
@@ -112,19 +112,19 @@ export default function Header() {
               >
                 {/* Enhanced Glow Effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute inset-0 rounded-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
-                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.4) 0%, rgba(139, 92, 246, 0.3) 50%, transparent 70%)',
-                    filter: 'blur(25px)',
+                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.5) 0%, rgba(139, 92, 246, 0.4) 50%, transparent 70%)',
+                    filter: 'blur(30px)',
                     zIndex: -1,
                   }}
                 />
                 <img
                   src="/logo.svg"
                   alt="<SATHIS/>"
-                  className="w-[160px] sm:w-[180px] md:w-[200px] h-auto transition-all duration-300"
+                  className="w-[220px] sm:w-[240px] md:w-[260px] lg:w-[280px] h-auto transition-all duration-300"
                   style={{
-                    filter: 'drop-shadow(0 4px 16px rgba(199, 21, 133, 0.4)) brightness(1.1)',
+                    filter: 'drop-shadow(0 6px 20px rgba(199, 21, 133, 0.5)) brightness(1.15) contrast(1.05)',
                     opacity: 1,
                   }}
                 />
