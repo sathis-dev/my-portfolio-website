@@ -215,27 +215,6 @@ export default function ExperiencePage() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Continuous Background */}
-      <div 
-        className="fixed inset-0 -z-10"
-        style={{
-          background: '#0A050F'
-        }}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse at top, rgba(199, 21, 133, 0.15) 0%, rgba(10, 5, 15, 0.95) 50%, rgba(10, 5, 15, 1) 100%)'
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse at 30% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%)'
-          }}
-        />
-      </div>
-
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto text-center">
