@@ -27,24 +27,6 @@ const projects = [
     statusLabel: 'In Active Development'
   },
   {
-    id: 'airsense',
-    title: 'AirSense IoT Dashboard',
-    slug: 'airsense',
-    categories: ['IoT', 'Dashboard', 'Real-time'],
-    description: 'IoT dashboard for monitoring and visualizing air quality metrics with device management capabilities. Built with Laravel and Livewire for real-time updates and seamless user experience.',
-    features: [
-      'Real-time air quality monitoring and visualization',
-      'Device management and configuration',
-      'Interactive charts with Chart.js',
-      'Responsive dashboard with Tailwind CSS'
-    ],
-    techStack: ['Laravel', 'Livewire', 'MySQL', 'Chart.js', 'Tailwind CSS'],
-    image: '/images/projects/airsense/thumbnail.jpg',
-    featured: true,
-    status: 'completed' as const,
-    statusLabel: 'Completed'
-  },
-  {
     id: 'brimston-energy',
     title: 'Brimston Energy Website',
     slug: 'brimston-energy',
@@ -112,7 +94,7 @@ export default function SelectedWorkSection() {
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-7 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 md:gap-8 max-w-[1000px] mx-auto">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
