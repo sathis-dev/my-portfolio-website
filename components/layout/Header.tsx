@@ -601,8 +601,192 @@ export default function Header() {
             </motion.div>
           </>
         )}
-        </AnimatePresence>
+      </AnimatePresence>
       </nav>
+
+      {/* Mobile Menu Outside Nav for Proper Rendering */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Mobile Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm"
+              style={{ zIndex: 9988 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Mobile Menu Panel */}
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="lg:hidden fixed left-4 right-4"
+              style={{
+                top: '90px',
+                background: 'linear-gradient(135deg, rgba(10, 5, 15, 0.98) 0%, rgba(20, 10, 25, 0.98) 100%)',
+                backdropFilter: 'blur(40px) saturate(120%)',
+                border: '1px solid rgba(199, 21, 133, 0.3)',
+                borderRadius: '24px',
+                boxShadow: '0 20px 60px rgba(199, 21, 133, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                zIndex: 9989,
+                maxHeight: 'calc(100vh - 110px)',
+                overflowY: 'auto',
+              }}
+            >
+              {/* Navigation Links */}
+              <nav className="p-4">
+                <div className="flex flex-col gap-2">
+                  {navItems.map((item, index) => {
+                    const isActive = pathname === item.href
+                    const Icon = item.icon
+                    
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ 
+                          delay: 0.05 + (index * 0.05),
+                          duration: 0.4,
+                          ease: [0.4, 0, 0.2, 1]
+                        }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300"
+                          style={{
+                            background: isActive 
+                              ? 'linear-gradient(135deg, rgba(199, 21, 133, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)'
+                              : 'rgba(255, 255, 255, 0.03)',
+                            border: isActive
+                              ? '1px solid rgba(199, 21, 133, 0.4)'
+                              : '1px solid rgba(255, 255, 255, 0.05)',
+                          }}
+                        >
+                          <div
+                            className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
+                            style={{
+                              background: isActive 
+                                ? 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)'
+                                : 'rgba(139, 92, 246, 0.1)',
+                              boxShadow: isActive
+                                ? '0 4px 16px rgba(199, 21, 133, 0.4)'
+                                : 'none',
+                            }}
+                          >
+                            <Icon 
+                              size={18} 
+                              className={isActive ? 'text-white' : 'text-purple-400'}
+                            />
+                          </div>
+                          <span 
+                            className="text-lg font-semibold transition-colors duration-300"
+                            style={{
+                              color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.7)'
+                            }}
+                          >
+                            {item.label}
+                          </span>
+                          {isActive && (
+                            <motion.div
+                              layoutId="activeMobile"
+                              className="ml-auto"
+                            >
+                              <ArrowRight size={18} className="text-pink-500" />
+                            </motion.div>
+                          )}
+                        </Link>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </nav>
+
+              {/* Divider */}
+              <div className="mx-4 my-2 h-px" style={{ background: 'rgba(199, 21, 133, 0.2)' }} />
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
+                className="px-4 pb-4 space-y-3"
+              >
+                {/* Let's Talk Button */}
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-2xl text-base font-semibold text-white transition-all duration-300"
+                  style={{
+                    background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
+                    boxShadow: '0 8px 24px rgba(199, 21, 133, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                  }}
+                >
+                  <Mail size={18} />
+                  <span>Let&apos;s Talk</span>
+                  <ArrowRight size={18} className="ml-auto" />
+                </Link>
+
+                {/* GitHub Button */}
+                <a
+                  href="https://github.com/sathis-dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-2xl text-base font-semibold text-white/90 transition-all duration-300"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(10px)',
+                  }}
+                >
+                  <Star size={18} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
+                  <span>GitHub Profile</span>
+                </a>
+              </motion.div>
+
+              {/* Footer Info */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="px-4 pb-4"
+              >
+                <div 
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl"
+                  style={{
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                  }}
+                >
+                  <motion.span
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: '#10B981' }}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [1, 0.5, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  />
+                  <span className="text-sm font-medium text-green-400">
+                    Available for Projects
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.header>
   )
 }
