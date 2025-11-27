@@ -68,7 +68,7 @@ export default function Header() {
       className="fixed top-0 left-0 right-0 px-4 sm:px-6 py-4"
       style={{
         pointerEvents: showHeader ? 'auto' : 'none',
-        zIndex: 9999,
+        zIndex: 9990,
       }}
     >
       <nav
@@ -97,7 +97,7 @@ export default function Header() {
         />
         {/* Grid Layout */}
         <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4 lg:gap-8">
-          {/* Premium Logo - LARGE & PROMINENT */}
+          {/* Premium Logo - EXTRA LARGE & DOMINANT */}
           <div className="flex items-center">
             <Link 
               href="/"
@@ -106,25 +106,25 @@ export default function Header() {
               className="group relative"
             >
               <motion.div 
-                whileHover={{ scale: 1.08, y: -2 }}
+                whileHover={{ scale: 1.1, y: -3 }}
                 whileTap={{ scale: 0.95 }}
                 className="relative transition-all duration-300"
               >
                 {/* Enhanced Glow Effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute inset-0 rounded-2xl opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
-                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.5) 0%, rgba(139, 92, 246, 0.4) 50%, transparent 70%)',
-                    filter: 'blur(30px)',
+                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.6) 0%, rgba(139, 92, 246, 0.5) 50%, transparent 70%)',
+                    filter: 'blur(40px)',
                     zIndex: -1,
                   }}
                 />
                 <img
                   src="/logo.svg"
                   alt="<SATHIS/>"
-                  className="w-[220px] sm:w-[240px] md:w-[260px] lg:w-[280px] h-auto transition-all duration-300"
+                  className="w-[320px] sm:w-[360px] md:w-[400px] lg:w-[440px] xl:w-[480px] h-auto transition-all duration-300"
                   style={{
-                    filter: 'drop-shadow(0 6px 20px rgba(199, 21, 133, 0.5)) brightness(1.15) contrast(1.05)',
+                    filter: 'drop-shadow(0 8px 28px rgba(199, 21, 133, 0.7)) brightness(1.25) contrast(1.15)',
                     opacity: 1,
                   }}
                 />
@@ -132,10 +132,10 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Advanced Navigation - Premium Design */}
+          {/* Compact Navigation - Smaller to Give Logo Space */}
           <div 
             ref={navRef} 
-            className="hidden lg:flex items-center gap-2 relative px-3 py-2 rounded-full"
+            className="hidden lg:flex items-center gap-1 relative px-2 py-1.5 rounded-full"
             onMouseLeave={() => setHoveredNavIndex(null)}
             style={{
               background: 'linear-gradient(135deg, rgba(39, 10, 33, 0.7) 0%, rgba(20, 10, 25, 0.7) 100%)',
@@ -169,26 +169,26 @@ export default function Header() {
                     data-cursor="link"
                     data-nav-item
                     onMouseEnter={() => setHoveredNavIndex(index)}
-                    className="group relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300"
+                    className="group relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-all duration-300"
                     style={{
                       color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.7)',
                     }}
                   >
                     <Icon 
-                      size={16} 
+                      size={14} 
                       className={`transition-all duration-300 ${
                         isActive 
                           ? 'text-pink-500' 
                           : 'text-purple-400 opacity-0 group-hover:opacity-100'
                       }`}
                     />
-                    <span className="text-[0.875rem] font-medium">
+                    <span className="text-[0.8125rem] font-medium">
                       {item.label}
                     </span>
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
                         style={{
                           background: '#E91E8C',
                           boxShadow: '0 0 8px rgba(233, 30, 140, 0.8)',
@@ -204,12 +204,12 @@ export default function Header() {
 
           {/* Premium Actions Section */}
           <div className="flex items-center justify-end gap-3">
-            {/* Availability Badge - Premium Design */}
+            {/* Availability Badge - Compact */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="hidden xl:flex items-center gap-2.5 px-4 py-2.5 rounded-full"
+              className="hidden xl:flex items-center gap-2 px-3 py-2 rounded-full"
               style={{
                 background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.08) 100%)',
                 border: '1px solid rgba(16, 185, 129, 0.3)',
@@ -217,7 +217,7 @@ export default function Header() {
               }}
             >
               <motion.div
-                className="relative w-2.5 h-2.5 rounded-full"
+                className="relative w-2 h-2 rounded-full"
                 style={{ background: '#10B981' }}
                 animate={{
                   scale: [1, 1.2, 1],
@@ -233,22 +233,22 @@ export default function Header() {
                   ease: 'easeInOut',
                 }}
               />
-              <span className="text-xs font-semibold text-emerald-400 tracking-wide">
+              <span className="text-[0.7rem] font-semibold text-emerald-400 tracking-wide">
                 AVAILABLE
               </span>
             </motion.div>
 
-            {/* Let's Talk Button - Premium Design */}
+            {/* Let's Talk Button - Compact */}
             <motion.div 
               whileHover={{ y: -2, scale: 1.02 }} 
               whileTap={{ scale: 0.98 }}
             >
               <Link
                 href="/contact"
-                className="hidden md:flex items-center gap-2.5 px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 group relative overflow-hidden whitespace-nowrap"
+                className="hidden md:flex items-center gap-2 px-5 py-2.5 text-[0.8125rem] font-bold text-white transition-all duration-300 group relative overflow-hidden whitespace-nowrap"
                 style={{
                   background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 50%, #7C3AED 100%)',
-                  borderRadius: '16px',
+                  borderRadius: '14px',
                   boxShadow: '0 4px 20px rgba(199, 21, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(199, 21, 133, 0.3)',
                 }}
                 onMouseEnter={(e) => {
@@ -272,7 +272,7 @@ export default function Header() {
                     ease: 'easeInOut',
                   }}
                 >
-                  <ArrowRight size={16} />
+                  <ArrowRight size={14} />
                 </motion.div>
                 {/* Shimmer Effect */}
                 <motion.div
@@ -293,7 +293,7 @@ export default function Header() {
               </Link>
             </motion.div>
 
-            {/* GitHub Button - Premium Glass Design */}
+            {/* GitHub Button - Compact */}
             <motion.div 
               whileHover={{ y: -2, scale: 1.02 }} 
               whileTap={{ scale: 0.98 }}
@@ -302,11 +302,11 @@ export default function Header() {
                 href="https://github.com/sathis-dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2.5 px-5 py-3 text-sm font-bold transition-all duration-300 group relative"
+                className="hidden md:flex items-center gap-2 px-4 py-2.5 text-[0.8125rem] font-bold transition-all duration-300 group relative"
                 style={{
                   background: 'rgba(255, 255, 255, 0.08)',
                   backdropFilter: 'blur(20px)',
-                  borderRadius: '16px',
+                  borderRadius: '14px',
                   border: '1px solid rgba(255, 255, 255, 0.15)',
                   boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
                   color: 'rgba(255, 255, 255, 0.9)',
@@ -334,15 +334,15 @@ export default function Header() {
                     ease: 'linear',
                   }}
                 >
-                  <Star size={16} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
+                  <Star size={14} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
                 </motion.div>
                 <span>GitHub</span>
                 <span 
-                  className="text-xs opacity-60 group-hover:opacity-100 transition-opacity"
+                  className="text-[0.65rem] opacity-60 group-hover:opacity-100 transition-opacity"
                   style={{
                     background: 'rgba(255, 255, 255, 0.1)',
-                    padding: '2px 6px',
-                    borderRadius: '6px',
+                    padding: '2px 5px',
+                    borderRadius: '5px',
                   }}
                 >
                   3.1K
@@ -428,7 +428,7 @@ export default function Header() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm"
-              style={{ zIndex: 9998, top: 0 }}
+              style={{ zIndex: 9988, top: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -446,7 +446,7 @@ export default function Header() {
                 border: '1px solid rgba(199, 21, 133, 0.3)',
                 borderRadius: '24px',
                 boxShadow: '0 20px 60px rgba(199, 21, 133, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                zIndex: 9999,
+                zIndex: 9989,
                 maxHeight: 'calc(100vh - 110px)',
                 overflowY: 'auto',
               }}
