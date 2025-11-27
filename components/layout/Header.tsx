@@ -380,8 +380,8 @@ export default function Header() {
         }
       `}</style>
 
-      {/* ReactBits Header - Hidden on homepage desktop (integrated in hero) */}
-      <header className={`reactbits-header ${isScrolled ? 'scrolled' : ''} ${pathname === '/' ? 'lg:hidden' : ''}`}>
+      {/* ReactBits Header */}
+      <header className={`reactbits-header ${isScrolled ? 'scrolled' : ''}`}>
         <div className="reactbits-container">
           {/* Logo - Keep Original */}
           <Link href="/" className="reactbits-logo">
