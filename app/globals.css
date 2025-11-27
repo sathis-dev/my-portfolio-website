@@ -924,6 +924,109 @@ html {
 }
 
 /* ========================================
+   PERFORMANCE OPTIMIZATIONS - 60+ FPS
+   GPU Acceleration & Smooth Animations
+   ======================================== */
+
+/* Force GPU acceleration for all animated elements */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU-accelerated transforms */
+[class*="motion"],
+[class*="animate"],
+.hover-lift,
+.hover-scale {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize header performance */
+header {
+  contain: layout style;
+  will-change: transform, opacity;
+}
+
+/* Optimize navigation */
+nav {
+  contain: layout style paint;
+}
+
+/* Optimize cards and large elements */
+article,
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Smooth scroll with GPU */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize images */
+img {
+  content-visibility: auto;
+  will-change: auto;
+}
+
+/* Prevent layout shifts */
+img[src*=".svg"] {
+  display: block;
+}
+
+/* Optimize backdrop filters */
+[style*="backdrop"],
+[class*="backdrop"] {
+  will-change: backdrop-filter;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Reduce repaints on hover */
+button:hover,
+a:hover,
+[class*="hover"]:hover {
+  will-change: transform, opacity, box-shadow;
+}
+
+/* Reset will-change after animations */
+button:not(:hover),
+a:not(:hover) {
+  will-change: auto;
+}
+
+/* Optimize Framer Motion animations */
+[data-framer-motion-id] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize shadow animations - use transform instead */
+.shadow-animate {
+  position: relative;
+}
+
+.shadow-animate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.shadow-animate:hover::after {
+  opacity: 1;
+}
+
+/* ========================================
    UNIFIED THEME - SAME FOR DESKTOP & MOBILE
    Dark & Mysterious Aesthetic Everywhere
    ======================================== */
