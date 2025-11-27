@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Star, Home, Briefcase, User, Code, Award, Mail, ArrowRight } from 'lucide-react'
@@ -366,6 +366,7 @@ export default function Header() {
                 boxShadow: isMobileMenuOpen
                   ? '0 4px 16px rgba(199, 21, 133, 0.3)'
                   : 'none',
+                zIndex: 9991,
               }}
             >
               <div className="flex flex-col gap-1">
@@ -419,38 +420,39 @@ export default function Header() {
         </div>
 
         {/* Advanced Mobile Menu - Slides Down */}
-        {isMobileMenuOpen && (
-          <>
-            {/* Backdrop with Blur */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm"
-              style={{ zIndex: 9988, top: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <>
+              {/* Backdrop with Blur */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm"
+                style={{ zIndex: 9988, top: 0 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
 
-            {/* Menu Panel - Slides Down from Header */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="lg:hidden fixed left-4 right-4 overflow-hidden"
-              style={{
-                top: '90px',
-                background: 'linear-gradient(135deg, rgba(10, 5, 15, 0.98) 0%, rgba(20, 10, 25, 0.98) 100%)',
-                backdropFilter: 'blur(40px) saturate(120%)',
-                border: '1px solid rgba(199, 21, 133, 0.3)',
-                borderRadius: '24px',
-                boxShadow: '0 20px 60px rgba(199, 21, 133, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                zIndex: 9989,
-                maxHeight: 'calc(100vh - 110px)',
-                overflowY: 'auto',
-              }}
-            >
+              {/* Menu Panel - Slides Down from Header */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                className="lg:hidden fixed left-4 right-4 overflow-hidden"
+                style={{
+                  top: '90px',
+                  background: 'linear-gradient(135deg, rgba(10, 5, 15, 0.98) 0%, rgba(20, 10, 25, 0.98) 100%)',
+                  backdropFilter: 'blur(40px) saturate(120%)',
+                  border: '1px solid rgba(199, 21, 133, 0.3)',
+                  borderRadius: '24px',
+                  boxShadow: '0 20px 60px rgba(199, 21, 133, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                  zIndex: 9989,
+                  maxHeight: 'calc(100vh - 110px)',
+                  overflowY: 'auto',
+                }}
+              >
 
               {/* Navigation Links */}
               <nav className="p-4">
@@ -599,6 +601,7 @@ export default function Header() {
             </motion.div>
           </>
         )}
+        </AnimatePresence>
       </nav>
     </motion.header>
   )
