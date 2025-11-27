@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sparkles, ArrowRight, Download } from 'lucide-react'
+import { Sparkles, ArrowRight, Download, Star } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Meteors } from '@/components/ui/meteors'
 import { Sparkles as SparklesEffect } from '@/components/ui/sparkles'
 import { BlurFade } from '@/components/ui/blur-fade'
@@ -14,7 +15,18 @@ import WhatIDoSection from './WhatIDoSection'
 import SelectedWorkSection from './SelectedWorkSection'
 import SmartScrollIndicator from '@/components/ui/SmartScrollIndicator'
 
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'About', href: '/about' },
+  { name: 'Skills', href: '/skills' },
+  { name: 'Experience', href: '/experience' },
+  { name: 'Contact', href: '/contact' }
+]
+
 export default function HeroSection() {
+  const pathname = usePathname()
+  
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects')
     projectsSection?.scrollIntoView({ behavior: 'smooth' })
@@ -22,10 +34,170 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden pb-4 sm:pb-6 md:pb-8 lg:pb-10">
-      {/* DarkVeil Background is now in the layout - seamless continuation */}
-      
-      {/* Meteors Background Effect */}
-      <Meteors number={15} className="absolute inset-0 z-0" />
+      {/* React Bits Radial Gradient Background */}
+      <div className="absolute inset-0 z-0" style={{
+        background: '#0A0A0F',
+        backgroundImage: `
+          radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.6) 0%, transparent 50%),
+          radial-gradient(circle at 70% 40%, rgba(236, 72, 153, 0.5) 0%, transparent 50%),
+          radial-gradient(circle at 30% 80%, rgba(6, 182, 212, 0.4) 0%, transparent 50%)
+        `
+      }} />
+
+      {/* Floating Organic Shapes */}
+      <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute"
+          style={{
+            width: '400px',
+            height: '400px',
+            background: 'linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)',
+            filter: 'blur(80px)',
+            opacity: 0.8,
+            top: '10%',
+            left: '10%',
+            borderRadius: '50%'
+          }}
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 5, 0]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        />
+        <motion.div
+          className="absolute"
+          style={{
+            width: '300px',
+            height: '300px',
+            background: 'linear-gradient(135deg, #22D3EE 0%, #8B5CF6 100%)',
+            filter: 'blur(80px)',
+            opacity: 0.8,
+            top: '50%',
+            right: '15%',
+            borderRadius: '50%'
+          }}
+          animate={{
+            y: [0, 20, 0],
+            rotate: [0, -5, 0]
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        />
+        <motion.div
+          className="absolute"
+          style={{
+            width: '250px',
+            height: '250px',
+            background: 'linear-gradient(135deg, #F472B6 0%, #A78BFA 100%)',
+            filter: 'blur(80px)',
+            opacity: 0.8,
+            bottom: '20%',
+            left: '20%',
+            borderRadius: '50%'
+          }}
+          animate={{
+            y: [0, -15, 0],
+            rotate: [0, 3, 0]
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        />
+      </div>
+
+      {/* Integrated Header (React Bits Style) */}
+      <header className="absolute top-0 left-0 right-0 z-50 hidden lg:block">
+        <div className="max-w-[1400px] mx-auto px-8 py-6">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 group">
+              <span className="text-xl font-bold text-white">
+                <span className="text-violet-400 opacity-70">&lt;</span>
+                SATHIS
+                <span className="text-violet-400 opacity-70">/&gt;</span>
+              </span>
+            </Link>
+
+            {/* Navigation Pill */}
+            <nav 
+              className="flex items-center gap-1 px-2 py-2 rounded-full"
+              style={{
+                background: 'rgba(26, 26, 36, 0.4)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(139, 92, 246, 0.2)'
+              }}
+            >
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="px-5 py-2.5 rounded-full text-[0.9375rem] font-medium transition-all duration-200"
+                  style={{
+                    color: pathname === item.href ? '#FFFFFF' : '#A3A3B3',
+                    background: pathname === item.href ? '#8B5CF6' : 'transparent'
+                  }}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+
+            {/* CTA Buttons */}
+            <div className="flex items-center gap-3">
+              <Link
+                href="/contact"
+                className="px-6 py-3 rounded-xl text-[0.9375rem] font-semibold text-white transition-all duration-200"
+                style={{
+                  background: '#8B5CF6',
+                  boxShadow: '0 4px 20px rgba(139, 92, 246, 0.4)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#7C3AED'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 6px 24px rgba(139, 92, 246, 0.5)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#8B5CF6'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(139, 92, 246, 0.4)'
+                }}
+              >
+                Let&apos;s Talk
+              </Link>
+              <a
+                href="https://github.com/sathis-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-[0.9375rem] font-semibold text-white transition-all duration-200"
+                style={{
+                  background: 'rgba(0, 0, 0, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.8)'
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.6)'
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                }}
+              >
+                <Star size={18} className="text-white" />
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
 
       {/* Hero Content */}
       <div className="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-6 lg:px-8 pt-24 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-8">
