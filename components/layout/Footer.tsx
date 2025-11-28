@@ -14,10 +14,9 @@ const footerLinks = {
   ],
   
   connect: [
-    { label: 'GitHub', href: 'https://github.com/yourusername', icon: Github },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/yourusername', icon: Linkedin },
-    { label: 'Email', href: 'mailto:your@email.com', icon: Mail },
-    { label: 'Download CV', href: '/cv.pdf', icon: Download }
+    { label: 'GitHub', href: 'https://github.com/sathis-dev', icon: Github },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sathis-hettiarachchi-52b4b436a/', icon: Linkedin },
+    { label: 'Email', href: 'mailto:sathis.rc.dev@gmail.com', icon: Mail }
   ]
 }
 

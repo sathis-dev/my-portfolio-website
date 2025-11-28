@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowRight, Download } from 'lucide-react'
+import { ArrowRight, Mail } from 'lucide-react'
 import Link from 'next/link'
 
 export default function CTASection() {
@@ -94,32 +94,32 @@ export default function CTASection() {
             </Link>
 
             {/* Secondary CTA */}
-            <motion.a
-              href="/cv.pdf"
-              download
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              data-cursor="button"
-              data-cursor-text="Download CV"
-              className="flex items-center gap-2 px-10 py-4 rounded-2xl text-base font-semibold text-white transition-all duration-300 w-full sm:w-auto"
-              style={{
-                background: 'rgba(10, 5, 15, 0.6)',
-                border: '2px solid rgba(199, 21, 133, 0.4)',
-                backdropFilter: 'blur(12px)',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(10, 5, 15, 0.8)'
-                e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.6)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(10, 5, 15, 0.6)'
-                e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.4)'
-              }}
-            >
-              Download CV
-              <Download size={20} />
-            </motion.a>
+            <Link href="/contact">
+              <motion.button
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+                data-cursor="button"
+                data-cursor-text="Get in Touch"
+                className="flex items-center gap-2 px-10 py-4 rounded-2xl text-base font-semibold text-white transition-all duration-300 w-full sm:w-auto"
+                style={{
+                  background: 'rgba(10, 5, 15, 0.6)',
+                  border: '2px solid rgba(199, 21, 133, 0.4)',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(10, 5, 15, 0.8)'
+                  e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.6)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(10, 5, 15, 0.6)'
+                  e.currentTarget.style.borderColor = 'rgba(199, 21, 133, 0.4)'
+                }}
+              >
+                Get in Touch
+                <Mail size={20} />
+              </motion.button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

@@ -604,7 +604,7 @@ export default function ContactPage() {
                 </div>
               </motion.div>
 
-              {/* Download CV Card */}
+              {/* Request CV Card */}
               <motion.div
                 whileHover={{ y: -2 }}
                 className="rounded-3xl p-8 transition-all duration-300"
@@ -615,23 +615,23 @@ export default function ContactPage() {
                   boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                 }}
               >
-                <h3 className="text-xl font-extrabold text-white mb-4">
-                  Download CV
+                <h3 className="text-xl font-extrabold text-white mb-2">
+                  Need My CV?
                 </h3>
-                <motion.a
-                  href="/cv.pdf"
-                  download
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-base font-bold text-white transition-all duration-300"
+                <p className="text-sm text-white/70 mb-4">
+                  Fill out the form and I'll send it to you
+                </p>
+                <div
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300"
                   style={{
-                    background: 'rgba(199, 21, 133, 0.1)',
-                    border: '1px solid rgba(199, 21, 133, 0.3)'
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
+                    color: '#10B981'
                   }}
                 >
-                  Download PDF
-                  <Download size={20} />
-                </motion.a>
+                  <Mail size={18} />
+                  Request via Contact Form
+                </div>
               </motion.div>
             </motion.div>
           </div>
