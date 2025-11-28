@@ -15,8 +15,9 @@ import {
   CheckCircle2,
   Star,
   BookOpen,
-  Download
+  Mail
 } from 'lucide-react'
+import Link from 'next/link'
 import { DecryptedText } from '@/components/ui/decrypted-text'
 
 const stats = [
@@ -381,31 +382,31 @@ export default function ExperiencePage() {
             }}
           >
             <h2 className="text-3xl font-extrabold text-white mb-4">
-              Want the full details?
+              Interested in working together?
             </h2>
             <p 
               className="text-base leading-relaxed mb-8"
               style={{ color: 'rgba(255, 255, 255, 0.75)' }}
             >
-              Download my CV for a complete overview of my experience, skills, and education
+              Get in touch to request my full CV and discuss potential projects or opportunities
             </p>
-            <motion.a
-              href="/cv.pdf"
-              download
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-base font-bold transition-all duration-300"
-              style={{
-                background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                color: '#FFFFFF',
-                boxShadow: '0 4px 16px rgba(199, 21, 133, 0.4)',
-                willChange: 'transform'
-              }}
-            >
-              Download CV (PDF)
-              <Download size={20} />
-            </motion.a>
+            <Link href="/contact">
+              <motion.button
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-base font-bold transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, #C71585 0%, #8B5CF6 100%)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#FFFFFF',
+                  boxShadow: '0 4px 16px rgba(199, 21, 133, 0.4)',
+                  willChange: 'transform'
+                }}
+              >
+                Request My CV
+                <Mail size={20} />
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </section>
