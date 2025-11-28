@@ -112,19 +112,19 @@ export default function Header() {
               >
                 {/* Enhanced Glow Effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
-                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.6) 0%, rgba(139, 92, 246, 0.5) 50%, transparent 70%)',
-                    filter: 'blur(40px)',
+                    background: 'radial-gradient(circle, rgba(199, 21, 133, 0.5) 0%, rgba(139, 92, 246, 0.4) 50%, transparent 70%)',
+                    filter: 'blur(30px)',
                     zIndex: -1,
                   }}
                 />
                 <img
                   src="/logo.svg"
                   alt="<SATHIS/>"
-                  className="w-[240px] sm:w-[320px] md:w-[380px] lg:w-[420px] xl:w-[460px] h-auto transition-all duration-300"
+                  className="w-[180px] sm:w-[220px] md:w-[240px] lg:w-[260px] xl:w-[280px] h-auto transition-all duration-300"
                   style={{
-                    filter: 'drop-shadow(0 8px 28px rgba(199, 21, 133, 0.7)) brightness(1.25) contrast(1.15)',
+                    filter: 'drop-shadow(0 6px 20px rgba(199, 21, 133, 0.6)) brightness(1.2) contrast(1.1)',
                     opacity: 1,
                   }}
                 />
