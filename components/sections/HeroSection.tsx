@@ -27,12 +27,12 @@ export default function HeroSection() {
       <Meteors number={15} className="absolute inset-0 z-0" />
 
       {/* Hero Content */}
-      <div className="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-6 lg:px-8 pt-24 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-8">
+      <div className="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-6 lg:px-8 pt-36 sm:pt-32 md:pt-28 lg:pt-32 xl:pt-36 pb-8">
         <div className="max-w-6xl mx-auto text-center w-full">
         {/* Availability Badge with Sparkles */}
         <BlurFade delay={0.2} inView={true}>
           <SparklesEffect hoverable={true} sparkleCount={8}>
-            <div className="inline-flex items-center gap-2 mb-6 sm:mb-6 md:mb-7">
+            <div className="inline-flex items-center gap-2 mb-8 sm:mb-6 md:mb-7">
               <div
                 className="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full"
                 style={{

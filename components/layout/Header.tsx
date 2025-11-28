@@ -65,14 +65,14 @@ export default function Header() {
         duration: 0.4, 
         ease: [0.4, 0, 0.2, 1],
       }}
-      className="fixed top-0 left-0 right-0 px-4 sm:px-6 py-4"
+      className="fixed top-0 left-0 right-0 px-3 sm:px-6 py-2.5 sm:py-4"
       style={{
         pointerEvents: showHeader ? 'auto' : 'none',
         zIndex: 9990,
       }}
     >
       <nav
-        className="max-w-[1400px] mx-auto rounded-3xl px-4 sm:px-6 py-4 transition-all duration-500 relative overflow-hidden"
+        className="max-w-[1400px] mx-auto rounded-3xl px-3 sm:px-6 py-2.5 sm:py-4 transition-all duration-500 relative overflow-hidden"
         style={{
           background: isScrolled 
             ? 'linear-gradient(135deg, rgba(39, 10, 33, 0.95) 0%, rgba(20, 10, 25, 0.95) 100%)' 
@@ -122,7 +122,7 @@ export default function Header() {
                 <img
                   src="/logo.svg"
                   alt="<SATHIS/>"
-                  className="w-[320px] sm:w-[360px] md:w-[400px] lg:w-[440px] xl:w-[480px] h-auto transition-all duration-300"
+                  className="w-[240px] sm:w-[320px] md:w-[380px] lg:w-[420px] xl:w-[460px] h-auto transition-all duration-300"
                   style={{
                     filter: 'drop-shadow(0 8px 28px rgba(199, 21, 133, 0.7)) brightness(1.25) contrast(1.15)',
                     opacity: 1,
