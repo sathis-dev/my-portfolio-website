@@ -85,8 +85,8 @@ const values = [
 
 const quickFacts = [
   { label: 'Location', value: 'Cambridge, UK' },
-  { label: 'Experience', value: '3+ years' },
-  { label: 'Education', value: 'BTEC Computer Science' },
+  { label: 'Experience', value: '3+ years (web development)' },
+  { label: 'Education', value: 'BTEC Level 3 in Computing (Cambridge Regional College)' },
   { label: 'Availability', value: 'Open to freelance projects' },
   { label: 'Languages', value: 'English, Sinhala' }
 ]

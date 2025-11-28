@@ -9,7 +9,7 @@ import { BlurFade } from '@/components/ui/blur-fade'
 const stats = [
   {
     icon: Briefcase,
-    number: 15,
+    number: 4,
     suffix: '+',
     label: 'Projects Delivered',
     color: '#E91E8C'
@@ -23,9 +23,9 @@ const stats = [
   },
   {
     icon: Layers,
-    number: 10,
+    number: 15,
     suffix: '+',
-    label: 'Tech Stack',
+    label: 'Technologies Used',
     color: '#8B5CF6'
   },
 ]

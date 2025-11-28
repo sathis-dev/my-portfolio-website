@@ -28,10 +28,10 @@ const projects = [
   },
   {
     id: 'brimston-energy',
-    title: 'Brimston Energy Website',
+    title: 'Brimstone Energy Website',
     slug: 'brimston-energy',
     categories: ['WordPress', 'Web Design', 'SEO'],
-    description: 'A complete redesign of Brimston Energy\'s marketing site using the Stax WordPress theme. I\'m restructuring page layouts, typography and content sections to make the site feel modern, trustworthy and easier to maintain. The focus is on clear storytelling for an energy company, better calls-to-action and solid performance.',
+    description: 'A complete redesign of Brimstone Energy\'s marketing site using the Stax WordPress theme. I\'m restructuring page layouts, typography and content sections to make the site feel modern, trustworthy and easier to maintain. The focus is on clear storytelling for an energy company, better calls-to-action and solid performance.',
     features: [
       'Turning a generic theme into a clean, branded marketing site',
       'Improving navigation, readability and section hierarchy',

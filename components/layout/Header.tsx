@@ -337,16 +337,6 @@ export default function Header() {
                   <Star size={14} className="text-yellow-400" fill="#FFD700" strokeWidth={0} />
                 </motion.div>
                 <span>GitHub</span>
-                <span 
-                  className="text-[0.65rem] opacity-60 group-hover:opacity-100 transition-opacity"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    padding: '2px 5px',
-                    borderRadius: '5px',
-                  }}
-                >
-                  3.1K
-                </span>
               </a>
             </motion.div>
 

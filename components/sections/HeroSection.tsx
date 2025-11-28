@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sparkles, ArrowRight, Download } from 'lucide-react'
+import { Sparkles, ArrowRight, Mail } from 'lucide-react'
 import Link from 'next/link'
 import { Meteors } from '@/components/ui/meteors'
 import { Sparkles as SparklesEffect } from '@/components/ui/sparkles'
@@ -169,23 +169,23 @@ export default function HeroSection() {
           </Link>
 
           {/* Secondary Button */}
-          <motion.a
-            href="/cv.pdf"
-            download
-            data-cursor="button"
-            whileHover={{ y: -2, scale: 1.02 }}
-            whileTap={{ y: 0, scale: 0.98 }}
-            className="flex items-center justify-center gap-2 sm:gap-2 px-6 sm:px-6 md:px-7 lg:px-8 py-3.5 sm:py-3 md:py-3.5 text-sm sm:text-sm md:text-base font-semibold text-white rounded-xl sm:rounded-2xl transition-all duration-300 w-full sm:w-auto"
-            style={{
-              background: 'linear-gradient(135deg, rgba(199, 21, 133, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(124, 58, 237, 0.15) 100%)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(199, 21, 133, 0.3)',
-              boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px rgba(199, 21, 133, 0.25)',
-            }}
-          >
-            <Download size={18} className="sm:w-[18px] sm:h-[18px]" />
-            Download CV
-          </motion.a>
+          <Link href="/contact">
+            <motion.button
+              data-cursor="button"
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ y: 0, scale: 0.98 }}
+              className="flex items-center justify-center gap-2 sm:gap-2 px-6 sm:px-6 md:px-7 lg:px-8 py-3.5 sm:py-3 md:py-3.5 text-sm sm:text-sm md:text-base font-semibold text-white rounded-xl sm:rounded-2xl transition-all duration-300 w-full sm:w-auto"
+              style={{
+                background: 'linear-gradient(135deg, rgba(199, 21, 133, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(124, 58, 237, 0.15) 100%)',
+                backdropFilter: 'blur(12px)',
+                border: '1px solid rgba(199, 21, 133, 0.3)',
+                boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px rgba(199, 21, 133, 0.25)',
+              }}
+            >
+              <Mail size={18} className="sm:w-[18px] sm:h-[18px]" />
+              CV Available on Request
+            </motion.button>
+          </Link>
           </div>
         </BlurFade>
 

@@ -15,8 +15,8 @@ const projects = {
     categories: ['AI', 'Mental Health', 'Accessibility'],
     status: 'In Active Development',
     statusColor: '#10B981',
-    date: '2024 - Present',
-    duration: '6 months',
+    date: '2025 - Present',
+    duration: 'Ongoing',
     role: 'Full Stack Developer & UI/UX Designer',
     techStack: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Claude API', 'Supabase'],
     links: {
@@ -127,60 +127,56 @@ const projects = {
       live: '',
       github: ''
     },
-    overview: 'Studio Stack Bot was created to solve a common problem: Discord servers often require multiple bots for different tasks, creating a cluttered experience. This all-in-one solution combines audio management, automation, moderation, and AI assistance into a single, powerful bot with an intuitive slash command interface.',
+    overview: 'Studio Stack Bot is my long-term Discord project for creators and communities. The goal is to centralise moderation, utility commands, automation, and AI helpers into a single bot with a clean slash-command interface. Right now I\'m focusing on a stable core (roles, utilities, light moderation, AI summaries and announcement drafts) and designing the structure for future modules like audio and analytics.',
     features: [
       {
-        title: 'Advanced Audio Management',
-        description: 'High-quality music playback, audio effects, voice channel management, and audio recording capabilities for podcasters and streamers.'
+        title: 'Core Utilities & Moderation (current)',
+        description: 'Role assignment, basic moderation commands, channel utilities, and logging to keep servers organised without relying on multiple separate bots.'
       },
       {
-        title: 'Workflow Automation',
-        description: 'Custom triggers, scheduled tasks, automated role assignments, and channel management to reduce repetitive administrative work.'
+        title: 'Workflow Automation (current / in progress)',
+        description: 'Scheduled reminders, recurring announcements, and lightweight automation to reduce manual admin work for server owners.'
       },
       {
-        title: 'AI-Powered Assistant',
-        description: 'Smart chatbot for answering questions, generating content ideas, summarizing conversations, and providing creative assistance.'
+        title: 'AI-Powered Assistant (current)',
+        description: 'Slash commands that use AI to summarise channels, suggest announcement drafts, and help with content ideas while keeping a natural, server-specific tone.'
       },
       {
-        title: 'Moderation Suite',
-        description: 'Automated moderation tools, spam detection, custom filter rules, and comprehensive logging for server safety.'
+        title: 'Planned Audio Module (future)',
+        description: 'Planned support for managing voice channels and audio sessions in a safe, TOS-compliant way, focused on utility (announcements, alerts) rather than music streaming.'
       },
       {
-        title: 'Analytics Dashboard',
-        description: 'Track server activity, member engagement, command usage, and growth metrics through an intuitive web dashboard.'
-      },
-      {
-        title: 'Custom Commands',
-        description: 'Server owners can create custom commands with variables, conditions, and actions tailored to their community needs.'
+        title: 'Planned Analytics Dashboard (future)',
+        description: 'A planned web dashboard to visualise server activity, command usage, and member engagement so owners can understand how their community is behaving over time.'
       }
     ],
     challenges: [
-      'Handling real-time audio streaming with low latency across multiple voice channels simultaneously',
-      'Designing an intuitive command structure that balances power with ease of use',
-      'Managing state and data consistency across distributed bot instances for scalability',
-      'Implementing AI features responsibly with content filtering and safety guardrails'
+      'Designing a clean slash-command and permissions structure that stays understandable as new modules are added',
+      'Keeping AI features helpful but safe, with guardrails and filters around prompts and responses',
+      'Structuring the bot in a modular way so that future features (audio, analytics, more automation) can be added without rewrites',
+      'Managing rate limits and error handling so the bot stays reliable even when multiple servers are active'
     ],
     learnings: [
-      'Working with Discord.js v14 and the latest Discord API features and best practices',
-      'Real-time audio processing and streaming in Node.js using native libraries',
-      'Designing scalable bot architecture with sharding and clustering for large servers',
-      'Integrating AI APIs (OpenAI) while managing costs and implementing rate limiting'
+      'Working with Discord.js v14 application commands, permissions, and interactions',
+      'Designing modular bot architecture in Node.js so features stay maintainable',
+      'Integrating AI APIs (OpenAI) for summaries and draft content while controlling usage and cost',
+      'Setting up logging and diagnostics so issues in production-style bots are easier to trace'
     ]
   },
   'brimston-energy': {
-    title: 'Brimston Energy Website',
+    title: 'Brimstone Energy Website',
     subtitle: 'WordPress Website Redesign',
-    description: 'A complete redesign of Brimston Energy\'s marketing site using the Stax WordPress theme. I\'m restructuring page layouts, typography and content sections to make the site feel modern, trustworthy and easier to maintain. The focus is on clear storytelling for an energy company, better calls-to-action and solid performance.',
+    description: 'A complete redesign of Brimstone Energy\'s marketing site using the Stax WordPress theme. I\'m restructuring page layouts, typography and content sections to make the site feel modern, trustworthy and easier to maintain. The focus is on clear storytelling for an energy company, better calls-to-action and solid performance.',
     image: '/images/projects/brimston/brimstone-energy-thumbnail.png',
     categories: ['WordPress', 'Web Design', 'SEO'],
     status: 'Completed',
     statusColor: '#3B82F6',
-    date: '2024',
+    date: '2025',
     duration: '2 months',
     role: 'WordPress Developer & Designer',
     techStack: ['WordPress', 'Stax Theme', 'CSS', 'JavaScript', 'PHP'],
     links: {
-      live: 'https://brimstonenergy.co.uk',
+      live: 'https://brimstone-energy.uk',
       github: ''
     },
     overview: 'Brimston Energy needed a modernized website with cleaner structure and better user experience, but required a solution that wouldn\'t disrupt their live site during development and would be maintainable by non-technical editors.',
@@ -223,7 +219,7 @@ const projects = {
     categories: ['AI', 'Education', 'Productivity'],
     status: 'Planned',
     statusColor: '#9D6EFF',
-    date: 'Planned for 2025',
+    date: 'Concept for 2026',
     duration: 'Planning Phase',
     role: 'Product Designer & Developer',
     techStack: ['Next.js 14', 'TypeScript', 'PostgreSQL', 'Prisma', 'Claude API', 'Tailwind CSS'],
@@ -231,7 +227,7 @@ const projects = {
       live: '',
       github: ''
     },
-    overview: 'StudyPilot AI was conceived after seeing students struggle with long, complex assignment briefs and multi-week projects. The platform uses AI to help students understand requirements, create realistic timelines, and build study habits—without doing the work for them. It\'s about learning to plan and manage projects, not shortcuts.',
+    overview: 'StudyPilot AI is a concept I developed after seeing students struggle with long, complex assignment briefs and multi-week projects. The platform would use AI to help students understand requirements, create realistic timelines, and build study habits—without doing the work for them. It\'s about learning to plan and manage projects, not shortcuts.',
     features: [
       {
         title: 'Assignment Brief Parser',
@@ -265,10 +261,10 @@ const projects = {
       'Designing an interface that motivates without adding stress or complexity to student life'
     ],
     learnings: [
-      'User research with students to understand study planning pain points and existing workflows',
-      'AI prompt engineering to extract structured data from unstructured assignment documents',
-      'Building scheduling algorithms that account for real-world student constraints',
-      'Ethical considerations in educational AI tools—where to draw the line on assistance'
+      'Doing user research with students to understand study planning pain points and existing workflows',
+      'Designing AI prompts that extract structured data from messy assignment documents',
+      'Building scheduling logic that respects real-world constraints like part-time work and family responsibilities',
+      'Thinking carefully about ethical boundaries in educational AI tools – how to support learning without enabling shortcuts'
     ]
   }
 }
@@ -508,7 +504,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
         </ContentSection>
 
         {/* Learnings */}
-        <ContentSection title="What I Learned" delay={0.5}>
+        <ContentSection title={params.slug === 'studypilot-ai' ? 'What This Project Will Teach Me (Planned)' : 'What I Learned'} delay={0.5}>
           <ul className="space-y-3">
             {project.learnings.map((learning, index) => (
               <li
