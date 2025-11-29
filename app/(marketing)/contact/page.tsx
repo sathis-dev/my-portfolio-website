@@ -619,7 +619,7 @@ export default function ContactPage() {
                   Need My CV?
                 </h3>
                 <p className="text-sm text-white/70 mb-4">
-                  Fill out the form and I'll send it to you
+                  Fill out the form and I&apos;ll send it to you
                 </p>
                 <div
                   className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300"
