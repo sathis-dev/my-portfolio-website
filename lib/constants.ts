@@ -5,9 +5,9 @@ export const SITE_CONFIG = {
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://sathis.dev',
   ogImage: '/og-image.jpg',
   links: {
-    github: 'https://github.com/sathis',
-    linkedin: 'https://linkedin.com/in/sathis',
-    email: 'mailto:hello@sathis.dev',
+    github: 'https://github.com/sathis-dev',
+    linkedin: 'https://www.linkedin.com/in/sathis-hettiarachchi-52b4b436a/',
+    email: 'mailto:sathis.rc.dev@gmail.com',
   },
   location: {
     city: 'Cambridge',

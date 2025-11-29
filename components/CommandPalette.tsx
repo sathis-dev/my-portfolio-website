@@ -111,9 +111,9 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     // Quick Actions
     {
       id: 'cv',
-      title: 'Download CV',
-      description: 'Download my resume',
-      action: () => window.open('/cv.pdf', '_blank'),
+      title: 'Request CV',
+      description: 'Get in touch to request my CV',
+      action: () => window.location.href = '/contact',
       icon: FileText,
       category: 'action' as const,
       keywords: ['cv', 'resume', 'download', 'pdf'],

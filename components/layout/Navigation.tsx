@@ -216,10 +216,10 @@ export default function Navigation() {
                   <Button
                     variant="primary"
                     size="lg"
-                    icon="Download"
-                    href="/cv.pdf"
+                    icon="Mail"
+                    href="/contact"
                   >
-                    Download CV
+                    Request CV
                   </Button>
                 </motion.div>
               </motion.nav>
