@@ -1,6 +1,8 @@
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import DarkVeil from '@/components/effects/DarkVeil'
+import ProtectionLayer from '@/components/ProtectionLayer'
+import SocialProof from '@/components/SocialProof'
 
 export default function MarketingLayout({
   children,
@@ -41,6 +43,12 @@ export default function MarketingLayout({
 
       {/* Footer - Seamless continuation */}
       <Footer />
+
+      {/* Protection Layer - Security & Copyright */}
+      <ProtectionLayer />
+
+      {/* Smart Social Proof - Activity Indicators */}
+      <SocialProof />
     </div>
   )
 }
