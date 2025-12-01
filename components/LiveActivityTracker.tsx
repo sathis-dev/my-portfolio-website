@@ -54,16 +54,35 @@ export default function LiveActivityTracker() {
           githubStars: githubData.public_repos || 0
         })
 
-        // Refresh stats every 30 seconds for live updates
+        // REAL-TIME updates every 5 seconds!
         const refreshInterval = setInterval(async () => {
-          const response = await fetch('/api/analytics')
-          const data = await response.json()
-          setStats(prev => ({
-            ...prev,
-            todayVisitors: data.todayVisitors || prev.todayVisitors,
-            weeklyVisitors: data.totalVisitors || prev.weeklyVisitors,
-          }))
-        }, 30000)
+          try {
+            // Fetch visitor stats
+            const analyticsResponse = await fetch('/api/analytics')
+            const analyticsData = await analyticsResponse.json()
+            
+            // Fetch GitHub stats (every 10 refreshes to avoid rate limit)
+            if (Math.random() > 0.9) {
+              const githubResponse = await fetch('https://api.github.com/users/sathis-dev')
+              const githubData = await githubResponse.json()
+              
+              setStats(prev => ({
+                ...prev,
+                todayVisitors: analyticsData.todayVisitors || prev.todayVisitors,
+                weeklyVisitors: analyticsData.totalVisitors || prev.weeklyVisitors,
+                githubStars: githubData.public_repos || prev.githubStars,
+              }))
+            } else {
+              setStats(prev => ({
+                ...prev,
+                todayVisitors: analyticsData.todayVisitors || prev.todayVisitors,
+                weeklyVisitors: analyticsData.totalVisitors || prev.weeklyVisitors,
+              }))
+            }
+          } catch (error) {
+            console.error('Failed to refresh stats:', error)
+          }
+        }, 5000) // Update every 5 seconds!
 
         return () => clearInterval(refreshInterval)
 
@@ -201,35 +220,55 @@ export default function LiveActivityTracker() {
             />
           </motion.div>
 
-          {/* Live Data */}
+          {/* Live Data with Real-Time Animation */}
           <div className="flex flex-col">
-            <motion.span 
-              key={current.value}
-              initial={{ scale: 1.2, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="text-2xl font-extrabold leading-none mb-1"
-              style={{
-                background: `linear-gradient(135deg, ${current.color} 0%, #FFFFFF 100%)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              {current.value}
-            </motion.span>
-            <span className="text-xs font-medium text-white/70">
-              {current.label}
-            </span>
+            <AnimatePresence mode="wait">
+              <motion.span 
+                key={`${current.label}-${current.value}`}
+                initial={{ scale: 1.3, opacity: 0, y: -10 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.8, opacity: 0, y: 10 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                className="text-2xl font-extrabold leading-none mb-1"
+                style={{
+                  background: `linear-gradient(135deg, ${current.color} 0%, #FFFFFF 100%)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {current.value}
+              </motion.span>
+            </AnimatePresence>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-white/70">
+                {current.label}
+              </span>
+              {/* LIVE badge */}
+              <span 
+                className="text-[0.6rem] font-bold px-1.5 py-0.5 rounded"
+                style={{
+                  background: `${current.color}30`,
+                  color: current.color,
+                }}
+              >
+                LIVE
+              </span>
+            </div>
           </div>
 
-          {/* Live Indicator */}
+          {/* Pulsing Live Indicator */}
           <motion.div
             className="w-2 h-2 rounded-full ml-2"
-            style={{ background: current.color }}
+            style={{ 
+              background: current.color,
+              boxShadow: `0 0 10px ${current.color}`,
+            }}
             animate={{
+              scale: [1, 1.5, 1],
               opacity: [1, 0.5, 1],
             }}
             transition={{
-              duration: 2,
+              duration: 1.5,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
