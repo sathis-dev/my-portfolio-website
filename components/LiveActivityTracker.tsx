@@ -21,71 +21,61 @@ export default function LiveActivityTracker() {
     // Show after 3 seconds
     const timer = setTimeout(() => setIsVisible(true), 3000)
 
-    // Track this session
+    // Track this session with backend API
     const initializeTracking = async () => {
       try {
-        // Get today's date key
-        const today = new Date().toISOString().split('T')[0]
-        const weekKey = getWeekKey()
-
-        // Load from localStorage
-        const storedData = localStorage.getItem('visitorTracking')
-        const tracking = storedData ? JSON.parse(storedData) : {
-          sessions: [],
-          dailyVisits: {},
-          weeklyVisits: {}
-        }
-
         // Generate unique session ID
-        const sessionId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+        const sessionId = sessionStorage.getItem('sessionId') || 
+          `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
         
-        // Check if new session (hasn't visited in last hour)
-        const lastVisit = tracking.sessions[tracking.sessions.length - 1]
-        const isNewSession = !lastVisit || (Date.now() - lastVisit.timestamp > 3600000)
-
-        if (isNewSession) {
-          tracking.sessions.push({
-            id: sessionId,
-            timestamp: Date.now()
-          })
-
-          // Update daily count
-          tracking.dailyVisits[today] = (tracking.dailyVisits[today] || 0) + 1
-
-          // Update weekly count
-          tracking.weeklyVisits[weekKey] = (tracking.weeklyVisits[weekKey] || 0) + 1
-
-          localStorage.setItem('visitorTracking', JSON.stringify(tracking))
-        }
-
-        // Calculate stats
-        const todayCount = tracking.dailyVisits[today] || 1
-        const weekCount = tracking.weeklyVisits[weekKey] || 1
-
-        // Fetch real GitHub stars (if available)
-        try {
-          const response = await fetch('https://api.github.com/users/sathis-dev')
-          const data = await response.json()
-          const totalRepos = data.public_repos || 0
+        if (!sessionStorage.getItem('sessionId')) {
+          sessionStorage.setItem('sessionId', sessionId)
           
-          setStats({
-            currentViewers: 1, // Current user
-            todayVisitors: todayCount,
-            weeklyVisitors: weekCount,
-            githubStars: totalRepos
-          })
-        } catch {
-          // Fallback if GitHub API fails
-          setStats({
-            currentViewers: 1,
-            todayVisitors: todayCount,
-            weeklyVisitors: weekCount,
-            githubStars: 0
+          // Track this visit with backend
+          await fetch('/api/analytics', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sessionId })
           })
         }
+
+        // Fetch current stats from backend
+        const analyticsResponse = await fetch('/api/analytics')
+        const analyticsData = await analyticsResponse.json()
+
+        // Fetch real GitHub data
+        const githubResponse = await fetch('https://api.github.com/users/sathis-dev')
+        const githubData = await githubResponse.json()
+        
+        setStats({
+          currentViewers: 1, // Current user
+          todayVisitors: analyticsData.todayVisitors || 1,
+          weeklyVisitors: analyticsData.totalVisitors || 1,
+          githubStars: githubData.public_repos || 0
+        })
+
+        // Refresh stats every 30 seconds for live updates
+        const refreshInterval = setInterval(async () => {
+          const response = await fetch('/api/analytics')
+          const data = await response.json()
+          setStats(prev => ({
+            ...prev,
+            todayVisitors: data.todayVisitors || prev.todayVisitors,
+            weeklyVisitors: data.totalVisitors || prev.weeklyVisitors,
+          }))
+        }, 30000)
+
+        return () => clearInterval(refreshInterval)
 
       } catch (error) {
         console.error('Tracking error:', error)
+        // Fallback to showing just current viewer
+        setStats({
+          currentViewers: 1,
+          todayVisitors: 1,
+          weeklyVisitors: 1,
+          githubStars: 0
+        })
       }
     }
 
